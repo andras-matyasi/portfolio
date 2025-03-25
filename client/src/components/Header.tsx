@@ -36,7 +36,7 @@ const Header = () => {
             </li>
             <li>
               <a href="#about" className="text-white hover:text-primary transition-colors">
-                About
+                About Me
               </a>
             </li>
             <li>

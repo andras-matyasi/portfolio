@@ -1,26 +1,32 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Scroll, Lightbulb, Briefcase, GraduationCap, Target } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const skills = [
-  { id: 1, name: "UX/UI Design" },
-  { id: 2, name: "User Research" },
-  { id: 3, name: "Wireframing" },
-  { id: 4, name: "Prototyping" },
-  { id: 5, name: "Design Systems" },
-  { id: 6, name: "User Testing" },
+const areaOfExpertise = [
+  { id: 1, name: "B2B: SaaS" },
+  { id: 2, name: "HR tech and job boards" },
+  { id: 3, name: "Mobility" },
+  { id: 4, name: "Web3" },
+  { id: 5, name: "Rapid prototyping with AI" },
+];
+
+const superpowers = [
+  { id: 1, name: "User research - feeling as bad as the customer", icon: Scroll },
+  { id: 2, name: "Being hands-on to make good calls", icon: Briefcase },
+  { id: 3, name: "Avoiding sunken cost fallacy", icon: Target },
+  { id: 4, name: "Working on: getting rid of biases and overfitting data", icon: Lightbulb },
 ];
 
 const AboutSection = () => {
   const { ref, controls } = useScrollAnimation();
 
   return (
-    <section id="about" className="py-16 md:py-24">
+    <section id="about" className="py-16 md:py-24 bg-dark">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
             ref={ref}
-            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
             initial={{ opacity: 0 }}
             animate={controls}
             transition={{ duration: 0.5 }}
@@ -33,54 +39,59 @@ const AboutSection = () => {
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
               <p className="text-secondary mb-4 leading-relaxed">
-                I'm a product designer with over 5 years of experience creating
-                digital products that balance business goals with user needs. I
-                specialize in user-centered design processes that deliver
-                meaningful and delightful experiences.
+                Product Manager from Budapest, Hungary, with a passion for research. 
+                Discovery is what makes me truly happy - finding the intersection between 
+                user needs and business opportunities.
               </p>
               <p className="text-secondary mb-6 leading-relaxed">
-                My approach combines strategic thinking with practical execution.
-                I work closely with development teams to ensure designs are
-                implemented with the highest quality while maintaining
-                feasibility.
+                I'm a Reforge alumni, having completed both the Mastering PM and 
+                Strategy and Growth Series. These programs have shaped my strategic 
+                approach to product development.
               </p>
 
-              <h3 className="text-xl font-semibold mb-4 mt-8">Core Skills</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <ul className="space-y-2 text-secondary">
-                    {skills.slice(0, 3).map((skill) => (
-                      <li key={skill.id} className="flex items-center">
-                        <Check className="h-5 w-5 mr-2 text-primary" />
-                        {skill.name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <ul className="space-y-2 text-secondary">
-                    {skills.slice(3).map((skill) => (
-                      <li key={skill.id} className="flex items-center">
-                        <Check className="h-5 w-5 mr-2 text-primary" />
-                        {skill.name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <h3 className="text-xl font-semibold mb-4 mt-8">Areas of Expertise</h3>
+              <div className="grid grid-cols-1 gap-2">
+                <ul className="space-y-2 text-secondary">
+                  {areaOfExpertise.map((area) => (
+                    <li key={area.id} className="flex items-center">
+                      <Check className="h-5 w-5 mr-2 text-primary" />
+                      {area.name}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
+            
             <motion.div
-              className="rounded-xl overflow-hidden"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5 }}
+              className="bg-dark-secondary p-6 rounded-xl"
             >
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="Designer portrait"
-                className="w-full h-auto object-cover"
-              />
+              <h3 className="text-xl font-semibold mb-6">Superpowers</h3>
+              <div className="space-y-6">
+                {superpowers.map((power) => (
+                  <div key={power.id} className="flex items-start">
+                    <div className="mr-4 p-2 bg-primary/10 rounded-lg">
+                      <power.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-white">{power.name}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-8 p-4 border border-primary/20 rounded-lg bg-primary/5">
+                <div className="flex items-center">
+                  <GraduationCap className="h-5 w-5 mr-2 text-primary" />
+                  <span className="text-white font-medium">Reforge Alumni</span>
+                </div>
+                <p className="text-secondary text-sm mt-2">
+                  Mastering Product Management, Strategy and Growth Series
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         </div>
