@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const Footer = () => {
   return (
     <motion.footer 
-      className="py-8 border-t border-dark-secondary"
+      className="py-4 border-t border-dark-secondary"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -45,7 +45,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-secondary hover:text-primary transition-colors"
+              className="text-white hover:text-primary transition-colors"
               aria-label="Dribbble"
             >
               <svg
