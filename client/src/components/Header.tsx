@@ -8,7 +8,9 @@ const Header = () => {
   const [contactMenuOpen, setContactMenuOpen] = useState(false);
   const [funkyToolsMenuOpen, setFunkyToolsMenuOpen] = useState(false);
   const contactMenuRef = useRef<HTMLLIElement>(null);
+  const contactDropdownRef = useRef<HTMLDivElement>(null);
   const funkyToolsMenuRef = useRef<HTMLLIElement>(null);
+  const funkyToolsDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,10 +23,21 @@ const Header = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (contactMenuRef.current && !contactMenuRef.current.contains(event.target as Node)) {
+      if (
+        contactMenuRef.current && 
+        !contactMenuRef.current.contains(event.target as Node) && 
+        contactDropdownRef.current && 
+        !contactDropdownRef.current.contains(event.target as Node)
+      ) {
         setContactMenuOpen(false);
       }
-      if (funkyToolsMenuRef.current && !funkyToolsMenuRef.current.contains(event.target as Node)) {
+      
+      if (
+        funkyToolsMenuRef.current && 
+        !funkyToolsMenuRef.current.contains(event.target as Node) && 
+        funkyToolsDropdownRef.current && 
+        !funkyToolsDropdownRef.current.contains(event.target as Node)
+      ) {
         setFunkyToolsMenuOpen(false);
       }
     };
@@ -32,6 +45,30 @@ const Header = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [contactMenuRef, funkyToolsMenuRef]);
+
+  // Handlers for menu interactions
+  const handleFunkyToolsMouseEnter = () => {
+    setFunkyToolsMenuOpen(true);
+    setContactMenuOpen(false);
+  };
+
+  const handleContactMouseEnter = () => {
+    setContactMenuOpen(true);
+    setFunkyToolsMenuOpen(false);
+  };
+
+  // Track mouse movement for horizontal detection
+  const handleMouseMove = (e: React.MouseEvent, menuRef: React.RefObject<HTMLLIElement>, setMenuOpen: (open: boolean) => void) => {
+    if (!menuRef.current) return;
+    
+    const rect = menuRef.current.getBoundingClientRect();
+    const mouseX = e.clientX;
+    
+    // Check if mouse is moving horizontally outside the menu's bounds
+    if (mouseX < rect.left - 20 || mouseX > rect.right + 20) {
+      setMenuOpen(false);
+    }
+  };
 
   return (
     <motion.header 
@@ -41,6 +78,15 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
+      onMouseMove={(e) => {
+        // Global mouse move to detect when mouse is far from any menu
+        if (contactMenuOpen) {
+          handleMouseMove(e, contactMenuRef, setContactMenuOpen);
+        }
+        if (funkyToolsMenuOpen) {
+          handleMouseMove(e, funkyToolsMenuRef, setFunkyToolsMenuOpen);
+        }
+      }}
     >
       <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
         <a href="#top" className="text-xl font-semibold tracking-tight text-white hover:text-primary transition-colors">
@@ -66,11 +112,7 @@ const Header = () => {
             <li 
               ref={funkyToolsMenuRef} 
               className="relative"
-              onMouseEnter={() => {
-                setFunkyToolsMenuOpen(true);
-                setContactMenuOpen(false);
-              }} 
-              onMouseLeave={() => setFunkyToolsMenuOpen(false)}
+              onMouseEnter={handleFunkyToolsMouseEnter}
             >
               <button 
                 className="text-white hover:text-primary transition-colors flex items-center"
@@ -79,7 +121,11 @@ const Header = () => {
                 Funky tools
               </button>
               {funkyToolsMenuOpen && (
-                <div className="absolute right-0 mt-2 py-2 w-48 bg-dark-secondary border border-dark rounded-md shadow-lg z-50">
+                <div 
+                  ref={funkyToolsDropdownRef}
+                  className="absolute right-0 mt-2 py-2 w-48 bg-dark-secondary border border-dark rounded-md shadow-lg z-50"
+                  onMouseEnter={handleFunkyToolsMouseEnter}
+                >
                   <a 
                     href="https://lunchvote.matyasi.me" 
                     target="_blank" 
@@ -95,11 +141,7 @@ const Header = () => {
             <li 
               ref={contactMenuRef} 
               className="relative"
-              onMouseEnter={() => {
-                setContactMenuOpen(true);
-                setFunkyToolsMenuOpen(false);
-              }} 
-              onMouseLeave={() => setContactMenuOpen(false)}
+              onMouseEnter={handleContactMouseEnter}
             >
               <button 
                 className="text-white hover:text-primary transition-colors flex items-center"
@@ -108,7 +150,11 @@ const Header = () => {
                 Contact
               </button>
               {contactMenuOpen && (
-                <div className="absolute right-0 mt-2 py-2 w-48 bg-dark-secondary border border-dark rounded-md shadow-lg z-50">
+                <div 
+                  ref={contactDropdownRef}
+                  className="absolute right-0 mt-2 py-2 w-48 bg-dark-secondary border border-dark rounded-md shadow-lg z-50"
+                  onMouseEnter={handleContactMouseEnter}
+                >
                   <a 
                     href="mailto:andras@matyasi.me" 
                     className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
