@@ -8,7 +8,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { CachedImage } from "@/components/ui/cached-image";
 import { useEffect, useState, useMemo } from "react";
 
 // Fisher-Yates (Knuth) shuffle algorithm
@@ -118,13 +117,10 @@ const ReferencesSection = () => {
       <p className="text-[#f8f8f0] italic mb-6 flex-grow">"{reference.quote}"</p>
       <div className="flex items-center mt-auto">
         <div className="mr-4">
-          <CachedImage 
+          <img 
             src={reference.imageUrl} 
             alt={reference.name} 
             className="h-12 w-12 rounded-full object-cover"
-            showSkeleton={true}
-            // Add a placeholder image or use a data URI for the fallback
-            fallbackSrc="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='10' r='8'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3Cpath d='M7 22h10M7 22c0-5 2.5-8 5-8s5 3 5 8'/%3E%3C/svg%3E"
           />
         </div>
         <div>
