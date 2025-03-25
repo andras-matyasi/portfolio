@@ -63,11 +63,18 @@ const Header = () => {
                 References
               </a>
             </li>
-            <li ref={funkyToolsMenuRef} className="relative">
+            <li 
+              ref={funkyToolsMenuRef} 
+              className="relative"
+              onMouseEnter={() => {
+                setFunkyToolsMenuOpen(true);
+                setContactMenuOpen(false);
+              }} 
+              onMouseLeave={() => setFunkyToolsMenuOpen(false)}
+            >
               <button 
                 className="text-white hover:text-primary transition-colors flex items-center"
                 onClick={() => setFunkyToolsMenuOpen(!funkyToolsMenuOpen)}
-                onMouseEnter={() => setFunkyToolsMenuOpen(true)}
               >
                 Funky tools
               </button>
@@ -85,11 +92,18 @@ const Header = () => {
                 </div>
               )}
             </li>
-            <li ref={contactMenuRef} className="relative">
+            <li 
+              ref={contactMenuRef} 
+              className="relative"
+              onMouseEnter={() => {
+                setContactMenuOpen(true);
+                setFunkyToolsMenuOpen(false);
+              }} 
+              onMouseLeave={() => setContactMenuOpen(false)}
+            >
               <button 
                 className="text-white hover:text-primary transition-colors flex items-center"
                 onClick={() => setContactMenuOpen(!contactMenuOpen)}
-                onMouseEnter={() => setContactMenuOpen(true)}
               >
                 Contact
               </button>
