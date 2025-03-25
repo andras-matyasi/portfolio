@@ -1,28 +1,28 @@
 import { motion } from "framer-motion";
-import { Mail, Users, Hash } from "lucide-react";
+import { Mail, Linkedin, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const contactMethods = [
   {
     id: 1,
     title: "Email",
-    value: "hello@andrasmatyasi.com",
-    href: "mailto:hello@andrasmatyasi.com",
+    value: "andras@matyasi.me",
+    href: "mailto:andras@matyasi.me",
     icon: Mail,
   },
   {
     id: 2,
     title: "LinkedIn",
-    value: "linkedin.com/in/andrasmatyasi",
-    href: "#",
-    icon: Users,
+    value: "linkedin.com/in/amatyasi",
+    href: "https://www.linkedin.com/in/amatyasi/",
+    icon: Linkedin,
   },
   {
     id: 3,
-    title: "Dribbble",
-    value: "dribbble.com/andrasmatyasi",
-    href: "#",
-    icon: Hash,
+    title: "Book a Meeting",
+    value: "Calendly",
+    href: "https://calendly.com/andras-matyasi/30min",
+    icon: Calendar,
   },
 ];
 

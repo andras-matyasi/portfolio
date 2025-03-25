@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { Mail, Linkedin, Calendar } from "lucide-react";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [contactMenuOpen, setContactMenuOpen] = useState(false);
+  const contactMenuRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +16,17 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (contactMenuRef.current && !contactMenuRef.current.contains(event.target as Node)) {
+        setContactMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [contactMenuRef]);
 
   return (
     <motion.header 
@@ -44,10 +58,43 @@ const Header = () => {
                 References
               </a>
             </li>
-            <li>
-              <a href="#contact" className="text-white hover:text-primary transition-colors">
+            <li ref={contactMenuRef} className="relative">
+              <button 
+                className="text-white hover:text-primary transition-colors flex items-center"
+                onClick={() => setContactMenuOpen(!contactMenuOpen)}
+                onMouseEnter={() => setContactMenuOpen(true)}
+              >
                 Contact
-              </a>
+              </button>
+              {contactMenuOpen && (
+                <div className="absolute right-0 mt-2 py-2 w-48 bg-dark-secondary border border-dark rounded-md shadow-lg z-50">
+                  <a 
+                    href="mailto:andras@matyasi.me" 
+                    className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                  >
+                    <Mail className="h-4 w-4 mr-2" />
+                    Email
+                  </a>
+                  <a 
+                    href="https://www.linkedin.com/in/amatyasi/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                  >
+                    <Linkedin className="h-4 w-4 mr-2" />
+                    LinkedIn
+                  </a>
+                  <a 
+                    href="https://calendly.com/andras-matyasi/30min" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                  >
+                    <Calendar className="h-4 w-4 mr-2" />
+                    Book a meeting
+                  </a>
+                </div>
+              )}
             </li>
           </ul>
         </nav>
