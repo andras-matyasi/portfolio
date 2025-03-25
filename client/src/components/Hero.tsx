@@ -15,7 +15,7 @@ const Hero = () => {
             I translate user pain into business gain
           </motion.h1>
           <motion.p 
-            className="text-lg md:text-xl leading-relaxed mb-8 text-balance bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent font-medium"
+            className="text-lg md:text-xl leading-relaxed mb-8 text-balance bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent font-medium"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -29,7 +29,7 @@ const Hero = () => {
           >
             <a 
               href="#work" 
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-300 font-medium"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 hover:from-blue-600 hover:via-indigo-700 hover:to-purple-800 text-white rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
             >
               Check out my work
               <ChevronDown className="h-4 w-4 ml-2" />

@@ -89,7 +89,7 @@ const Header = () => {
       }}
     >
       <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-        <a href="#top" className="text-xl font-semibold tracking-tight text-white hover:text-primary transition-colors">
+        <a href="#top" className="text-xl font-semibold tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-all duration-300">
           Andras Matyasi
         </a>
         <nav>
