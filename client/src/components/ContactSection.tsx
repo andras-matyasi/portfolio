@@ -55,12 +55,9 @@ const ContactSection = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Get in Touch</h2>
-          <p className="text-lg mb-12 flex items-center justify-center">
-            <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent font-medium">
-              Interested in working together? Feel free to reach out for
-              collaborations (either project or employment-based) or just a friendly hello
-            </span>
-            <span className="ml-1 text-white">👋</span>
+          <p className="text-lg mb-12 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent font-medium">
+            Interested in working together? Feel free to reach out for
+            collaborations or just a friendly hello.
           </p>
 
           <motion.div
