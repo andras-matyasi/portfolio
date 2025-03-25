@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Calendar } from "lucide-react";
+import { Mail, Linkedin, Calendar, Utensils } from "lucide-react";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [contactMenuOpen, setContactMenuOpen] = useState(false);
+  const [funkyToolsMenuOpen, setFunkyToolsMenuOpen] = useState(false);
   const contactMenuRef = useRef<HTMLLIElement>(null);
+  const funkyToolsMenuRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,11 +24,14 @@ const Header = () => {
       if (contactMenuRef.current && !contactMenuRef.current.contains(event.target as Node)) {
         setContactMenuOpen(false);
       }
+      if (funkyToolsMenuRef.current && !funkyToolsMenuRef.current.contains(event.target as Node)) {
+        setFunkyToolsMenuOpen(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [contactMenuRef]);
+  }, [contactMenuRef, funkyToolsMenuRef]);
 
   return (
     <motion.header 
@@ -57,6 +62,28 @@ const Header = () => {
               <a href="#references" className="text-white hover:text-primary transition-colors">
                 References
               </a>
+            </li>
+            <li ref={funkyToolsMenuRef} className="relative">
+              <button 
+                className="text-white hover:text-primary transition-colors flex items-center"
+                onClick={() => setFunkyToolsMenuOpen(!funkyToolsMenuOpen)}
+                onMouseEnter={() => setFunkyToolsMenuOpen(true)}
+              >
+                Funky tools
+              </button>
+              {funkyToolsMenuOpen && (
+                <div className="absolute right-0 mt-2 py-2 w-48 bg-dark-secondary border border-dark rounded-md shadow-lg z-50">
+                  <a 
+                    href="https://lunchvote.matyasi.me" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                  >
+                    <Utensils className="h-4 w-4 mr-2" />
+                    Lunchvote
+                  </a>
+                </div>
+              )}
             </li>
             <li ref={contactMenuRef} className="relative">
               <button 
