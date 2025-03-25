@@ -30,8 +30,8 @@ const Header = () => {
         <nav>
           <ul className="flex space-x-6 text-sm">
             <li>
-              <a href="#references" className="text-white hover:text-primary transition-colors">
-                References
+              <a href="#case-studies" className="text-white hover:text-primary transition-colors">
+                Case Studies
               </a>
             </li>
             <li>
@@ -40,8 +40,8 @@ const Header = () => {
               </a>
             </li>
             <li>
-              <a href="#recommendations" className="text-white hover:text-primary transition-colors">
-                Recommendations
+              <a href="#references" className="text-white hover:text-primary transition-colors">
+                References
               </a>
             </li>
             <li>

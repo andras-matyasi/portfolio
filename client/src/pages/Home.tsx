@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ProjectsSection from "@/components/ProjectsSection";
 import AboutSection from "@/components/AboutSection";
+import ReferencesSection from "@/components/ReferencesSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
@@ -55,6 +56,7 @@ const Home = () => {
         <Hero />
         <ProjectsSection />
         <AboutSection />
+        <ReferencesSection />
         <ContactSection />
       </main>
       <Footer />

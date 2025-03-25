@@ -35,7 +35,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="work" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
+    <section id="case-studies" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-10"
@@ -44,7 +44,7 @@ const ProjectsSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Selected Work</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Case Studies</h2>
         </motion.div>
 
         <motion.div
