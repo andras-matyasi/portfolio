@@ -2,28 +2,70 @@ import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-// Sample references data
+// Real references data
 const references = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    position: "VP of Product, TechCorp",
-    quote: "Andras has an exceptional ability to understand complex user needs and translate them into actionable product strategies. His work transformed our approach to product development.",
-    imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+    name: "Áron Albert",
+    position: "Software Engineer, Kameleo",
+    quote: "András was keen on knowing the users and their needs better. He is the most user-centric PMs I ever worked with, actively seeking insights and feedback. I could feel the pain of the user when reading the PRDs.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4D03AQGYKO-mdYXhkg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1712325416363?e=1748476800&v=beta&t=hvz7YLJNlxvKxQDCxhRA2h23wrhB5aRecDihRg5lSYo"
   },
   {
     id: 2,
-    name: "Michael Rodriguez",
-    position: "CEO, StartupXYZ",
-    quote: "Working with Andras on our SaaS platform was a game-changer. His strategic mindset and attention to detail helped us achieve a 40% increase in user engagement.",
-    imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+    name: "Ferenc Agócs",
+    position: "Software Engineer, Kameleo",
+    quote: "Andris always had a clear idea for our product, and focused on what matters. His keen attention to all the different moving parts and processes in the life of our product always kept us on track. His professional skill and fun personality is something I wish I had at all my previous jobs.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4D03AQGX2FNMIRQ-WQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1681594537997?e=1748476800&v=beta&t=xg--Q_KS8HTNMiENc04mKmlvbLPHpwVUh7rRacBDGio"
   },
   {
     id: 3,
-    name: "Emily Chen",
-    position: "Head of UX, InnovateDesign",
-    quote: "Andras bridges the gap between business objectives and user experience perfectly. His collaborative approach made our project not only successful but enjoyable.",
-    imageUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+    name: "Bence Gulyás",
+    position: "Full-stack Product Designer, Freelance (profession.hu)",
+    quote: "What set Andris apart was his balanced approach to decision-making. He skillfully filtered senior stakeholder input while facilitating unbiased trade-offs during the design process. This collaborative approach kept us focused on solving the right problems.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/C4D03AQF_4uj0A567jg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1612304072619?e=1748476800&v=beta&t=nOkhTpJ0XKilv1cZMeebsXNIWc_Z-BGPC84ciae-FUg"
+  },
+  {
+    id: 4,
+    name: "Fanni Csomós",
+    position: "Marketing Manager, Kameleo",
+    quote: "Andris is the kind of product guy every team needs. He knows exactly when to push, when to say no, and how to balance user insights without blindly following requests. He has a killer instinct for strategy, collaborates seamlessly with marketing, stays hands-on when needed, and ensures great ideas turn into real impact. Smart, driven, and always two steps ahead. If you get the chance to work with him, take it.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQF3PFEEFsHxfg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1624865088478?e=1748476800&v=beta&t=FqnO1AAZy0Wk95u04gVWJSy6lFZcGHc3X5_XO-1koSw"
+  },
+  {
+    id: 5,
+    name: "Ádám Kóbor",
+    position: "Senior Software Engineer, Lovely Systems",
+    quote: "Throughout our collaboration, Andras consistently showed exceptional resilience and leadership, steering our teams effectively even in a demanding and high-pressure environment. He maintained focus on delivering value to users and the business, while skillfully managing competing priorities and expectations from various stakeholders.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E03AQH2h1x8BaSE7w/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1728410409203?e=1748476800&v=beta&t=-coc9IAtv2MQgObLysamSTn4nDrv8YelAXLMm0Epero"
+  },
+  {
+    id: 6,
+    name: "Eszter Somogyi-Vass",
+    position: "Product Lead, profession,hu",
+    quote: "I've had the pleasure of working closely with Andris, and I can confidently say he's one of the best product managers I've collaborated with. His attention to detail is great, and he always keeps the user experience at the heart of every decision. Beyond that, Andris is a fantastic communicator and works seamlessly with teams across the board—whether it's engineering, design, or stakeholders. He has a knack for bringing people together to solve problems efficiently.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4D03AQESn2zA4XEGHQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1729507589620?e=1748476800&v=beta&t=-VeNfPXRbJUquduiW_XJ7r9kwAyjSHzmC0SxWZCxVz8"
+  },
+  {
+    id: 7,
+    name: "Balázs Wágner",
+    position: "UX Designer, Bitrise",
+    quote: "It's really easy to work with András, I really enjoyed it. As a senior product manager, he had a sharp vision while giving me a high degree of freedom. He was prepared and focused, keeping projects on track. The work we did together had an impact and was fun, too.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQHDNXxZVBhqvQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1628000953607?e=1748476800&v=beta&t=npMO5V5fYJ4wVgpJzUHvtaOjw8Y51OmNVowaARd7iLw"
+  },
+  {
+    id: 8,
+    name: "Ádám Krajcs",
+    position: "Lead Software Engineer, profession.hu",
+    quote: "I had the pleasure of working with Andris for several years at Profession.hu. He has an exceptional ability to define and communicate a clear product vision while ensuring alignment between business goals and user needs. Andris is highly data-driven, making informed decisions based on thorough analysis while also valuing user feedback and market trends.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQGWJqyze1aZDQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1606301602048?e=1748476800&v=beta&t=c5TlKGyGzB1aOAXHglWZJmhLp9RFrco_FDzPn3w8YXc"
+  },
+  {
+    id: 9,
+    name: "Balázs Sólyom",
+    position: "Chief Data Officer, Trendency",
+    quote: "Andris is the kind of person who, if dropped into the jungle with a few tools, would not only find his way back but might also return with a new idea or concept. Working with him is a great advantage because he doesn't just want to get things done - he wants to do them well. He's a consultant-minded colleague who actively seeks to understand the underlying problems behind each task and offers solutions to address them.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQGokA7aY9zomg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1621232009879?e=1748476800&v=beta&t=3g-rDHofbOAZm3JdJbdf5Eas6S6N50I8Ro_NXWItTts"
   }
 ];
 
