@@ -17,6 +17,12 @@ const superpowers = [
   { id: 4, name: "Working on: getting rid of biases and overfitting data", icon: Lightbulb },
 ];
 
+// Define animation variants
+const fadeInVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 }
+};
+
 const AboutSection = () => {
   const { ref, controls } = useScrollAnimation();
 
@@ -30,14 +36,15 @@ const AboutSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">About Me</h2>
         </motion.div>
         
         <div className="max-w-5xl mx-auto">
           <motion.div
             ref={ref}
             className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
-            initial={{ opacity: 0 }}
+            variants={fadeInVariants}
+            initial="hidden"
             animate={controls}
             transition={{ duration: 0.5 }}
           >
@@ -58,7 +65,7 @@ const AboutSection = () => {
                 approach to product development.
               </p>
 
-              <h3 className="text-xl font-semibold mb-4 mt-8">Areas of Expertise</h3>
+              <h3 className="text-xl font-semibold mb-4 mt-8 text-white">Areas of Expertise</h3>
               <div className="grid grid-cols-1 gap-2">
                 <ul className="space-y-2 text-[#f8f8f0]">
                   {areaOfExpertise.map((area) => (
@@ -78,7 +85,7 @@ const AboutSection = () => {
               transition={{ duration: 0.5 }}
               className="bg-dark-secondary p-6 rounded-xl"
             >
-              <h3 className="text-xl font-semibold mb-6">Superpowers</h3>
+              <h3 className="text-xl font-semibold mb-6 text-white">Superpowers</h3>
               <div className="space-y-6">
                 {superpowers.map((power) => (
                   <div key={power.id} className="flex items-start">
