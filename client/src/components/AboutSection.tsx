@@ -23,6 +23,16 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-16 md:py-24 bg-dark">
       <div className="container mx-auto px-4 md:px-6">
+        <motion.div 
+          className="max-w-3xl mx-auto text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
+        </motion.div>
+        
         <div className="max-w-5xl mx-auto">
           <motion.div
             ref={ref}
@@ -37,7 +47,6 @@ const AboutSection = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
               <p className="text-secondary mb-4 leading-relaxed">
                 Product Manager from Budapest, Hungary, with a passion for research. 
                 Discovery is what makes me truly happy - finding the intersection between 
