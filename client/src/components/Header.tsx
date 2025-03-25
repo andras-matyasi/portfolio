@@ -24,19 +24,24 @@ const Header = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-        <Link href="#" className="text-xl font-semibold tracking-tight text-white hover:text-primary transition-colors">
+        <a href="#top" className="text-xl font-semibold tracking-tight text-white hover:text-primary transition-colors">
           Andras Matyasi
-        </Link>
+        </a>
         <nav>
           <ul className="flex space-x-6 text-sm">
             <li>
-              <a href="#work" className="text-white hover:text-primary transition-colors">
-                Work
+              <a href="#references" className="text-white hover:text-primary transition-colors">
+                References
               </a>
             </li>
             <li>
               <a href="#about" className="text-white hover:text-primary transition-colors">
                 About Me
+              </a>
+            </li>
+            <li>
+              <a href="#recommendations" className="text-white hover:text-primary transition-colors">
+                Recommendations
               </a>
             </li>
             <li>
