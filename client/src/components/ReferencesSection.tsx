@@ -8,10 +8,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+
+// Fisher-Yates (Knuth) shuffle algorithm
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
 
 // Real references data
-const references = [
+const referencesData = [
   {
     id: 1,
     name: "Áron Albert",
@@ -81,16 +91,25 @@ const ReferencesSection = () => {
   const { ref, controls } = useScrollAnimation();
   const [activeSlide, setActiveSlide] = useState(0);
   const [api, setApi] = useState<any>(null);
+  
+  // Shuffle references once on component mount
+  const references = useMemo(() => shuffleArray(referencesData), []);
 
   useEffect(() => {
     if (!api) return;
     
-    api.on("select", () => {
+    const onSelect = () => {
       setActiveSlide(api.selectedScrollSnap());
-    });
+    };
+    
+    api.on("select", onSelect);
+    
+    return () => {
+      api.off("select", onSelect);
+    };
   }, [api]);
 
-  const ReferenceCard = ({ reference }: { reference: typeof references[0] }) => (
+  const ReferenceCard = ({ reference }: { reference: typeof referencesData[0] }) => (
     <div className="bg-dark p-6 rounded-xl shadow-md flex flex-col h-full">
       <div className="mb-4">
         <Quote className="h-8 w-8 text-primary/40" />
@@ -123,7 +142,7 @@ const ReferencesSection = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">References</h2>
-          <p className="text-[#f8f8f0]">What colleagues and clients say about my work</p>
+          <p className="text-[#f8f8f0]">Curious what it’s like to work with me? Here’s what my peers say - unpaid and flattering.</p>
         </motion.div>
         
         <motion.div
