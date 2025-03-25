@@ -58,41 +58,41 @@ export const projects: Project[] = [
   },
   {
     id: "project2",
-    title: "AnalyticsPro",
-    category: "Web Platform",
-    description: "An analytics dashboard that helps businesses track and visualize their performance metrics.",
+    title: "SaaS CSAT increase 15%",
+    category: "Product Management",
+    description: "A customer satisfaction improvement initiative that significantly boosted CSAT scores.",
     coverImage: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    fullDescription: "An analytics dashboard that helps businesses track and visualize their performance metrics for data-driven decision making.",
-    role: "UX Designer",
-    timeline: "4 months (2021)",
-    tools: "Figma, Miro, Hotjar",
+    fullDescription: "Implemented a strategic customer satisfaction initiative that increased CSAT scores by 15% for a B2B SaaS platform.",
+    role: "Product Manager",
+    timeline: "6 months (2022)",
+    tools: "User Research, Journey Mapping, A/B Testing, Analytics",
     overview: [
-      "AnalyticsPro is a comprehensive analytics platform designed to help businesses of all sizes make data-driven decisions by visualizing complex performance metrics in an accessible way.",
-      "The primary challenge was to present complex data in a way that's both comprehensive and easy to understand for users with varying levels of data literacy."
+      "Led a comprehensive CSAT improvement initiative for a B2B SaaS platform that was experiencing declining customer satisfaction and increased churn.",
+      "The challenge was to identify and address key pain points in the customer journey, improve product experience, and create more responsive customer support processes."
     ],
     process: [
       {
-        title: "User Research",
-        description: "I conducted interviews with potential users to understand their data visualization needs and pain points with existing analytics tools."
+        title: "Pain Point Analysis",
+        description: "I conducted extensive customer interviews and analyzed support tickets to identify the most critical pain points affecting customer satisfaction."
       },
       {
-        title: "Information Architecture",
-        description: "I organized the platform's features and data visualizations in a way that follows a logical hierarchy and supports common user workflows."
+        title: "Experience Mapping",
+        description: "I created detailed customer journey maps to visualize touchpoints and moments of friction throughout the entire customer lifecycle."
       },
       {
-        title: "Interface Design",
-        description: "I designed a clean, modern interface that emphasizes important data while reducing visual noise and cognitive load."
+        title: "Solution Prioritization",
+        description: "I developed a prioritized roadmap of experience improvements based on impact potential and implementation complexity."
       },
       {
-        title: "User Testing",
-        description: "I conducted usability tests to validate design decisions and identify areas for improvement."
+        title: "Implementation & Measurement",
+        description: "I worked across product, engineering, and customer success teams to implement changes and establish ongoing measurement of CSAT metrics."
       }
     ],
     images: [
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
     ],
-    results: "AnalyticsPro launched successfully with positive feedback from initial users. The platform has been praised for its intuitive design and ability to make complex data accessible to users with varying levels of expertise."
+    results: "The customer satisfaction initiative achieved a 15% increase in CSAT scores over a 6-month period. Churn rate decreased by 12%, and customer lifetime value increased by 18% as a result of the improvements to product experience and support processes."
   },
   {
     id: "project3",
