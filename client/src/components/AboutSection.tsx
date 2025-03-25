@@ -47,12 +47,12 @@ const AboutSection = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5 }}
             >
-              <p className="text-secondary mb-4 leading-relaxed">
+              <p className="text-[#f8f8f0] mb-4 leading-relaxed">
                 Product Manager from Budapest, Hungary, with a passion for research. 
                 Discovery is what makes me truly happy - finding the intersection between 
                 user needs and business opportunities.
               </p>
-              <p className="text-secondary mb-6 leading-relaxed">
+              <p className="text-[#f8f8f0] mb-6 leading-relaxed">
                 I'm a Reforge alumni, having completed both the Mastering PM and 
                 Strategy and Growth Series. These programs have shaped my strategic 
                 approach to product development.

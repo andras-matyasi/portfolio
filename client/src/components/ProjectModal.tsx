@@ -57,7 +57,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
           className="relative bg-dark-secondary rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 md:p-8 animate-fade-in"
         >
           <button
-            className="absolute top-4 right-4 text-secondary hover:text-white transition-colors"
+            className="absolute top-4 right-4 text-[#f8f8f0] hover:text-white transition-colors"
             onClick={onClose}
             aria-label="Close modal"
           >
@@ -71,7 +71,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
             <h2 className="text-2xl md:text-3xl font-bold mt-2 mb-4">
               {project.title}
             </h2>
-            <p className="text-secondary">{project.fullDescription}</p>
+            <p className="text-[#f8f8f0]">{project.fullDescription}</p>
           </div>
 
           <div className="aspect-video w-full mb-8 rounded-lg overflow-hidden">
@@ -85,22 +85,22 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <h3 className="text-lg font-semibold mb-2">Role</h3>
-              <p className="text-secondary">{project.role}</p>
+              <p className="text-[#f8f8f0]">{project.role}</p>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-2">Timeline</h3>
-              <p className="text-secondary">{project.timeline}</p>
+              <p className="text-[#f8f8f0]">{project.timeline}</p>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-2">Tools</h3>
-              <p className="text-secondary">{project.tools}</p>
+              <p className="text-[#f8f8f0]">{project.tools}</p>
             </div>
           </div>
 
           <div className="mb-8">
             <h3 className="text-xl font-semibold mb-4">Overview</h3>
             {project.overview.map((paragraph, index) => (
-              <p key={index} className="text-secondary mb-4">
+              <p key={index} className="text-[#f8f8f0] mb-4">
                 {paragraph}
               </p>
             ))}
@@ -112,13 +112,13 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
               {project.process.slice(0, 2).map((step, index) => (
                 <div key={index}>
                   <h4 className="text-lg font-medium mb-2">{step.title}</h4>
-                  <p className="text-secondary mb-4">{step.description}</p>
+                  <p className="text-[#f8f8f0] mb-4">{step.description}</p>
                 </div>
               ))}
               {project.process.slice(2).map((step, index) => (
                 <div key={index + 2}>
                   <h4 className="text-lg font-medium mb-2">{step.title}</h4>
-                  <p className="text-secondary">{step.description}</p>
+                  <p className="text-[#f8f8f0]">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -138,7 +138,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
 
           <div className="mb-8">
             <h3 className="text-xl font-semibold mb-4">Results</h3>
-            <p className="text-secondary mb-4">{project.results}</p>
+            <p className="text-[#f8f8f0] mb-4">{project.results}</p>
           </div>
 
           <div className="text-center">
