@@ -1,7 +1,7 @@
 <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background Circle -->
-  <circle cx="16" cy="16" r="16" fill="#6D28D9"/>
+  <!-- Square with rounded corners like LunchVote -->
+  <rect width="32" height="32" rx="4" fill="#8B5CF6"/>
   
-  <!-- PM Text with better positioning and styling -->
-  <text x="16" y="20" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="-0.5">PM</text>
+  <!-- PM Text with matching typography -->
+  <text x="16" y="21" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="white" text-anchor="middle">PM</text>
 </svg>
