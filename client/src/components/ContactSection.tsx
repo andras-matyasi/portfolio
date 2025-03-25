@@ -13,7 +13,7 @@ const contactMethods = [
   {
     id: 2,
     title: "LinkedIn",
-    value: "linkedin.com/in/amatyasi",
+    value: "Andras Matyasi",
     href: "https://www.linkedin.com/in/amatyasi/",
     icon: Linkedin,
   },
