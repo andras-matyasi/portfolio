@@ -41,7 +41,7 @@ const ReferencesSection = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">References</h2>
-          <p className="text-secondary">What colleagues and clients say about my work</p>
+          <p className="text-[#f8f8f0]">What colleagues and clients say about my work</p>
         </motion.div>
         
         <motion.div
@@ -71,7 +71,7 @@ const ReferencesSection = () => {
               <div className="mb-4">
                 <Quote className="h-8 w-8 text-primary/40" />
               </div>
-              <p className="text-secondary italic mb-6 flex-grow">"{reference.quote}"</p>
+              <p className="text-[#f8f8f0] italic mb-6 flex-grow">"{reference.quote}"</p>
               <div className="flex items-center mt-auto">
                 <div className="mr-4">
                   <img 
@@ -82,7 +82,7 @@ const ReferencesSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-white">{reference.name}</h4>
-                  <p className="text-sm text-secondary">{reference.position}</p>
+                  <p className="text-sm text-[#f8f8f0]">{reference.position}</p>
                 </div>
               </div>
             </motion.div>

@@ -80,7 +80,7 @@ const ProjectsSection = () => {
                 <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-secondary text-sm">{project.description}</p>
+                <p className="text-[#f8f8f0] text-sm">{project.description}</p>
               </div>
             </motion.div>
           ))}
