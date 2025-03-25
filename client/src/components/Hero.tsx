@@ -20,7 +20,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Your everyday PM, turning 'we should build this' into 'our users love this.'
+            Your Product guy, turning 'we should build this' into 'our users love this.'
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -31,7 +31,7 @@ const Hero = () => {
               href="#work" 
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-300 font-medium"
             >
-              View my work
+              Check out my work
               <ChevronDown className="h-4 w-4 ml-2" />
             </a>
           </motion.div>
