@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="pt-32 pb-24 md:pt-48 md:pb-32 relative overflow-hidden">
+    <section className="pt-32 pb-12 md:pt-48 md:pb-16 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl">
           <motion.h1 
@@ -29,7 +29,7 @@ const Hero = () => {
           >
             <a 
               href="#work" 
-              className="inline-flex items-center px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors font-medium"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-300 font-medium"
             >
               View my work
               <ChevronDown className="h-4 w-4 ml-2" />

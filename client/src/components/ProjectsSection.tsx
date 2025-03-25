@@ -35,7 +35,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="work" className="py-20 md:py-32 bg-dark-secondary">
+    <section id="work" className="py-16 md:py-24 bg-dark-secondary">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-16"
