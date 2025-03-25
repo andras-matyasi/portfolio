@@ -11,13 +11,13 @@ const Footer = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-secondary text-sm">
-            © {new Date().getFullYear()} John Doe. All rights reserved.
+          <p className="text-white text-sm">
+            © {new Date().getFullYear()} Andras Matyasi. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a
               href="#"
-              className="text-secondary hover:text-primary transition-colors"
+              className="text-white hover:text-primary transition-colors"
               aria-label="LinkedIn"
             >
               <svg
@@ -31,7 +31,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-secondary hover:text-primary transition-colors"
+              className="text-white hover:text-primary transition-colors"
               aria-label="Twitter"
             >
               <svg

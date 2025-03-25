@@ -30,17 +30,17 @@ const Header = () => {
         <nav>
           <ul className="flex space-x-6 text-sm">
             <li>
-              <a href="#work" className="text-secondary hover:text-white transition-colors">
+              <a href="#work" className="text-white hover:text-primary transition-colors">
                 Work
               </a>
             </li>
             <li>
-              <a href="#about" className="text-secondary hover:text-white transition-colors">
+              <a href="#about" className="text-white hover:text-primary transition-colors">
                 About
               </a>
             </li>
             <li>
-              <a href="#contact" className="text-secondary hover:text-white transition-colors">
+              <a href="#contact" className="text-white hover:text-primary transition-colors">
                 Contact
               </a>
             </li>
