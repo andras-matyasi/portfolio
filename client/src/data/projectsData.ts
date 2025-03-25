@@ -20,41 +20,41 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "project1",
-    title: "HealthTrack",
-    category: "Mobile App",
-    description: "A health and fitness tracking application designed to help users monitor their daily activities.",
+    title: "SaaS Pricing Optimization",
+    category: "Product Management",
+    description: "A strategic pricing overhaul for a SaaS platform that increased company revenue.",
     coverImage: "https://images.unsplash.com/photo-1581287053822-fd7bf4f4bfec?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    fullDescription: "A health and fitness tracking application designed to help users monitor their daily activities and achieve their wellness goals.",
-    role: "Lead UX/UI Designer",
-    timeline: "3 months (2022)",
-    tools: "Figma, Protopie, Maze",
+    fullDescription: "A strategic pricing overhaul for a B2B SaaS platform that increased company revenue while providing better value to customers.",
+    role: "Senior Product Manager",
+    timeline: "4 months (2023)",
+    tools: "Market Analysis, Pricing Strategy, User Interviews, Analytics",
     overview: [
-      "HealthTrack is a comprehensive health and fitness tracking application that helps users monitor their daily activities, nutrition, and progress toward wellness goals. The app provides personalized insights and recommendations based on user data.",
-      "The challenge was to create an intuitive interface that would make complex health data accessible and actionable for users with varying levels of technical proficiency."
+      "Led a comprehensive pricing strategy overhaul for a B2B SaaS platform struggling with pricing that didn't align with customer value perception and usage patterns.",
+      "The challenge was to create a pricing structure that would increase revenue while providing better value alignment for different customer segments."
     ],
     process: [
       {
-        title: "Research & Discovery",
-        description: "I conducted user interviews and competitive analysis to identify pain points in existing health tracking applications and opportunities for improvement."
+        title: "Customer Research",
+        description: "I conducted extensive interviews with current and churned customers to understand value perception, usage patterns, and price sensitivity across different segments."
       },
       {
-        title: "Wireframing & Prototyping",
-        description: "I created low-fidelity wireframes to establish the information architecture and user flow, followed by interactive prototypes for user testing."
+        title: "Competitive Analysis",
+        description: "I analyzed competitor pricing strategies and market positioning to identify opportunities for differentiation and value-based pricing approaches."
       },
       {
-        title: "Design Iterations",
-        description: "Through multiple iterations and user testing sessions, I refined the interface to ensure it was both visually appealing and functionally intuitive."
+        title: "Value Metric Identification",
+        description: "I worked with the data team to identify metrics that accurately reflected the value customers received from the product, ensuring pricing aligned with actual value delivery."
       },
       {
-        title: "Implementation",
-        description: "I worked closely with developers to ensure the design was implemented accurately and efficiently, making adjustments as needed."
+        title: "Testing & Implementation",
+        description: "I designed and implemented a phased rollout strategy with grandfathering options for existing customers, monitoring key retention and revenue metrics throughout the transition."
       }
     ],
     images: [
       "https://images.unsplash.com/photo-1598257006458-087169a1f08d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
       "https://images.unsplash.com/photo-1598732729203-566633b3ae81?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
     ],
-    results: "The redesigned HealthTrack app saw a 40% increase in daily active users and a 25% improvement in user retention rates. User feedback has been overwhelmingly positive, with particular praise for the intuitive interface and personalized insights."
+    results: "The new pricing strategy resulted in a 22% increase in annual recurring revenue (ARR) within 6 months, with customer retention rates remaining stable despite the changes. Customer satisfaction surveys showed improved value perception across all segments."
   },
   {
     id: "project2",

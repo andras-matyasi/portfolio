@@ -25,7 +25,7 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
         <Link href="#" className="text-xl font-semibold tracking-tight text-white hover:text-primary transition-colors">
-          John Doe
+          Andras Matyasi
         </Link>
         <nav>
           <ul className="flex space-x-6 text-sm">
