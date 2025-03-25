@@ -51,11 +51,13 @@ const Home = () => {
   return (
     <div className="bg-dark text-light min-h-screen overflow-x-hidden">
       <Header />
-      <main>
+      <main className="flex flex-col">
         <Hero />
-        <ProjectsSection />
+        <div className="flex flex-col" style={{ marginBottom: '-6rem' }}>
+          <ProjectsSection />
+          <ContactSection />
+        </div>
         <AboutSection />
-        <ContactSection />
       </main>
       <Footer />
     </div>
