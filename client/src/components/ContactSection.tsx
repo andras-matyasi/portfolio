@@ -6,21 +6,21 @@ const contactMethods = [
   {
     id: 1,
     title: "Email",
-    value: "hello@johndoe.com",
-    href: "mailto:hello@johndoe.com",
+    value: "hello@andrasmatyasi.com",
+    href: "mailto:hello@andrasmatyasi.com",
     icon: Mail,
   },
   {
     id: 2,
     title: "LinkedIn",
-    value: "linkedin.com/in/johndoe",
+    value: "linkedin.com/in/andrasmatyasi",
     href: "#",
     icon: Users,
   },
   {
     id: 3,
     title: "Dribbble",
-    value: "dribbble.com/johndoe",
+    value: "dribbble.com/andrasmatyasi",
     href: "#",
     icon: Hash,
   },
@@ -55,7 +55,7 @@ const ContactSection = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Get in Touch</h2>
-          <p className="text-secondary text-lg mb-12">
+          <p className="text-lg mb-12 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent font-medium">
             Interested in working together? Feel free to reach out for
             collaborations or just a friendly hello.
           </p>
@@ -79,7 +79,7 @@ const ContactSection = () => {
                 <h3 className="text-lg font-semibold mb-2">{method.title}</h3>
                 <a
                   href={method.href}
-                  className="text-secondary hover:text-primary transition-colors"
+                  className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
                 >
                   {method.value}
                 </a>

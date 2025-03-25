@@ -15,7 +15,7 @@ const Hero = () => {
             I translate user pain into business gain
           </motion.h1>
           <motion.p 
-            className="text-lg md:text-xl text-secondary leading-relaxed mb-8 text-balance"
+            className="text-lg md:text-xl leading-relaxed mb-8 text-balance bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent font-medium"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
