@@ -53,11 +53,9 @@ const Home = () => {
       <Header />
       <main className="flex flex-col">
         <Hero />
-        <div className="flex flex-col" style={{ marginBottom: '-6rem' }}>
-          <ProjectsSection />
-          <ContactSection />
-        </div>
+        <ProjectsSection />
         <AboutSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>

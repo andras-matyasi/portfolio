@@ -35,7 +35,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="work" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark-secondary overflow-hidden">
+    <section id="work" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-10"
