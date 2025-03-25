@@ -60,7 +60,7 @@ const AboutSection = () => {
 
               <h3 className="text-xl font-semibold mb-4 mt-8">Areas of Expertise</h3>
               <div className="grid grid-cols-1 gap-2">
-                <ul className="space-y-2 text-secondary">
+                <ul className="space-y-2 text-[#f8f8f0]">
                   {areaOfExpertise.map((area) => (
                     <li key={area.id} className="flex items-center">
                       <Check className="h-5 w-5 mr-2 text-primary" />
@@ -97,7 +97,7 @@ const AboutSection = () => {
                   <GraduationCap className="h-5 w-5 mr-2 text-primary" />
                   <span className="text-white font-medium">Reforge Alumni</span>
                 </div>
-                <p className="text-secondary text-sm mt-2">
+                <p className="text-[#f8f8f0] text-sm mt-2">
                   Mastering Product Management, Strategy and Growth Series
                 </p>
               </div>
