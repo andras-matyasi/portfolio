@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useEffect, useState } from "react";
 
 // Real references data
 const references = [
@@ -21,7 +29,7 @@ const references = [
   {
     id: 3,
     name: "Bence Gulyás",
-    position: "Full-stack Product Designer, Freelance (profession.hu)",
+    position: "Product Designer, Freelance",
     quote: "What set Andris apart was his balanced approach to decision-making. He skillfully filtered senior stakeholder input while facilitating unbiased trade-offs during the design process. This collaborative approach kept us focused on solving the right problems.",
     imageUrl: "https://media.licdn.com/dms/image/v2/C4D03AQF_4uj0A567jg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1612304072619?e=1748476800&v=beta&t=nOkhTpJ0XKilv1cZMeebsXNIWc_Z-BGPC84ciae-FUg"
   },
@@ -71,6 +79,38 @@ const references = [
 
 const ReferencesSection = () => {
   const { ref, controls } = useScrollAnimation();
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [api, setApi] = useState<any>(null);
+
+  useEffect(() => {
+    if (!api) return;
+    
+    api.on("select", () => {
+      setActiveSlide(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  const ReferenceCard = ({ reference }: { reference: typeof references[0] }) => (
+    <div className="bg-dark p-6 rounded-xl shadow-md flex flex-col h-full">
+      <div className="mb-4">
+        <Quote className="h-8 w-8 text-primary/40" />
+      </div>
+      <p className="text-[#f8f8f0] italic mb-6 flex-grow">"{reference.quote}"</p>
+      <div className="flex items-center mt-auto">
+        <div className="mr-4">
+          <img 
+            src={reference.imageUrl} 
+            alt={reference.name} 
+            className="h-12 w-12 rounded-full object-cover"
+          />
+        </div>
+        <div>
+          <h4 className="font-medium text-white">{reference.name}</h4>
+          <p className="text-sm text-[#f8f8f0]">{reference.position}</p>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section id="references" className="py-16 md:py-24 bg-dark-secondary">
@@ -88,47 +128,52 @@ const ReferencesSection = () => {
         
         <motion.div
           ref={ref}
-          variants={{
-            hidden: { opacity: 0 },
-            show: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.2
-              }
-            }
-          }}
-          initial="hidden"
-          animate={controls}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative"
         >
-          {references.map((reference) => (
-            <motion.div
-              key={reference.id}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-              }}
-              className="bg-dark p-6 rounded-xl shadow-md flex flex-col h-full"
-            >
-              <div className="mb-4">
-                <Quote className="h-8 w-8 text-primary/40" />
-              </div>
-              <p className="text-[#f8f8f0] italic mb-6 flex-grow">"{reference.quote}"</p>
-              <div className="flex items-center mt-auto">
-                <div className="mr-4">
-                  <img 
-                    src={reference.imageUrl} 
-                    alt={reference.name} 
-                    className="h-12 w-12 rounded-full object-cover"
+          <Carousel
+            setApi={setApi}
+            className="w-full"
+            opts={{
+              align: "start",
+              loop: true
+            }}
+          >
+            <CarouselContent className="-ml-4">
+              {references.map((reference) => (
+                <CarouselItem 
+                  key={reference.id} 
+                  className="pl-4 md:basis-1/2 lg:basis-1/3"
+                >
+                  <div className="h-full">
+                    <ReferenceCard reference={reference} />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex items-center justify-center mt-8 gap-2">
+              <CarouselPrevious 
+                className="relative left-0 bg-primary/20 hover:bg-primary/30 text-white hover:text-white border-none" 
+              />
+              <div className="flex gap-2">
+                {references.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => api?.scrollTo(index)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                      activeSlide === index ? "bg-primary" : "bg-gray-600"
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
                   />
-                </div>
-                <div>
-                  <h4 className="font-medium text-white">{reference.name}</h4>
-                  <p className="text-sm text-[#f8f8f0]">{reference.position}</p>
-                </div>
+                ))}
               </div>
-            </motion.div>
-          ))}
+              <CarouselNext 
+                className="relative right-0 bg-primary/20 hover:bg-primary/30 text-white hover:text-white border-none"
+              />
+            </div>
+          </Carousel>
         </motion.div>
       </div>
     </section>
