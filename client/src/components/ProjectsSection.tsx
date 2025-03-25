@@ -45,9 +45,6 @@ const ProjectsSection = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Selected Work</h2>
-          <p className="text-secondary text-lg">
-            A collection of projects I've worked on that showcase my skills and approach.
-          </p>
         </motion.div>
 
         <motion.div
@@ -92,7 +89,7 @@ const ProjectsSection = () => {
         <div className="text-center">
           <a
             href="#contact"
-            className="inline-flex items-center text-primary hover:text-white transition-colors font-medium"
+            className="inline-flex items-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
           >
             Interested in working together?
             <ArrowRight className="h-4 w-4 ml-2" />
