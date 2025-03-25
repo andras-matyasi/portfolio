@@ -55,13 +55,14 @@ const AboutSection = () => {
               transition={{ duration: 0.5 }}
             >
               <p className="text-[#f8f8f0] mb-4 leading-relaxed">
-                Senior Product Manager with 10+ years of experience across SaaS, HR, job boards, 
-                mobility, travel and advertising. Proven ability to drive revenue, scale products 
-                from 0 to 1 (and beyond), lead discovery, improve user retention and satisfaction, 
-                and enable cross-functional teams.
+                Product Manager from Budapest, Hungary, with a passion for research. 
+                Discovery is what makes me truly happy - finding the intersection between 
+                user needs and business opportunities.
               </p>
               <p className="text-[#f8f8f0] mb-6 leading-relaxed">
-                Skilled in developing product strategy. Fluent in English (C1) and Hungarian.
+                I'm a Reforge alumni, having completed both the Mastering PM and 
+                Strategy and Growth Series. These programs have shaped my strategic 
+                approach to product development.
               </p>
 
               <h3 className="text-xl font-semibold mb-4 mt-8 text-white">Areas of Expertise</h3>
