@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Calendar, Utensils, Menu, X } from "lucide-react";
+import { Mail, Linkedin, Calendar, Utensils, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Header = () => {
@@ -145,6 +145,9 @@ const Header = () => {
                   onClick={() => setFunkyToolsMenuOpen(!funkyToolsMenuOpen)}
                 >
                   Funky tools
+                  <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" 
+                    style={{ transform: funkyToolsMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  />
                 </button>
                 {funkyToolsMenuOpen && (
                   <div 
@@ -174,6 +177,9 @@ const Header = () => {
                   onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 >
                   Contact
+                  <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200"
+                    style={{ transform: contactMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  />
                 </button>
                 {contactMenuOpen && (
                   <div 
@@ -270,7 +276,7 @@ const Header = () => {
                   onClick={() => setFunkyToolsMenuOpen(!funkyToolsMenuOpen)}
                 >
                   <span>Funky tools</span>
-                  {funkyToolsMenuOpen ? <X size={18} /> : <Menu size={18} />}
+                  {funkyToolsMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </button>
                 {funkyToolsMenuOpen && (
                   <div className="mt-2 pl-4 border-l border-dark-secondary">
@@ -295,7 +301,7 @@ const Header = () => {
                   onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 >
                   <span>Contact</span>
-                  {contactMenuOpen ? <X size={18} /> : <Menu size={18} />}
+                  {contactMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </button>
                 {contactMenuOpen && (
                   <div className="mt-2 pl-4 border-l border-dark-secondary">
