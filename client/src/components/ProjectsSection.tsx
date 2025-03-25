@@ -35,10 +35,10 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="work" className="py-16 md:py-24 bg-dark-secondary">
+    <section id="work" className="py-12 md:py-16 bg-dark-secondary">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
-          className="max-w-3xl mx-auto text-center mb-16"
+          className="max-w-3xl mx-auto text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -52,7 +52,7 @@ const ProjectsSection = () => {
           variants={container}
           initial="hidden"
           animate={controls}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10"
         >
           {projects.map((project) => (
             <motion.div

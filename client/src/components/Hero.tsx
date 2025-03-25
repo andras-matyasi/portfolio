@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="pt-32 pb-12 md:pt-48 md:pb-16 relative overflow-hidden">
+    <section className="pt-32 pb-8 md:pt-48 md:pb-8 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl">
           <motion.h1 
