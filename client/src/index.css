@@ -9,10 +9,17 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    touch-action: manipulation;
   }
   
   html {
     @apply scroll-smooth;
+    height: -webkit-fill-available;
   }
   
   .project-card:hover .project-overlay {

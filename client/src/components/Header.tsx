@@ -75,9 +75,30 @@ const Header = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  // Close mobile menu when a link is clicked
-  const handleMobileLinkClick = () => {
+  // Close mobile menu when a link is clicked and handle smooth scrolling
+  const handleMobileLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Close mobile menu
     setMobileMenuOpen(false);
+    
+    // Check if this is an anchor link
+    const href = e.currentTarget.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      
+      // Find the target element and scroll to it smoothly
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        // Small delay to allow the menu to close first
+        setTimeout(() => {
+          window.scrollTo({
+            top: targetElement.offsetTop - 70, // Account for header height
+            behavior: 'smooth'
+          });
+        }, 300);
+      }
+    }
   };
 
   // Track mouse movement for horizontal detection
@@ -236,14 +257,19 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu Panel */}
-      {isMobile && mobileMenuOpen && (
+      {isMobile && (
         <motion.div
           ref={mobileMenuRef}
-          className="bg-dark/95 border-t border-dark-secondary"
+          className="bg-dark/95 border-t border-dark-secondary overflow-hidden"
           initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.3 }}
+          animate={{ 
+            opacity: mobileMenuOpen ? 1 : 0,
+            height: mobileMenuOpen ? "auto" : 0
+          }}
+          transition={{ 
+            duration: 0.3,
+            ease: "easeInOut"
+          }}
         >
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
