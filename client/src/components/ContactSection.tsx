@@ -45,7 +45,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="pt-2 pb-20 md:pt-4 md:pb-24 bg-dark-secondary">
+    <section id="contact" className="pt-0 pb-16 md:pt-0 md:pb-20 bg-dark-secondary overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           className="max-w-3xl mx-auto text-center"

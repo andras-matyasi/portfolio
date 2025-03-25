@@ -35,7 +35,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="work" className="py-12 md:py-16 bg-dark-secondary">
+    <section id="work" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark-secondary overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-10"
@@ -86,7 +86,7 @@ const ProjectsSection = () => {
           ))}
         </motion.div>
 
-        <div className="text-center">
+        <div className="text-center mb-0 pb-0">
           <a
             href="#contact"
             className="inline-flex items-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
