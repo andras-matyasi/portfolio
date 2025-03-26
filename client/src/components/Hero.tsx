@@ -50,43 +50,111 @@ const AnimatedGradientBackground = () => {
 
   return (
     <div className="absolute inset-0 overflow-hidden -z-10">
+      {/* Main animated background with more visible gradients */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/10 to-purple-900/5"></div>
+      
       {/* Purple blue blob 1 */}
       <motion.div 
-        className="absolute -top-[30%] -left-[10%] w-[80%] h-[80%] bg-gradient-to-br from-blue-600/20 via-indigo-600/15 to-purple-700/20 rounded-full blur-3xl"
+        className="blob blob-1 -top-[20%] -left-[5%] w-[90%] h-[90%]"
         initial={{ opacity: 0.5 }}
         animate="animate"
         variants={blobVariants}
-        style={{ animation: "pulse 15s infinite ease-in-out" }}
       />
       
       {/* Blue indigo blob 2 */}
       <motion.div 
-        className="absolute top-[20%] -right-[30%] w-[70%] h-[70%] bg-gradient-to-bl from-blue-500/15 via-violet-500/10 to-indigo-600/20 rounded-full blur-3xl"
+        className="blob blob-2 top-[10%] -right-[20%] w-[80%] h-[80%]"
         initial={{ opacity: 0.6 }}
         animate="animate"
         variants={blob2Variants}
-        style={{ animation: "pulse 18s infinite ease-in-out 2s" }}
       />
       
       {/* Small accent blob */}
       <motion.div 
-        className="absolute bottom-[10%] left-[20%] w-[40%] h-[40%] bg-gradient-to-tr from-purple-600/10 via-blue-400/15 to-indigo-500/10 rounded-full blur-3xl"
+        className="blob blob-3 bottom-[5%] left-[15%] w-[50%] h-[50%]"
         initial={{ opacity: 0.5 }}
         animate="animate"
         variants={blob3Variants}
-        style={{ animation: "pulse 20s infinite ease-in-out 4s" }}
       />
       
-      {/* Subtle grid overlay */}
-      <div className="absolute inset-0 animated-grid opacity-30"></div>
+      {/* Animated particle elements */}
+      <div className="particles-container absolute inset-0">
+        {Array.from({ length: 15 }).map((_, index) => (
+          <motion.div
+            key={index}
+            className="hero-particle"
+            initial={{
+              x: Math.random() * 100 + "%",
+              y: Math.random() * 100 + "%",
+              scale: Math.random() * 0.5 + 0.5,
+            }}
+            animate={{
+              y: [
+                Math.random() * 100 + "%", 
+                Math.random() * 100 + "%", 
+                Math.random() * 100 + "%"
+              ],
+              x: [
+                Math.random() * 100 + "%", 
+                Math.random() * 100 + "%", 
+                Math.random() * 100 + "%"
+              ],
+              opacity: [0.1, 0.5, 0.1],
+            }}
+            transition={{
+              duration: Math.random() * 20 + 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
       
-      {/* Additional animated elements */}
-      <div className="absolute top-[40%] left-[50%] w-24 h-24 rounded-full bg-blue-500/5" 
-           style={{ animation: "float 8s infinite ease-in-out" }}></div>
-      <div className="absolute top-[20%] left-[20%] w-16 h-16 rounded-full bg-purple-500/5" 
-           style={{ animation: "float 12s infinite ease-in-out 2s" }}></div>
-      <div className="absolute top-[70%] right-[30%] w-20 h-20 rounded-full bg-indigo-500/5" 
-           style={{ animation: "float 10s infinite ease-in-out 1s" }}></div>
+      {/* Subtle animated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-blue-900/10 animate-pulse"></div>
+      
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 animated-grid opacity-40"></div>
+      
+      {/* Additional animated floating elements */}
+      <div className="floating-element top-[30%] left-[40%] w-32 h-32 bg-blue-500/10"></div>
+      <div className="floating-element top-[15%] left-[25%] w-24 h-24 bg-purple-500/10" 
+           style={{ animationDelay: "2s" }}></div>
+      <div className="floating-element top-[60%] right-[20%] w-28 h-28 bg-indigo-500/10" 
+           style={{ animationDelay: "1s" }}></div>
+           
+      {/* Moving light streaks */}
+      <motion.div 
+        className="hero-moving-streak hero-moving-streak-1 w-40"
+        style={{ top: '30%', left: '-10%' }}
+        animate={{ 
+          left: ['0%', '100%'],
+          opacity: [0, 0.7, 0]
+        }}
+        transition={{ 
+          duration: 7, 
+          repeat: Infinity,
+          repeatType: "loop", 
+          ease: "easeInOut", 
+          times: [0, 0.5, 1] 
+        }}
+      />
+      <motion.div 
+        className="hero-moving-streak hero-moving-streak-2 w-60"
+        style={{ top: '60%', left: '-10%' }}
+        animate={{ 
+          left: ['0%', '100%'],
+          opacity: [0, 0.5, 0]
+        }}
+        transition={{ 
+          duration: 12, 
+          repeat: Infinity,
+          repeatType: "loop", 
+          ease: "easeInOut",
+          delay: 2,
+          times: [0, 0.5, 1]
+        }}
+      />
     </div>
   );
 };
@@ -135,12 +203,9 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <a 
-              href="#work" 
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 hover:from-blue-600 hover:via-indigo-700 hover:to-purple-800 text-white rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl relative overflow-hidden group"
-            >
+            <a href="#work" className="hero-button">
               <span className="relative z-10">Check out my work</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span className="hero-button-hover-overlay"></span>
               <ChevronDown className="h-4 w-4 ml-2 relative z-10" />
             </a>
           </motion.div>
