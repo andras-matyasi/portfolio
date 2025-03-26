@@ -34,7 +34,7 @@ export const projects: Project[] = [
     title: "SaaS CSAT Improvement",
     type: "Product Management",
     shortText: "A customer satisfaction initiative that increased CSAT scores by 15% for a B2B SaaS platform.",
-    image: "/images/case-studies/saas-csat-improvement.jpg",
+    image: "/images/case-studies/activation-case-study.png",
     problem: "The B2B SaaS platform was experiencing declining customer satisfaction and increased churn due to unresolved pain points in the customer journey, inconsistent product experiences, and slow customer support processes.",
     solution: "I conducted extensive customer interviews and analyzed support tickets to identify critical pain points, created detailed customer journey maps, developed a prioritized roadmap of experience improvements, and worked across teams to implement changes.",
     success: "The customer satisfaction initiative achieved a 15% increase in CSAT scores over a 6-month period. Churn rate decreased by 12%, and customer lifetime value increased by 18% as a result of the improvements to product experience and support processes.",
