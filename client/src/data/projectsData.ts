@@ -85,7 +85,7 @@ export const projects: Project[] = [
     title: "Car Subscription from 0 to 1",
     type: "Product Strategy",
     shortText: "Launching a car subscription service from concept to successful market entry.",
-    image: "/images/case-studies/swapp-case-study-b.png",
+    image: "/images/case-studies/swapp-case-study.png",
     problem: "Existing food delivery platforms were causing frustration with complicated interfaces, unreliable delivery tracking, and difficulty in comparing menu options, leading to order abandonment.",
     solution: "I analyzed existing food delivery apps, developed detailed user personas, created a visual system with food imagery as the hero, and conducted testing sessions with users ordering from actual restaurants.",
     success: "QuickBite has achieved a 28% higher order completion rate compared to industry standards, with users specifically praising the intuitive ordering process and helpful restaurant recommendations.",
