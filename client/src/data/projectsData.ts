@@ -48,6 +48,7 @@ export const projects: Project[] = [
   },
   {
     id: "project3",
+    active: false,
     title: "ModernShop E-commerce Platform",
     type: "E-commerce",
     shortText: "A modern e-commerce platform with minimalist design and seamless user experience from browsing to checkout.",
@@ -64,6 +65,7 @@ export const projects: Project[] = [
   },
   {
     id: "project4",
+    active: true,
     title: "SecurePay Payment Application",
     type: "Fintech",
     shortText: "A secure payment application focused on user security, transaction transparency, and seamless experience.",
@@ -80,6 +82,7 @@ export const projects: Project[] = [
   },
   {
     id: "project5",
+    active: true,
     title: "QuickBite Food Delivery",
     type: "Food & Beverage",
     shortText: "A food delivery app connecting users with local restaurants through seamless ordering and tracking.",
@@ -96,6 +99,7 @@ export const projects: Project[] = [
   },
   {
     id: "project6",
+    active: true,
     title: "ConnectHub Networking Platform",
     type: "Social",
     shortText: "A professional networking platform designed for meaningful connections beyond superficial interactions.",
