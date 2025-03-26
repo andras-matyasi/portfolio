@@ -66,79 +66,46 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
 
           <div className="mb-8">
             <span className="text-xs font-medium text-primary uppercase tracking-wider">
-              {project.category}
+              {project.type}
             </span>
             <h2 className="text-2xl md:text-3xl font-bold mt-2 mb-4">
               {project.title}
             </h2>
-            <p className="text-[#f8f8f0]">{project.fullDescription}</p>
+            <p className="text-[#f8f8f0]">{project.shortText}</p>
           </div>
 
           <div className="aspect-video w-full mb-8 rounded-lg overflow-hidden">
             <img
-              src={project.coverImage}
+              src={project.image}
               alt={`${project.title} Overview`}
               className="w-full h-full object-cover"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Role</h3>
-              <p className="text-[#f8f8f0]">{project.role}</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Timeline</h3>
-              <p className="text-[#f8f8f0]">{project.timeline}</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Tools</h3>
-              <p className="text-[#f8f8f0]">{project.tools}</p>
-            </div>
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold mb-4">Problem</h3>
+            <p className="text-[#f8f8f0] mb-4">{project.problem}</p>
           </div>
 
           <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">Overview</h3>
-            {project.overview.map((paragraph, index) => (
-              <p key={index} className="text-[#f8f8f0] mb-4">
-                {paragraph}
-              </p>
-            ))}
+            <h3 className="text-xl font-semibold mb-4">Solution</h3>
+            <p className="text-[#f8f8f0] mb-4">{project.solution}</p>
           </div>
 
           <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">Process</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {project.process.slice(0, 2).map((step, index) => (
-                <div key={index}>
-                  <h4 className="text-lg font-medium mb-2">{step.title}</h4>
-                  <p className="text-[#f8f8f0] mb-4">{step.description}</p>
-                </div>
+            <h3 className="text-xl font-semibold mb-4">Success</h3>
+            <p className="text-[#f8f8f0] mb-4">{project.success}</p>
+          </div>
+
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold mb-4">Key Learnings</h3>
+            <ul className="list-disc pl-5 space-y-2">
+              {project.keyLearnings.map((learning, index) => (
+                <li key={index} className="text-[#f8f8f0]">
+                  {learning}
+                </li>
               ))}
-              {project.process.slice(2).map((step, index) => (
-                <div key={index + 2}>
-                  <h4 className="text-lg font-medium mb-2">{step.title}</h4>
-                  <p className="text-[#f8f8f0]">{step.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            {project.images.map((image, index) => (
-              <div key={index} className="rounded-lg overflow-hidden">
-                <img
-                  src={image}
-                  alt={`${project.title} Image ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">Results</h3>
-            <p className="text-[#f8f8f0] mb-4">{project.results}</p>
+            </ul>
           </div>
 
           <div className="text-center">

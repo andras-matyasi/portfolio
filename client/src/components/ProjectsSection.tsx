@@ -63,7 +63,7 @@ const ProjectsSection = () => {
             >
               <div className="relative aspect-video">
                 <img
-                  src={project.coverImage}
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover"
                 />
@@ -75,12 +75,12 @@ const ProjectsSection = () => {
               </div>
               <div className="p-5">
                 <span className="text-xs font-medium text-primary uppercase tracking-wider">
-                  {project.category}
+                  {project.type}
                 </span>
                 <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-[#f8f8f0] text-sm">{project.description}</p>
+                <p className="text-[#f8f8f0] text-sm">{project.shortText}</p>
               </div>
             </motion.div>
           ))}
