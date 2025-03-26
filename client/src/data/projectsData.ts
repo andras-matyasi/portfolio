@@ -1,5 +1,6 @@
 export interface Project {
   id: string;
+  active: boolean; // On-off switch to show/hide the project
   title: string;
   type: string;
   shortText: string;
@@ -13,6 +14,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "project1",
+    active: true,
     title: "SaaS Pricing Optimization",
     type: "Product Management",
     shortText: "A strategic pricing overhaul for a SaaS platform that increased company revenue.",
@@ -29,6 +31,7 @@ export const projects: Project[] = [
   },
   {
     id: "project2",
+    active: true,
     title: "SaaS CSAT Improvement",
     type: "Product Management",
     shortText: "A customer satisfaction initiative that increased CSAT scores by 15% for a B2B SaaS platform.",
