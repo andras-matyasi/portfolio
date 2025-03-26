@@ -13,20 +13,19 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "project1",
+    id: "pricing-kameleo",
     active: true,
-    title: "SaaS Pricing Optimization",
-    type: "Product Management",
-    shortText: "A strategic pricing overhaul for a SaaS platform that increased company revenue.",
-    image: "/images/case-studies/saas-pricing-optimization.jpg",
-    problem: "The B2B SaaS platform struggled with pricing that didn't align with customer value perception and usage patterns, causing revenue leakage and customer confusion about the value proposition.",
-    solution: "I led a comprehensive pricing strategy overhaul by conducting customer interviews, analyzing competitor pricing, identifying true value metrics, and implementing a phased rollout with grandfathering options for existing customers.",
-    success: "The new pricing strategy resulted in a 22% increase in annual recurring revenue (ARR) within 6 months, with customer retention rates remaining stable despite the changes. Customer satisfaction surveys showed improved value perception across all segments.",
+    title: "Pricing Strategy",
+    type: "SaaS",
+    shortText: "Enabling users to capture more value and increasing revenue with pricing change.",
+    image: "/images/case-studies/pricing-case-study.png",
+    problem: "Seat-based pricing provided bad scaling for teams and heavy API users.",
+    solution: "Redesigned packages so team members and API usage became more scalable add-ons.",
+    success: "4x team members in 2 months, extra API usage is the top grossing add-on, total revenue increased by 8%",
     keyLearnings: [
-      "Value-based pricing significantly outperforms cost-plus or competitor-based approaches for SaaS products",
-      "Grandfathering existing customers during pricing changes is critical for maintaining loyalty",
-      "Pricing should be tied to specific customer usage patterns and value metrics",
-      "Cross-functional collaboration is essential when implementing pricing changes"
+      "Don't be afraid to experiment with pricing",
+      "Designing pricing should be a cross-company effort, everyone can have good ideas", 
+      "Creating your own pricing flavor beats copying competitors" 
     ]
   },
   {
