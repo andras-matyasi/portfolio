@@ -1,13 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { projects } from "@/data/projectsData";
 import ProjectModal from "./ProjectModal";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [api, setApi] = useState<any>(null);
   const { ref, controls } = useScrollAnimation();
+  const isMobile = useIsMobile();
+
+  const activeProjects = projects.filter(project => project.active);
+
+  useEffect(() => {
+    if (!api) return;
+    
+    const onSelect = () => {
+      setActiveSlide(api.selectedScrollSnap());
+    };
+    
+    api.on("select", onSelect);
+    
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
 
   const openModal = (projectId: string) => {
     setSelectedProject(projectId);
@@ -19,20 +46,40 @@ const ProjectsSection = () => {
     document.body.style.overflow = "auto";
   };
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
   const item = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
+
+  const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
+    <motion.div
+      variants={item}
+      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
+      onClick={() => openModal(project.id)}
+    >
+      <div className="relative" style={{ aspectRatio: '3/2' }}>
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover"
+        />
+        <div className="project-overlay absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span className="px-4 py-2 border border-white/30 text-white text-sm font-medium rounded-lg">
+            View Case Study
+          </span>
+        </div>
+      </div>
+      <div className="p-5">
+        <span className="text-xs font-medium text-primary uppercase tracking-wider">
+          {project.type}
+        </span>
+        <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-[#f8f8f0] text-sm">{project.shortText}</p>
+      </div>
+    </motion.div>
+  );
 
   return (
     <section id="case-studies" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
@@ -49,44 +96,62 @@ const ProjectsSection = () => {
 
         <motion.div
           ref={ref}
-          variants={container}
-          initial="hidden"
-          animate={controls}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative px-10 md:px-14"
         >
-          {projects.filter(project => project.active).map((project) => (
-            <motion.div
-              key={project.id}
-              variants={item}
-              className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-              onClick={() => openModal(project.id)}
+          <Carousel
+            setApi={setApi}
+            className="w-full"
+            opts={{
+              align: "start",
+              loop: true
+            }}
+          >
+            <CarouselContent className="-ml-4">
+              {activeProjects.map((project) => (
+                <CarouselItem 
+                  key={project.id} 
+                  className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
+                >
+                  <div className="h-full">
+                    <ProjectCard project={project} />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            
+            <CarouselPrevious 
+              className="absolute left-0 top-1/2 -translate-y-1/2 bg-primary/20 hover:bg-primary/30 text-white hover:text-white border-none h-12 w-12 rounded-full shadow-lg"
+              style={{ transform: 'translateY(-50%)' }}
             >
-              <div className="relative" style={{ aspectRatio: '3/2' }}>
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="project-overlay absolute inset-0 bg-dark/60 opacity-0 transition-opacity flex items-center justify-center">
-                  <span className="px-4 py-2 border border-white/30 text-white text-sm font-medium rounded-lg">
-                    View Case Study
-                  </span>
-                </div>
-              </div>
-              <div className="p-5">
-                <span className="text-xs font-medium text-primary uppercase tracking-wider">
-                  {project.type}
-                </span>
-                <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-[#f8f8f0] text-sm">{project.shortText}</p>
-              </div>
-            </motion.div>
-          ))}
+              <ChevronLeft className="h-8 w-8" />
+            </CarouselPrevious>
+            
+            <CarouselNext 
+              className="absolute right-0 top-1/2 -translate-y-1/2 bg-primary/20 hover:bg-primary/30 text-white hover:text-white border-none h-12 w-12 rounded-full shadow-lg"
+              style={{ transform: 'translateY(-50%)' }}
+            >
+              <ChevronRight className="h-8 w-8" />
+            </CarouselNext>
+          </Carousel>
+          
+          <div className="flex items-center justify-center mt-8 gap-2">
+            {activeProjects.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  activeSlide === index ? "bg-primary" : "bg-gray-600"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </motion.div>
 
-        <div className="text-center mb-0 pb-0">
+        <div className="text-center my-10">
           <a
             href="#contact"
             className="inline-flex items-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
