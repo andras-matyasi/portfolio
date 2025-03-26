@@ -66,10 +66,6 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
       keyframes: {
         "accordion-down": {
           from: {
@@ -87,39 +83,10 @@ export default {
             height: "0",
           },
         },
-        "float": {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        "pulse": {
-          "0%, 100%": { opacity: "0.5" },
-          "50%": { opacity: "0.8" },
-        },
-        "drift": {
-          "0%": { transform: "translate(0, 0)" },
-          "25%": { transform: "translate(5px, 5px)" },
-          "50%": { transform: "translate(0, 10px)" },
-          "75%": { transform: "translate(-5px, 5px)" },
-          "100%": { transform: "translate(0, 0)" },
-        },
-        "subtle-rotate": {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
-        },
-        "gradientText": {
-          "0%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-          "100%": { backgroundPosition: "0% 50%" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "float": "float 6s ease-in-out infinite",
-        "pulse": "pulse 4s ease-in-out infinite",
-        "drift": "drift 30s ease-in-out infinite",
-        "subtle-rotate": "subtle-rotate 30s linear infinite",
-        "gradientText": "gradientText 8s ease infinite",
       },
     },
   },
