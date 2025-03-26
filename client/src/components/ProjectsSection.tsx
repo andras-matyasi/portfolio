@@ -61,7 +61,7 @@ const ProjectsSection = () => {
               className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               onClick={() => openModal(project.id)}
             >
-              <div className="relative aspect-video">
+              <div className="relative" style={{ aspectRatio: '3/2' }}>
                 <img
                   src={project.image}
                   alt={project.title}
