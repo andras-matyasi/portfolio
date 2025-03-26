@@ -49,9 +49,9 @@ const AnimatedGradientBackground = () => {
   };
 
   return (
-    <div className="absolute inset-0 overflow-hidden -z-10">
+    <div className="absolute inset-0 overflow-hidden z-0">
       {/* Main animated background with more visible gradients */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/10 to-purple-900/5"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 to-purple-900/20"></div>
       
       {/* Purple blue blob 1 */}
       <motion.div 
@@ -180,7 +180,7 @@ const Hero = () => {
       {/* Animated gradient background */}
       <AnimatedGradientBackground />
       
-      <div className="container mx-auto px-4 md:px-6 relative">
+      <div className="container mx-auto px-4 md:px-6 relative z-20">
         <div className="max-w-3xl">
           <motion.h1 
             className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6 text-balance"
