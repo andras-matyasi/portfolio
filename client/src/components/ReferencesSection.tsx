@@ -152,47 +152,93 @@ const ReferencesSection = () => {
           transition={{ duration: 0.8 }}
           className="relative"
         >
-          <Carousel
-            setApi={setApi}
-            className="w-full"
-            opts={{
-              align: "start",
-              loop: true
-            }}
-          >
-            <CarouselContent className="-ml-4">
-              {references.map((reference) => (
-                <CarouselItem 
-                  key={reference.id} 
-                  className="pl-4 md:basis-1/2 lg:basis-1/3"
+          <div className="flex">
+            {/* Left Arrow - Full height */}
+            <button 
+              onClick={() => api?.scrollPrev()}
+              className="flex items-center justify-center w-14 md:w-20 bg-dark-secondary hover:bg-dark transition-all duration-300 cursor-pointer"
+              aria-label="Previous slide"
+            >
+              <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="w-full h-full text-primary/80 hover:text-primary transition-colors"
                 >
-                  <div className="h-full">
-                    <ReferenceCard reference={reference} />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="flex items-center justify-center mt-8 gap-2">
-              <CarouselPrevious 
-                className="relative left-0 bg-primary/20 hover:bg-primary/30 text-white hover:text-white border-none" 
-              />
-              <div className="flex gap-2">
-                {references.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => api?.scrollTo(index)}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                      activeSlide === index ? "bg-primary" : "bg-gray-600"
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
               </div>
-              <CarouselNext 
-                className="relative right-0 bg-primary/20 hover:bg-primary/30 text-white hover:text-white border-none"
-              />
+            </button>
+
+            {/* Carousel content */}
+            <div className="flex-1">
+              <Carousel
+                setApi={setApi}
+                className="w-full"
+                opts={{
+                  align: "start",
+                  loop: true
+                }}
+              >
+                <CarouselContent className="-ml-4">
+                  {references.map((reference) => (
+                    <CarouselItem 
+                      key={reference.id} 
+                      className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
+                    >
+                      <div className="h-full">
+                        <ReferenceCard reference={reference} />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                
+                {/* These are hidden but still needed for API functionality */}
+                <CarouselPrevious className="hidden" />
+                <CarouselNext className="hidden" />
+              </Carousel>
             </div>
-          </Carousel>
+
+            {/* Right Arrow - Full height */}
+            <button 
+              onClick={() => api?.scrollNext()}
+              className="flex items-center justify-center w-14 md:w-20 bg-dark-secondary hover:bg-dark transition-all duration-300 cursor-pointer"
+              aria-label="Next slide"
+            >
+              <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="w-full h-full text-primary/80 hover:text-primary transition-colors"
+                >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </button>
+          </div>
+          
+          <div className="flex items-center justify-center mt-8 gap-2">
+            {references.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  activeSlide === index ? "bg-primary" : "bg-gray-600"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
