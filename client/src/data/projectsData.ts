@@ -17,15 +17,15 @@ export const projects: Project[] = [
     active: true,
     title: "Pricing Strategy",
     type: "SaaS",
-    shortText: "Enabling users to capture more value and increasing revenue with pricing change.",
+    shortText: "Enabling users to capture more value and increasing revenue with pricing change at Kameleo.",
     image: "/images/case-studies/pricing-case-study.png",
     problem: "Seat-based pricing provided bad scaling for teams and heavy API users.",
     solution: "Redesigned packages so team members and API usage became more scalable add-ons.",
     success: "4x team members in 2 months, extra API usage is the top grossing add-on, total revenue increased by 8%",
     keyLearnings: [
-      "Don't be afraid to experiment with pricing",
-      "Designing pricing should be a cross-company effort, everyone can have good ideas", 
-      "Creating your own pricing flavor beats copying competitors" 
+      "Do your research, but don't be afraid to change the pricing.",
+      "Designing pricing should be a cross-company effort, each team have invaluable input.", 
+      "Creating your own pricing flavor, aligned with your product strategy beats copying competitors. Be the best option for your ICP." 
     ]
   },
   {
