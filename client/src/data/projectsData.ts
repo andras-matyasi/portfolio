@@ -31,7 +31,7 @@ export const projects: Project[] = [
   {
     id: "csat-kameleo",
     active: true,
-    title: "Core flow redesign",
+    title: "Core feature redesign to increase activation",
     type: "SaaS",
     shortText: "Shorter time to AHA moment to increase activation and satisfaction.",
     image: "/images/case-studies/activation-case-study.png",
@@ -112,16 +112,15 @@ export const projects: Project[] = [
     active: true,
     title: "Company reviews on a job board",
     type: "Job board",
-    shortText: "Brief description that appears on the card",
+    shortText: "The story of turning a struggling product to striving feature.",
     image: "/images/case-studies/reviews-case-study.png",
-    problem: "Detailed description of the problem being solved",
-    solution: "Explanation of how you approached and solved the problem",
-    success: "Metrics and outcomes that demonstrate the project's success",
+    problem: "Company reviews was a secondary product (to the job board) with low brand awareness. Paid was the only channel for acquisition, the product has low engagement and resource intensive to keep alive. However, user feedback was very positive, as it was a rare thing to find reviews about companies at the time (in the local market in Hungary).",
+    solution: "Sunset the individual product. Launched a company reviews as a new feature for the job board, with access to the customer base. Provided a native interface to review companies 1 click away from you online CV, and created a simple email automation flow.",
+    success: "30% of the job board's ads had at least 5 parametric reviews (true/false statements and star ratings) within 3 months. Ads from rated companies performed better compared to non-rated companies and organic traffic increased.",
     keyLearnings: [
-      "Key learning point 1",
-      "Key learning point 2",
-      "Key learning point 3",
-      "Key learning point 4"
+      "If a feature or product is struggling, sunset it, no matter how much money you spent on it. Free up company resources to something that actually delivers.",
+      "Creating reviews about the companies that pay you, and what makes a difference for the end user is hard. Stay positive and invest time in simple but effective rules and moderation.",
+      "The company needs to be aligned to be able to pull such a project. As a PM, be good friends with sales before trying to change the world."
     ]
   }
 ];
