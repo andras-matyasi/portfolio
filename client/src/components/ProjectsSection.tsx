@@ -134,13 +134,13 @@ const ProjectsSection = () => {
                   loop: true
                 }}
               >
-                <CarouselContent className="-ml-4">
+                <CarouselContent className="-ml-1 md:-ml-4">
                   {activeProjects.map((project) => (
                     <CarouselItem 
                       key={project.id} 
-                      className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
+                      className="pl-1 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3"
                     >
-                      <div className="h-full">
+                      <div className="h-full flex justify-center">
                         <ProjectCard project={project} />
                       </div>
                     </CarouselItem>
