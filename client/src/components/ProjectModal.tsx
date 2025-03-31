@@ -54,7 +54,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.3 }}
-          className="relative bg-dark-secondary rounded-xl w-[95%] max-w-4xl max-h-[90vh] overflow-y-auto p-4 md:p-8 animate-fade-in"
+          className="relative bg-dark-secondary rounded-xl w-[40%] max-w-4xl max-h-[90vh] overflow-y-auto p-3 md:p-8 animate-fade-in"
         >
           <button
             className="absolute top-3 right-3 md:top-4 md:right-4 text-[#f8f8f0] hover:text-white transition-colors"
