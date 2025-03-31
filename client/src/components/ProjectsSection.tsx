@@ -54,7 +54,7 @@ const ProjectsSection = () => {
   const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
     <motion.div
       variants={item}
-      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full w-[60%] mx-auto md:w-full"
+      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full w-[85%] mx-auto md:w-full"
       onClick={() => openModal(project.id)}
     >
       <div className="relative" style={{ aspectRatio: '3/2' }}>
@@ -83,7 +83,7 @@ const ProjectsSection = () => {
 
   return (
     <section id="case-studies" className="pt-8 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
-      <div className="container mx-auto px-1 md:px-6">
+      <div className="container mx-auto px-0 md:px-6">
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-4 md:mb-10"
           initial={{ opacity: 0, y: 20 }}
@@ -102,10 +102,10 @@ const ProjectsSection = () => {
           className="relative"
         >
           <div className="flex">
-            {/* Left Arrow - Smaller on mobile */}
+            {/* Left Arrow - Hidden on mobile */}
             <button 
               onClick={() => api?.scrollPrev()}
-              className="flex items-center justify-center w-6 md:w-14 lg:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
+              className="hidden md:flex items-center justify-center md:w-14 lg:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Previous slide"
             >
               <div className="w-4 h-4 md:w-8 md:h-8 lg:w-10 lg:h-10 flex items-center justify-center">
@@ -153,10 +153,10 @@ const ProjectsSection = () => {
               </Carousel>
             </div>
 
-            {/* Right Arrow - Smaller on mobile */}
+            {/* Right Arrow - Hidden on mobile */}
             <button 
               onClick={() => api?.scrollNext()}
-              className="flex items-center justify-center w-6 md:w-14 lg:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
+              className="hidden md:flex items-center justify-center md:w-14 lg:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Next slide"
             >
               <div className="w-4 h-4 md:w-8 md:h-8 lg:w-10 lg:h-10 flex items-center justify-center">
