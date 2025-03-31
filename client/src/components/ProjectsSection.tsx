@@ -54,7 +54,7 @@ const ProjectsSection = () => {
   const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
     <motion.div
       variants={item}
-      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
+      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full max-w-[90%] mx-auto md:max-w-full"
       onClick={() => openModal(project.id)}
     >
       <div className="relative" style={{ aspectRatio: '3/2' }}>
@@ -64,19 +64,19 @@ const ProjectsSection = () => {
           className="w-full h-full object-cover"
         />
         <div className="project-overlay absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <span className="px-4 py-2 border border-white/30 text-white text-sm font-medium rounded-lg">
+          <span className="px-3 py-1.5 border border-white/30 text-white text-xs md:text-sm font-medium rounded-lg">
             View Case Study
           </span>
         </div>
       </div>
-      <div className="p-5">
+      <div className="p-3 md:p-5">
         <span className="text-xs font-medium text-primary uppercase tracking-wider">
           {project.type}
         </span>
-        <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
+        <h3 className="text-base md:text-xl font-semibold mt-1 md:mt-2 mb-1 md:mb-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
-        <p className="text-[#f8f8f0] text-sm">{project.shortText}</p>
+        <p className="text-[#f8f8f0] text-xs md:text-sm">{project.shortText}</p>
       </div>
     </motion.div>
   );

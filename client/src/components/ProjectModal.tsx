@@ -54,27 +54,27 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.3 }}
-          className="relative bg-dark-secondary rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 md:p-8 animate-fade-in"
+          className="relative bg-dark-secondary rounded-xl w-[95%] max-w-4xl max-h-[90vh] overflow-y-auto p-4 md:p-8 animate-fade-in"
         >
           <button
-            className="absolute top-4 right-4 text-[#f8f8f0] hover:text-white transition-colors"
+            className="absolute top-3 right-3 md:top-4 md:right-4 text-[#f8f8f0] hover:text-white transition-colors"
             onClick={onClose}
             aria-label="Close modal"
           >
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5 md:h-6 md:w-6" />
           </button>
 
-          <div className="mb-8">
+          <div className="mb-5 md:mb-8">
             <span className="text-xs font-medium text-primary uppercase tracking-wider">
               {project.type}
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold mt-2 mb-4">
+            <h2 className="text-xl md:text-3xl font-bold mt-1 md:mt-2 mb-2 md:mb-4">
               {project.title}
             </h2>
-            <p className="text-[#f8f8f0]">{project.shortText}</p>
+            <p className="text-[#f8f8f0] text-sm md:text-base">{project.shortText}</p>
           </div>
 
-          <div className="w-full mb-8 rounded-lg overflow-hidden" style={{ aspectRatio: '3/2' }}>
+          <div className="w-full mb-5 md:mb-8 rounded-lg overflow-hidden" style={{ aspectRatio: '3/2' }}>
             <img
               src={project.image}
               alt={`${project.title} Overview`}
@@ -82,26 +82,26 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
             />
           </div>
 
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">Problem</h3>
-            <p className="text-[#f8f8f0] mb-4">{project.problem}</p>
+          <div className="mb-5 md:mb-8">
+            <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Problem</h3>
+            <p className="text-[#f8f8f0] text-sm md:text-base mb-2 md:mb-4">{project.problem}</p>
           </div>
 
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">Solution</h3>
-            <p className="text-[#f8f8f0] mb-4">{project.solution}</p>
+          <div className="mb-5 md:mb-8">
+            <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Solution</h3>
+            <p className="text-[#f8f8f0] text-sm md:text-base mb-2 md:mb-4">{project.solution}</p>
           </div>
 
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">Success</h3>
-            <p className="text-[#f8f8f0] mb-4">{project.success}</p>
+          <div className="mb-5 md:mb-8">
+            <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Success</h3>
+            <p className="text-[#f8f8f0] text-sm md:text-base mb-2 md:mb-4">{project.success}</p>
           </div>
 
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">Key Learnings</h3>
-            <ul className="list-disc pl-5 space-y-2">
+          <div className="mb-5 md:mb-8">
+            <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Key Learnings</h3>
+            <ul className="list-disc pl-4 md:pl-5 space-y-1 md:space-y-2">
               {project.keyLearnings.map((learning, index) => (
-                <li key={index} className="text-[#f8f8f0]">
+                <li key={index} className="text-[#f8f8f0] text-sm md:text-base">
                   {learning}
                 </li>
               ))}
@@ -110,10 +110,10 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
 
           <div className="text-center">
             <button
-              className="inline-flex items-center px-5 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors font-medium"
+              className="inline-flex items-center px-4 py-1.5 md:px-5 md:py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors text-sm md:text-base font-medium"
               onClick={onClose}
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
+              <ArrowLeft className="h-3.5 w-3.5 md:h-4 md:w-4 mr-1.5 md:mr-2" />
               Back to Projects
             </button>
           </div>
