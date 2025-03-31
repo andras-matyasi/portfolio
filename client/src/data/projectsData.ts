@@ -15,9 +15,9 @@ export const projects: Project[] = [
   {
     id: "pricing-kameleo",
     active: true,
-    title: "Pricing Strategy",
+    title: "Switch from seat-based pricing to add-on based pricing",
     type: "SaaS",
-    shortText: "Enabling users to capture more value and increasing revenue with pricing change at Kameleo.",
+    shortText: "Enable users to capture more value and increase revenue with pricing change at Kameleo.",
     image: "/images/case-studies/pricing-case-study.png",
     problem: "Seat-based pricing provided bad scaling for teams and heavy API users.",
     solution: "Redesigned packages so team members and API usage became more scalable add-ons.",
@@ -29,105 +29,99 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: "project2",
+    id: "csat-kameleo",
     active: true,
-    title: "SaaS CSAT Improvement",
-    type: "Product Management",
-    shortText: "A customer satisfaction initiative that increased CSAT scores by 15% for a B2B SaaS platform.",
+    title: "Core flow redesign",
+    type: "SaaS",
+    shortText: "Shorter time to AHA moment to increase activation and satisfaction.",
     image: "/images/case-studies/activation-case-study.png",
-    problem: "The B2B SaaS platform was experiencing declining customer satisfaction and increased churn due to unresolved pain points in the customer journey, inconsistent product experiences, and slow customer support processes.",
-    solution: "I conducted extensive customer interviews and analyzed support tickets to identify critical pain points, created detailed customer journey maps, developed a prioritized roadmap of experience improvements, and worked across teams to implement changes.",
-    success: "The customer satisfaction initiative achieved a 15% increase in CSAT scores over a 6-month period. Churn rate decreased by 12%, and customer lifetime value increased by 18% as a result of the improvements to product experience and support processes.",
+    problem: "User research indicated the new customers, especially those who switch from competitors have lower satisfaction than older customers. After watching session replays, user interviews and competitor analysis, a pattern emerged: the core flow is hard to comprehend for new customers.",
+    solution: "Prototypes were created and user tested to find a better performing flow. Change was implemented to the frontend and API.",
+    success: "Activation increased by 7% and CSAT for new customers increased by 15%.",
     keyLearnings: [
-      "Proactive customer experience improvement is more effective than reactive issue resolution",
-      "Cross-functional alignment is crucial when addressing customer experience challenges",
-      "Quantifying experience issues helps prioritize improvements that deliver the most value",
-      "Continuous measurement of CSAT provides early warning signals for potential issues"
+      "Simple interfaces work better. ",
+      "Don't expose complex filtering logic on the UI, just to stay congruent with the API."
     ]
   },
   {
-    id: "improving-retention",
+    id: "retention-kameleo",
     active: true,
-    title: "Improving Retention",
-    type: "Product Management",
-    shortText: "A strategic initiative to improve user retention through targeted product improvements and engagement strategies.",
+    title: "Improve retention for prosumer SaaS",
+    type: "SaaS",
+    shortText: "Focusing on the main USP instead of non-core features",
     image: "/images/case-studies/retention-case-study.png",
-    problem: "Traditional e-commerce platforms were overwhelming users with complex interfaces, information overload, and convoluted checkout processes, leading to cart abandonment and frustration.",
-    solution: "I analyzed competing platforms, mapped the entire customer journey, created interactive prototypes for key user flows, and developed a comprehensive design system that prioritized simplicity while maintaining necessary functionality.",
-    success: "ModernShop has seen a 35% higher conversion rate compared to industry standards, with customers specifically praising the intuitive navigation and streamlined checkout process.",
+    problem: "Declining retention curve",
+    solution: "Improved Kameleo's browsers to offer better fingerprinting protection.",
+    success: "3 percentage point improvement in month 2 retention, flattening retention curve.",
     keyLearnings: [
-      "Minimalist design principles can significantly improve conversion rates in e-commerce",
-      "A robust design system is essential for maintaining consistency as the platform scales",
-      "User testing during the prototyping phase reveals critical friction points before launch",
-      "Balancing simplicity with functionality requires constant refinement based on user feedback"
+      "Nail it then scale it. Solve the core problem before adding on additional features and platforms.",
+      "Browser-based services change fast. Dedicate continuous effort to your core value proposition for a browser-based company."
     ]
   },
   {
-    id: "user-research-program",
+    id: "continuous-user-research",
     active: true,
-    title: "Continuous User Research Program",
-    type: "User Research",
-    shortText: "Building and implementing a continuous user research program to drive product decisions with customer insights.",
+    title: "Continuous user research framework",
+    type: "SaaS",
+    shortText: "How to continuously source candidates as a single product manager at a bootstrapped company",
     image: "/images/case-studies/user-research-case-study.png",
-    problem: "Users were hesitant to adopt digital payment solutions due to security concerns, complexity of financial transactions, and lack of transparency in how their financial data was being handled.",
-    solution: "I worked with security experts to translate best practices into user-friendly designs, created intuitive interaction patterns for complex processes, developed a visual language communicating trust, and conducted extensive usability testing.",
-    success: "SecurePay has achieved an excellent security rating while maintaining a high user satisfaction score. The app has been recognized for making complex security concepts accessible to everyday users.",
+    problem: "Hard to source quality candidates if you have a small customer pool if you have non-English native customers.",
+    solution: "Discord community building, async user testing and value-based sourcing from support.",
+    success: "Quality candidates from the ICPs.",
     keyLearnings: [
-      "Security and usability can coexist with thoughtful design thinking",
-      "Visual cues that reinforce security help build user confidence in financial applications",
-      "Progressive disclosure helps users understand complex financial processes",
-      "Regular security-focused user testing reveals how users perceive security features"
+      "Nail it then scale it. Solve the core problem before adding on additional features and platforms.",
+      "Increasing cash reward increases the number of interviews, but the best interviews talked to us for free or for additional product usage.",
+      "Async interviews require careful planning. It's unlikely to be the number one source, but enables users who are less likely to book a call.",
+      "Timing is crucial for success: best success rates were after signup (if the activity is high), package change or after successful support interaction.",
+      "Create a (Discord) community to help with sourcing."
     ]
   },
   {
-    id: "car-subscription",
+    id: "swapp",
     active: true,
-    title: "Car Subscription from 0 to 1",
-    type: "Product Strategy",
-    shortText: "Launching a car subscription service from concept to successful market entry.",
+    title: "Swapp",
+    type: "Marketplace",
+    shortText: "Finding traction with a new car subscription platform.",
     image: "/images/case-studies/swapp-case-study.png",
-    problem: "Existing food delivery platforms were causing frustration with complicated interfaces, unreliable delivery tracking, and difficulty in comparing menu options, leading to order abandonment.",
-    solution: "I analyzed existing food delivery apps, developed detailed user personas, created a visual system with food imagery as the hero, and conducted testing sessions with users ordering from actual restaurants.",
-    success: "QuickBite has achieved a 28% higher order completion rate compared to industry standards, with users specifically praising the intuitive ordering process and helpful restaurant recommendations.",
+    problem: "Launch a new company and survive.",
+    solution: "Experimentation and growing through partnerships until traction: shipped 2 MVPs (car subscription and daily car rental for extra monetization). Launched in 3 cities, 1 sticked. Partnered up with Careem to source new customers through their superapp.",
+    success: "Achieved PMF in Dubai.",
     keyLearnings: [
-      "Food imagery is the primary decision driver in food delivery applications",
-      "Real-time tracking significantly reduces anxiety during the delivery process",
-      "Personalized recommendations based on ordering history increase average order value",
-      "Optimizing for peak usage times is critical for food delivery applications"
+      "From 0 to 1 you need to ship and experiment fast.",
+      "Done is better than perfect.",
+      "The chicken or the egg problem: a 2 sided marketplace needs constant growth on both sides."
     ]
   },
   {
-    id: "job-board-onboarding",
+    id: "profession-onboarding",
     active: true,
-    title: "Job Board Onboarding",
-    type: "UX Design",
-    shortText: "Designing an intuitive onboarding process for a specialized job board platform.",
+    title: "Onboarding flow for passive job search",
+    type: "Job board",
+    shortText: "Increase high quality jobseekers by 25% on the platform",
     image: "/images/case-studies/onboardin-case-study.png",
-    problem: "New users were struggling to complete the registration process, resulting in high drop-off rates during onboarding.",
-    solution: "I researched user pain points, simplified the registration flow, created contextual help guides, and implemented progressive disclosure techniques.",
-    success: "Registration completion rates increased by 38% and time-to-first-application decreased by 45%.",
+    problem: "Job applicants churned when they were asked to create a data-rich profile to be discovered in Hungary's leading job platform.",
+    solution: "Created a progressive onboarding flow and asked for bite-sized data after each job application. After 5 applications, the profile was data-rich.",
+    success: "Increased data rich profiles to half a million from 400k in 2 months.",
     keyLearnings: [
-      "Progressive disclosure significantly reduces cognitive load during complex onboarding processes",
-      "Contextual help at potential drop-off points increases completion rates",
-      "User testing with the target demographic reveals pain points not obvious to the product team",
-      "Optimizing for the most critical user actions leads to better conversion metrics"
+      "Introduce the right (low) amount of friction to get more data-rich profiles.",
+      "One applicant will likely to apply 7 times on the platform. That's plenty of occasion to ask for bite-sized information about their profile."
     ]
   },
   {
-    id: "company-reviews-feature",
+    id: "profession-reviews",
     active: true,
-    title: "Company Reviews Feature Launch",
-    type: "Product Development",
-    shortText: "Developing and launching a company reviews feature for a professional networking platform.",
+    title: "Company reviews on a job board",
+    type: "Job board",
+    shortText: "Brief description that appears on the card",
     image: "/images/case-studies/reviews-case-study.png",
-    problem: "Professional networking platforms were encouraging superficial connections and broadcast-style communications rather than meaningful professional relationships and genuine knowledge exchange.",
-    solution: "I researched professionals' networking needs, worked with content strategists on guidelines encouraging meaningful exchanges, designed interaction patterns facilitating genuine connection, and ran multiple usability studies.",
-    success: "The reviews feature saw impressive adoption with users reporting 3x more meaningful professional connections compared to other networking platforms they've used.",
+    problem: "Detailed description of the problem being solved",
+    solution: "Explanation of how you approached and solved the problem",
+    success: "Metrics and outcomes that demonstrate the project's success",
     keyLearnings: [
-      "Designing for quality over quantity in social interactions creates more user value",
-      "Content guidelines significantly influence how users interact on a platform",
-      "Social friction can be positive when it encourages more thoughtful interactions",
-      "Community norms are established early and difficult to change once established"
+      "Key learning point 1",
+      "Key learning point 2",
+      "Key learning point 3",
+      "Key learning point 4"
     ]
   }
 ];
