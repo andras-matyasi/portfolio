@@ -3,7 +3,7 @@ import { Check, Scroll, Lightbulb, Briefcase, GraduationCap, Target } from "luci
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const areaOfExpertise = [
-  { id: 1, name: "B2B: SaaS" },
+  { id: 1, name: "B2B SaaS" },
   { id: 2, name: "HR tech and job boards" },
   { id: 3, name: "Mobility" },
   { id: 4, name: "Web3" },
