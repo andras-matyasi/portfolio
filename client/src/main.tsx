@@ -2,8 +2,8 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-// Initialize Mixpanel
-import './lib/mixpanel';
+// Initialize Analytics (with ad-blocker resistance)
+import './lib/analytics';
 
 // Apply Inter font family to the entire app
 document.documentElement.classList.add('font-inter');
