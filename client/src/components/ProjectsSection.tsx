@@ -57,7 +57,7 @@ const ProjectsSection = () => {
       className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
       onClick={() => openModal(project.id)}
     >
-      <div className="relative w-full" style={{ width: '336px', height: '224px', maxWidth: '100%' }}>
+      <div className="relative" style={{ aspectRatio: '3/2' }}>
         <img
           src={project.image}
           alt={project.title}
@@ -69,14 +69,14 @@ const ProjectsSection = () => {
           </span>
         </div>
       </div>
-      <div className="p-4">
+      <div className="p-5">
         <span className="text-xs font-medium text-primary uppercase tracking-wider">
           {project.type}
         </span>
-        <h3 className="text-base md:text-xl font-semibold mt-1 mb-1 group-hover:text-primary transition-colors line-clamp-1">
+        <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
-        <p className="text-[#f8f8f0] text-xs md:text-sm line-clamp-1">{project.shortText}</p>
+        <p className="text-[#f8f8f0] text-sm">{project.shortText}</p>
       </div>
     </motion.div>
   );
@@ -102,10 +102,10 @@ const ProjectsSection = () => {
           className="relative"
         >
           <div className="flex">
-            {/* Left Arrow - Hidden on mobile, visible on larger screens */}
+            {/* Left Arrow - Full height */}
             <button 
               onClick={() => api?.scrollPrev()}
-              className="hidden md:flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
+              className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Previous slide"
             >
               <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
@@ -130,18 +130,17 @@ const ProjectsSection = () => {
                 setApi={setApi}
                 className="w-full"
                 opts={{
-                  align: "center",
-                  loop: true,
-                  dragFree: true
+                  align: "start",
+                  loop: true
                 }}
               >
-                <CarouselContent className="ml-0 md:-ml-4">
+                <CarouselContent className="-ml-4">
                   {activeProjects.map((project) => (
                     <CarouselItem 
                       key={project.id} 
-                      className="pl-4 md:pl-4 basis-auto md:basis-1/2 lg:basis-1/3 flex justify-center"
+                      className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
                     >
-                      <div className="flex justify-center">
+                      <div className="h-full">
                         <ProjectCard project={project} />
                       </div>
                     </CarouselItem>
@@ -154,10 +153,10 @@ const ProjectsSection = () => {
               </Carousel>
             </div>
 
-            {/* Right Arrow - Hidden on mobile, visible on larger screens */}
+            {/* Right Arrow - Full height */}
             <button 
               onClick={() => api?.scrollNext()}
-              className="hidden md:flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
+              className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Next slide"
             >
               <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
