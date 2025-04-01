@@ -206,7 +206,18 @@ const Header = () => {
               >
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center"
-                  onClick={() => setFunkyToolsMenuOpen(!funkyToolsMenuOpen)}
+                  onClick={() => {
+                    setFunkyToolsMenuOpen(!funkyToolsMenuOpen);
+                    try {
+                      MixpanelService.trackEvent('Menu Toggle', {
+                        menu: 'funky_tools',
+                        action: !funkyToolsMenuOpen ? 'open' : 'close',
+                        mobile: false
+                      });
+                    } catch (err) {
+                      console.error('Failed to track funky tools menu toggle:', err);
+                    }
+                  }}
                 >
                   Funky tools
                   <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" 
@@ -246,7 +257,18 @@ const Header = () => {
               >
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center"
-                  onClick={() => setContactMenuOpen(!contactMenuOpen)}
+                  onClick={() => {
+                    setContactMenuOpen(!contactMenuOpen);
+                    try {
+                      MixpanelService.trackEvent('Menu Toggle', {
+                        menu: 'contact',
+                        action: !contactMenuOpen ? 'open' : 'close',
+                        mobile: false
+                      });
+                    } catch (err) {
+                      console.error('Failed to track contact menu toggle:', err);
+                    }
+                  }}
                 >
                   Contact
                   <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200"
@@ -316,7 +338,18 @@ const Header = () => {
         {isMobile && (
           <button 
             className="text-white hover:text-primary transition-colors p-1"
-            onClick={toggleMobileMenu}
+            onClick={() => {
+              toggleMobileMenu();
+              try {
+                MixpanelService.trackEvent('Menu Toggle', {
+                  menu: 'mobile_main',
+                  action: !mobileMenuOpen ? 'open' : 'close',
+                  mobile: true
+                });
+              } catch (err) {
+                console.error('Failed to track mobile menu toggle:', err);
+              }
+            }}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
@@ -371,7 +404,18 @@ const Header = () => {
               <div className="py-2">
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
-                  onClick={() => setFunkyToolsMenuOpen(!funkyToolsMenuOpen)}
+                  onClick={() => {
+                    setFunkyToolsMenuOpen(!funkyToolsMenuOpen);
+                    try {
+                      MixpanelService.trackEvent('Menu Toggle', {
+                        menu: 'funky_tools',
+                        action: !funkyToolsMenuOpen ? 'open' : 'close',
+                        mobile: true
+                      });
+                    } catch (err) {
+                      console.error('Failed to track mobile funky tools menu toggle:', err);
+                    }
+                  }}
                 >
                   <span>Funky tools</span>
                   {funkyToolsMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -404,7 +448,18 @@ const Header = () => {
               <div className="py-2">
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
-                  onClick={() => setContactMenuOpen(!contactMenuOpen)}
+                  onClick={() => {
+                    setContactMenuOpen(!contactMenuOpen);
+                    try {
+                      MixpanelService.trackEvent('Menu Toggle', {
+                        menu: 'contact',
+                        action: !contactMenuOpen ? 'open' : 'close',
+                        mobile: true
+                      });
+                    } catch (err) {
+                      console.error('Failed to track mobile contact menu toggle:', err);
+                    }
+                  }}
                 >
                   <span>Contact</span>
                   {contactMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}

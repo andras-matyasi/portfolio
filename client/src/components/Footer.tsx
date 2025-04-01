@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Linkedin, Mail, Calendar } from "lucide-react";
+import MixpanelService from "@/lib/mixpanel";
 
 const Footer = () => {
   return (
@@ -20,6 +21,17 @@ const Footer = () => {
               href="mailto:andras@matyasi.me"
               className="text-white hover:text-primary transition-colors"
               aria-label="Email"
+              onClick={() => {
+                try {
+                  MixpanelService.trackEvent('Contact Click', {
+                    method: 'email',
+                    section: 'footer',
+                    value: 'andras@matyasi.me'
+                  });
+                } catch (err) {
+                  console.error('Failed to track email click:', err);
+                }
+              }}
             >
               <Mail className="h-5 w-5" />
             </a>
@@ -29,6 +41,17 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-white hover:text-primary transition-colors"
               aria-label="LinkedIn"
+              onClick={() => {
+                try {
+                  MixpanelService.trackEvent('Contact Click', {
+                    method: 'linkedin',
+                    section: 'footer',
+                    value: 'amatyasi'
+                  });
+                } catch (err) {
+                  console.error('Failed to track LinkedIn click:', err);
+                }
+              }}
             >
               <Linkedin className="h-5 w-5" />
             </a>
@@ -38,6 +61,17 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-white hover:text-primary transition-colors"
               aria-label="Book a Meeting"
+              onClick={() => {
+                try {
+                  MixpanelService.trackEvent('Contact Click', {
+                    method: 'calendly',
+                    section: 'footer',
+                    value: 'Book a meeting'
+                  });
+                } catch (err) {
+                  console.error('Failed to track Calendly click:', err);
+                }
+              }}
             >
               <Calendar className="h-5 w-5" />
             </a>

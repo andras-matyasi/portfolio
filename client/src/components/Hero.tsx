@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import MixpanelService from "@/lib/mixpanel";
 
 const Hero = () => {
   return (
@@ -30,6 +31,17 @@ const Hero = () => {
             <a 
               href="#case-studies" 
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 hover:from-blue-600 hover:via-indigo-700 hover:to-purple-800 text-white rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
+              onClick={() => {
+                try {
+                  MixpanelService.trackEvent('CTA Click', {
+                    cta_text: 'Check out my work',
+                    cta_location: 'hero_section',
+                    destination: 'case_studies_section'
+                  });
+                } catch (err) {
+                  console.error('Failed to track CTA click:', err);
+                }
+              }}
             >
               Check out my work
               <ChevronDown className="h-4 w-4 ml-2" />

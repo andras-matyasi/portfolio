@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import MixpanelService from "@/lib/mixpanel";
 
 const contactMethods = [
   {
@@ -79,7 +80,20 @@ const ContactSection = () => {
                 <h3 className="text-lg font-semibold mb-2">{method.title}</h3>
                 <a
                   href={method.href}
+                  target={method.id !== 1 ? "_blank" : undefined}
+                  rel={method.id !== 1 ? "noopener noreferrer" : undefined}
                   className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
+                  onClick={() => {
+                    try {
+                      MixpanelService.trackEvent('Contact Click', {
+                        method: method.title.toLowerCase(),
+                        section: 'contact_section',
+                        value: method.value
+                      });
+                    } catch (err) {
+                      console.error('Failed to track contact click:', err);
+                    }
+                  }}
                 >
                   {method.value}
                 </a>
