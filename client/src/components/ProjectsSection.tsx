@@ -130,17 +130,19 @@ const ProjectsSection = () => {
                 setApi={setApi}
                 className="w-full"
                 opts={{
-                  align: "center", // Changed to center for better alignment
-                  loop: true
+                  align: "start",
+                  loop: true,
+                  dragFree: true,
+                  containScroll: "trimSnaps"
                 }}
               >
-                <CarouselContent className="-ml-4">
+                <CarouselContent className="-ml-1 md:-ml-4">
                   {activeProjects.map((project) => (
                     <CarouselItem 
                       key={project.id} 
-                      className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 flex justify-center"
+                      className="pl-1 md:pl-4 basis-[85%] md:basis-1/2 lg:basis-1/3 flex justify-center"
                     >
-                      <div className="h-full w-full max-w-[280px] mx-auto md:max-w-none md:mx-0">
+                      <div className="h-full w-full mx-auto">
                         <ProjectCard project={project} />
                       </div>
                     </CarouselItem>
