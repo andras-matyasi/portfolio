@@ -68,29 +68,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Make a request to Mixpanel with timeout and retry
       try {
-        // Prepare data for Mixpanel
-        const eventData = {
+        // Prepare data for Mixpanel - correct format based on their API docs
+        const eventData = [{
           event,
           properties: {
             ...properties,
             token: mixpanelToken,
             time: properties?.time || Math.floor(Date.now() / 1000),
             ip: clientIp,
-            $source: 'server-proxy'
+            $source: 'server-proxy',
+            distinct_id: properties?.distinct_id || 'anonymous'
           }
-        };
+        }];
         
         const encodedData = Buffer.from(JSON.stringify(eventData)).toString('base64');
         
-        // Add timeout to prevent long-hanging requests
-        const response = await axios.get(`https://api.mixpanel.com/track/?data=${encodedData}&ip=1`, {
-          timeout: 2000 // 2 second timeout
+        // Debug log for tracking
+        console.log(`Sending event to Mixpanel: ${event}`);
+        
+        // Use the batch endpoint for better reliability
+        const response = await axios.get(`https://api.mixpanel.com/track/?data=${encodedData}&verbose=1&ip=1`, {
+          timeout: 3000 // 3 second timeout
         });
         
+        console.log(`Mixpanel response: ${response.status} ${response.statusText}`);
+        
         res.status(200).json({ success: true });
-      } catch (apiError) {
-        // Log error but don't expose details to client
-        console.error('Mixpanel API request failed:', apiError.message);
+      } catch (error: any) {
+        // Log detailed error information for debugging
+        console.error('Mixpanel API request failed:');
+        console.error(`- Message: ${error.message || 'Unknown error'}`);
+        
+        if (error.response) {
+          console.error(`- Status: ${error.response.status}`);
+          console.error(`- Data: ${JSON.stringify(error.response.data)}`);
+          console.error(`- Headers: ${JSON.stringify(error.response.headers)}`);
+        } else if (error.request) {
+          console.error('- No response received');
+        }
         
         // Return success to client anyway - analytics should never break the site
         res.status(200).json({ success: false, reason: 'api_error' });
