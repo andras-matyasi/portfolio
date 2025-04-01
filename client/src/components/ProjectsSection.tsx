@@ -12,6 +12,7 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
+import MixpanelService from "@/lib/mixpanel";
 
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
@@ -26,7 +27,20 @@ const ProjectsSection = () => {
     if (!api) return;
     
     const onSelect = () => {
-      setActiveSlide(api.selectedScrollSnap());
+      const newSlideIndex = api.selectedScrollSnap();
+      // Only track if slide actually changed
+      if (newSlideIndex !== activeSlide) {
+        const newProject = activeProjects[newSlideIndex];
+        if (newProject) {
+          MixpanelService.trackEvent('Carousel Slide Change', {
+            project_id: newProject.id,
+            project_title: newProject.title,
+            project_type: newProject.type,
+            slide_index: newSlideIndex
+          });
+        }
+      }
+      setActiveSlide(newSlideIndex);
     };
     
     api.on("select", onSelect);
@@ -34,14 +48,38 @@ const ProjectsSection = () => {
     return () => {
       api.off("select", onSelect);
     };
-  }, [api]);
+  }, [api, activeSlide, activeProjects]);
 
   const openModal = (projectId: string) => {
+    // Find the project to get its details for tracking
+    const project = projects.find(p => p.id === projectId);
+    
+    // Track case study view
+    if (project) {
+      MixpanelService.trackEvent('View Case Study', {
+        project_id: projectId,
+        project_title: project.title,
+        project_type: project.type
+      });
+    }
+    
     setSelectedProject(projectId);
     document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
+    // Track case study close
+    if (selectedProject) {
+      const project = projects.find(p => p.id === selectedProject);
+      if (project) {
+        MixpanelService.trackEvent('Close Case Study', {
+          project_id: selectedProject,
+          project_title: project.title,
+          project_type: project.type
+        });
+      }
+    }
+    
     setSelectedProject(null);
     document.body.style.overflow = "auto";
   };
@@ -104,7 +142,13 @@ const ProjectsSection = () => {
           <div className="flex">
             {/* Left Arrow - Full height */}
             <button 
-              onClick={() => api?.scrollPrev()}
+              onClick={() => {
+                api?.scrollPrev();
+                MixpanelService.trackEvent('Carousel Navigation', {
+                  direction: 'previous',
+                  current_slide: activeSlide
+                });
+              }}
               className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Previous slide"
             >
@@ -155,7 +199,13 @@ const ProjectsSection = () => {
 
             {/* Right Arrow - Full height */}
             <button 
-              onClick={() => api?.scrollNext()}
+              onClick={() => {
+                api?.scrollNext();
+                MixpanelService.trackEvent('Carousel Navigation', {
+                  direction: 'next',
+                  current_slide: activeSlide
+                });
+              }}
               className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Next slide"
             >
@@ -180,7 +230,18 @@ const ProjectsSection = () => {
             {activeProjects.map((_, index) => (
               <button
                 key={index}
-                onClick={() => api?.scrollTo(index)}
+                onClick={() => {
+                  api?.scrollTo(index);
+                  // Only track if actually changing slides
+                  if (activeSlide !== index) {
+                    const targetProject = activeProjects[index];
+                    MixpanelService.trackEvent('Carousel Dot Navigation', {
+                      from_slide: activeSlide,
+                      to_slide: index,
+                      target_project: targetProject?.title
+                    });
+                  }
+                }}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                   activeSlide === index ? "bg-primary" : "bg-gray-600"
                 }`}
@@ -194,6 +255,13 @@ const ProjectsSection = () => {
           <a
             href="#contact"
             className="inline-flex items-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
+            onClick={() => {
+              MixpanelService.trackEvent('CTA Click', {
+                cta_text: 'Interested in working together?',
+                cta_location: 'case_studies_section',
+                destination: 'contact_section'
+              });
+            }}
           >
             Interested in working together?
             <ArrowRight className="h-4 w-4 ml-2" />

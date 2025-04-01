@@ -383,7 +383,15 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={handleMobileLinkClick}
+                      onClick={(e) => {
+                        MixpanelService.trackEvent('External Link Click', {
+                          link: 'https://lunchvote.matyasi.me',
+                          text: 'Lunchvote',
+                          category: 'funky_tools',
+                          mobile: true
+                        });
+                        handleMobileLinkClick(e);
+                      }}
                     >
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
@@ -406,7 +414,14 @@ const Header = () => {
                     <a 
                       href="mailto:andras@matyasi.me" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={handleMobileLinkClick}
+                      onClick={(e) => {
+                        MixpanelService.trackEvent('Contact Click', {
+                          method: 'email',
+                          text: 'Email',
+                          mobile: true
+                        });
+                        handleMobileLinkClick(e);
+                      }}
                     >
                       <Mail className="h-4 w-4 mr-2" />
                       Email
@@ -416,7 +431,14 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={handleMobileLinkClick}
+                      onClick={(e) => {
+                        MixpanelService.trackEvent('Contact Click', {
+                          method: 'linkedin',
+                          text: 'LinkedIn',
+                          mobile: true
+                        });
+                        handleMobileLinkClick(e);
+                      }}
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
                       LinkedIn
@@ -426,7 +448,14 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={handleMobileLinkClick}
+                      onClick={(e) => {
+                        MixpanelService.trackEvent('Contact Click', {
+                          method: 'calendly',
+                          text: 'Book a meeting',
+                          mobile: true
+                        });
+                        handleMobileLinkClick(e);
+                      }}
                     >
                       <Calendar className="h-4 w-4 mr-2" />
                       Book a meeting
