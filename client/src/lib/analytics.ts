@@ -2,9 +2,8 @@
 // This file deliberately avoids using terms that would trigger ad blockers
 // This approach allows the site to work even when tracking is blocked
 
-// Configuration
+// Configuration - simplified to only use server proxy
 const TOKEN = import.meta.env.VITE_MIXPANEL_TOKEN || '';
-const API_URL = 'https://api.mixpanel.com/track/';
 const PROXY_URL = '/api/analytics/track';
 
 // Anonymous device ID generation with localStorage fallback
@@ -51,59 +50,24 @@ const trackViaProxy = async (name: string, props?: Record<string, any>): Promise
   }
 };
 
-// Direct tracking to API (will be blocked by ad blockers, but that's OK)
+// Direct tracking to API was completely removed to avoid ad blocker detection
+// Instead, we'll rely solely on our server-side proxy which is more resilient
 const trackDirect = async (name: string, props?: Record<string, any>): Promise<void> => {
-  try {
-    if (!TOKEN) return;
-    
-    // Get device ID
-    const deviceId = getDeviceId();
-    
-    // Prepare data
-    const data = {
-      event: name,
-      properties: {
-        ...props,
-        token: TOKEN,
-        distinct_id: deviceId,
-        $device_id: deviceId,
-        time: Math.floor(Date.now() / 1000)
-      }
-    };
-    
-    // Encode data
-    const encodedData = btoa(JSON.stringify(data));
-    
-    // Fire and forget - no need to wait
-    fetch(`${API_URL}?data=${encodedData}&ip=1`, { 
-      method: 'GET',
-      mode: 'no-cors' // This prevents CORS errors but also means we can't read the response
-    });
-  } catch (err) {
-    // Silent failure
-    if (import.meta.env.DEV) {
-      console.warn('Direct tracking error:', err);
-    }
-  }
+  // This is now just a no-op function since we're only using the proxy
+  return Promise.resolve();
 };
 
-// Main tracking function that tries multiple methods
+// Main tracking function that only uses server-side proxy
 export const trackEvent = (name: string, props?: Record<string, any>): void => {
   // Skip if we don't have an event name
   if (!name) return;
   
-  // Try to track via proxy (most reliable)
+  // Only use the server proxy method now - more reliable with ad blockers
   trackViaProxy(name, props).catch(() => {
     // Nothing to do on failure
   });
   
-  // Also try direct if possible (for better IP detection)
-  // This will likely be blocked by ad blockers, but the proxy should still work
-  if (TOKEN) {
-    trackDirect(name, props).catch(() => {
-      // Nothing to do on failure
-    });
-  }
+  // We've removed the direct tracking to avoid ad blocker issues
 };
 
 // Track page views
