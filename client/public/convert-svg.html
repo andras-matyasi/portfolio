@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SVG to Image Converter</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    #svgContainer {
+      width: 1200px;
+      height: 630px;
+    }
+  </style>
+</head>
+<body>
+  <div id="svgContainer">
+    <img src="og-image.svg" width="1200" height="630" alt="Open Graph Image" />
+  </div>
+  <script>
+    // This page is just for viewing the SVG and taking a screenshot
+    // You can use browser tools to save it as a JPG
+    console.log("SVG loaded. Take a screenshot of this page and save as og-image.jpg");
+  </script>
+</body>
+</html>
