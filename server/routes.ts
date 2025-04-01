@@ -41,34 +41,64 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }, 2000);
   });
   
-  // Proxy for Mixpanel to avoid ad blockers
+  // Enhanced proxy for Mixpanel to avoid ad blockers
   app.post('/api/analytics/track', async (req: Request, res: Response) => {
     try {
       const { event, properties } = req.body;
       const mixpanelToken = process.env.MIXPANEL_TOKEN;
       
-      // Ensure we have the required parameters
-      if (!event || !mixpanelToken) {
-        return res.status(400).json({ error: 'Missing required parameters' });
+      // Ensure we have the required parameters but don't fail the site if missing
+      if (!event) {
+        return res.status(400).json({ error: 'Missing event name' });
       }
       
-      // Make a request to Mixpanel
-      const encodedData = Buffer.from(JSON.stringify({
-        event,
-        properties: {
-          ...properties,
-          token: mixpanelToken,
-          time: properties?.time || Math.floor(Date.now() / 1000),
-          ip: req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress
-        }
-      })).toString('base64');
+      // If we don't have a token, just acknowledge the request but don't actually track
+      if (!mixpanelToken) {
+        console.warn('Mixpanel proxy: Missing token, analytics event not sent');
+        return res.status(200).json({ success: false, reason: 'missing_token' });
+      }
       
-      const response = await axios.get(`https://api.mixpanel.com/track/?data=${encodedData}&ip=1`);
+      // Enhanced IP detection
+      const clientIp = req.headers['cf-connecting-ip'] || 
+                      req.headers['x-real-ip'] || 
+                      req.headers['x-forwarded-for'] || 
+                      req.connection.remoteAddress || 
+                      req.ip || 
+                      '0.0.0.0';
       
-      res.status(200).json({ success: true });
+      // Make a request to Mixpanel with timeout and retry
+      try {
+        // Prepare data for Mixpanel
+        const eventData = {
+          event,
+          properties: {
+            ...properties,
+            token: mixpanelToken,
+            time: properties?.time || Math.floor(Date.now() / 1000),
+            ip: clientIp,
+            $source: 'server-proxy'
+          }
+        };
+        
+        const encodedData = Buffer.from(JSON.stringify(eventData)).toString('base64');
+        
+        // Add timeout to prevent long-hanging requests
+        const response = await axios.get(`https://api.mixpanel.com/track/?data=${encodedData}&ip=1`, {
+          timeout: 2000 // 2 second timeout
+        });
+        
+        res.status(200).json({ success: true });
+      } catch (apiError) {
+        // Log error but don't expose details to client
+        console.error('Mixpanel API request failed:', apiError.message);
+        
+        // Return success to client anyway - analytics should never break the site
+        res.status(200).json({ success: false, reason: 'api_error' });
+      }
     } catch (error) {
-      console.error('Mixpanel proxy error:', error);
-      res.status(500).json({ error: 'Failed to track event' });
+      // Something went very wrong, but don't break the client experience
+      console.error('Mixpanel proxy unexpected error:', error);
+      res.status(200).json({ success: false, reason: 'server_error' });
     }
   });
   

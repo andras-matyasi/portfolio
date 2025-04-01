@@ -7,15 +7,24 @@ import Home from "./pages/Home";
 import { useEffect } from "react";
 import MixpanelService from "@/lib/mixpanel";
 
-// This component tracks page views when routes change
+// This component safely tracks page views when routes change
 function PageViewTracker() {
   const [location] = useLocation();
   
   useEffect(() => {
-    // Track page view on each location change
-    MixpanelService.trackPageView(location);
+    try {
+      // Track page view on each location change
+      // This is designed to gracefully fail if tracking is blocked
+      MixpanelService.trackPageView(location);
+    } catch (error) {
+      // Silent fail to avoid breaking the application
+      if (import.meta.env.DEV) {
+        console.warn('Failed to track page view:', error);
+      }
+    }
   }, [location]);
   
+  // This component doesn't render anything
   return null;
 }
 
