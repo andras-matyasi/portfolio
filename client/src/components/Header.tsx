@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Calendar, Utensils, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import MixpanelService from "@/lib/mixpanel";
 
 const Header = () => {
   const isMobile = useIsMobile();
@@ -82,6 +83,15 @@ const Header = () => {
     
     // Check if this is an anchor link
     const href = e.currentTarget.getAttribute('href');
+    const linkText = e.currentTarget.textContent?.trim() || '';
+    
+    // Track click in Mixpanel
+    MixpanelService.trackEvent('Navigation Click', {
+      link: href,
+      text: linkText,
+      mobile: true
+    });
+    
     if (href && href.startsWith('#')) {
       e.preventDefault();
       
@@ -142,17 +152,50 @@ const Header = () => {
           <nav>
             <ul className="flex space-x-6 text-sm">
               <li>
-                <a href="#case-studies" className="text-white hover:text-primary transition-colors">
+                <a 
+                  href="#case-studies" 
+                  className="text-white hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    // Track desktop navigation
+                    MixpanelService.trackEvent('Navigation Click', {
+                      link: '#case-studies',
+                      text: 'Case Studies',
+                      mobile: false
+                    });
+                  }}
+                >
                   Case Studies
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-white hover:text-primary transition-colors">
+                <a 
+                  href="#about" 
+                  className="text-white hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    // Track desktop navigation
+                    MixpanelService.trackEvent('Navigation Click', {
+                      link: '#about',
+                      text: 'About Me',
+                      mobile: false
+                    });
+                  }}
+                >
                   About Me
                 </a>
               </li>
               <li>
-                <a href="#references" className="text-white hover:text-primary transition-colors">
+                <a 
+                  href="#references" 
+                  className="text-white hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    // Track desktop navigation
+                    MixpanelService.trackEvent('Navigation Click', {
+                      link: '#references',
+                      text: 'References',
+                      mobile: false
+                    });
+                  }}
+                >
                   References
                 </a>
               </li>
@@ -181,6 +224,14 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                      onClick={() => {
+                        MixpanelService.trackEvent('External Link Click', {
+                          link: 'https://lunchvote.matyasi.me',
+                          text: 'Lunchvote',
+                          category: 'funky_tools',
+                          mobile: false
+                        });
+                      }}
                     >
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
@@ -211,6 +262,13 @@ const Header = () => {
                     <a 
                       href="mailto:andras@matyasi.me" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                      onClick={() => {
+                        MixpanelService.trackEvent('Contact Click', {
+                          method: 'email',
+                          text: 'Email',
+                          mobile: false
+                        });
+                      }}
                     >
                       <Mail className="h-4 w-4 mr-2" />
                       Email
@@ -220,6 +278,13 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                      onClick={() => {
+                        MixpanelService.trackEvent('Contact Click', {
+                          method: 'linkedin',
+                          text: 'LinkedIn',
+                          mobile: false
+                        });
+                      }}
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
                       LinkedIn
@@ -229,6 +294,13 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                      onClick={() => {
+                        MixpanelService.trackEvent('Contact Click', {
+                          method: 'calendly',
+                          text: 'Book a meeting',
+                          mobile: false
+                        });
+                      }}
                     >
                       <Calendar className="h-4 w-4 mr-2" />
                       Book a meeting
