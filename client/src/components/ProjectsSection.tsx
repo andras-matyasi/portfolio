@@ -54,7 +54,7 @@ const ProjectsSection = () => {
   const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
     <motion.div
       variants={item}
-      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full w-[40%] mx-auto md:w-full"
+      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
       onClick={() => openModal(project.id)}
     >
       <div className="relative" style={{ aspectRatio: '3/2' }}>
@@ -64,34 +64,34 @@ const ProjectsSection = () => {
           className="w-full h-full object-cover"
         />
         <div className="project-overlay absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <span className="px-2 py-1 md:px-3 md:py-1.5 border border-white/30 text-white text-xs md:text-sm font-medium rounded-lg">
+          <span className="px-4 py-2 border border-white/30 text-white text-sm font-medium rounded-lg">
             View Case Study
           </span>
         </div>
       </div>
-      <div className="p-2 md:p-5">
-        <span className="text-[10px] md:text-xs font-medium text-primary uppercase tracking-wider">
+      <div className="p-5">
+        <span className="text-xs font-medium text-primary uppercase tracking-wider">
           {project.type}
         </span>
-        <h3 className="text-sm md:text-xl font-semibold mt-1 md:mt-2 mb-1 md:mb-2 group-hover:text-primary transition-colors line-clamp-1">
+        <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
-        <p className="text-[#f8f8f0] text-[10px] md:text-sm line-clamp-2">{project.shortText}</p>
+        <p className="text-[#f8f8f0] text-sm">{project.shortText}</p>
       </div>
     </motion.div>
   );
 
   return (
-    <section id="case-studies" className="pt-8 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
-      <div className="container mx-auto px-0 md:px-6">
+    <section id="case-studies" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
         <motion.div 
-          className="max-w-3xl mx-auto text-center mb-4 md:mb-10"
+          className="max-w-3xl mx-auto text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-6">Case Studies</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Case Studies</h2>
         </motion.div>
 
         <motion.div
@@ -102,13 +102,13 @@ const ProjectsSection = () => {
           className="relative"
         >
           <div className="flex">
-            {/* Left Arrow - Hidden on mobile */}
+            {/* Left Arrow - Full height */}
             <button 
               onClick={() => api?.scrollPrev()}
-              className="hidden md:flex items-center justify-center md:w-14 lg:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
+              className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Previous slide"
             >
-              <div className="w-4 h-4 md:w-8 md:h-8 lg:w-10 lg:h-10 flex items-center justify-center">
+              <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   viewBox="0 0 24 24" 
@@ -125,23 +125,22 @@ const ProjectsSection = () => {
             </button>
 
             {/* Carousel content */}
-            <div className="flex-1 flex justify-center">
+            <div className="flex-1">
               <Carousel
                 setApi={setApi}
-                className="w-full flex justify-center"
+                className="w-full"
                 opts={{
-                  align: "center",
-                  loop: true,
-                  containScroll: "trimSnaps"
+                  align: "start",
+                  loop: true
                 }}
               >
-                <CarouselContent className="-ml-0 md:-ml-4 flex justify-center">
+                <CarouselContent className="-ml-4">
                   {activeProjects.map((project) => (
                     <CarouselItem 
                       key={project.id} 
-                      className="pl-0 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3 flex justify-center"
+                      className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
                     >
-                      <div className="h-full flex justify-center items-center">
+                      <div className="h-full">
                         <ProjectCard project={project} />
                       </div>
                     </CarouselItem>
@@ -154,13 +153,13 @@ const ProjectsSection = () => {
               </Carousel>
             </div>
 
-            {/* Right Arrow - Hidden on mobile */}
+            {/* Right Arrow - Full height */}
             <button 
               onClick={() => api?.scrollNext()}
-              className="hidden md:flex items-center justify-center md:w-14 lg:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
+              className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Next slide"
             >
-              <div className="w-4 h-4 md:w-8 md:h-8 lg:w-10 lg:h-10 flex items-center justify-center">
+              <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   viewBox="0 0 24 24" 
@@ -177,7 +176,7 @@ const ProjectsSection = () => {
             </button>
           </div>
           
-          <div className="flex items-center justify-center mt-4 md:mt-8 gap-2">
+          <div className="flex items-center justify-center mt-8 gap-2">
             {activeProjects.map((_, index) => (
               <button
                 key={index}
