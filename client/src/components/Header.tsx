@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Calendar, Utensils, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import MixpanelService from "@/lib/mixpanel";
+import Analytics from "@/lib/analytics";
 
 const Header = () => {
   const isMobile = useIsMobile();
@@ -86,7 +86,7 @@ const Header = () => {
     const linkText = e.currentTarget.textContent?.trim() || '';
     
     // Track click in Mixpanel
-    MixpanelService.trackEvent('Navigation Click', {
+    Analytics.trackEvent('Navigation Click', {
       link: href,
       text: linkText,
       mobile: true
@@ -157,7 +157,7 @@ const Header = () => {
                   className="text-white hover:text-primary transition-colors"
                   onClick={(e) => {
                     // Track desktop navigation
-                    MixpanelService.trackEvent('Navigation Click', {
+                    Analytics.trackEvent('Navigation Click', {
                       link: '#case-studies',
                       text: 'Case Studies',
                       mobile: false
@@ -173,7 +173,7 @@ const Header = () => {
                   className="text-white hover:text-primary transition-colors"
                   onClick={(e) => {
                     // Track desktop navigation
-                    MixpanelService.trackEvent('Navigation Click', {
+                    Analytics.trackEvent('Navigation Click', {
                       link: '#about',
                       text: 'About Me',
                       mobile: false
@@ -189,7 +189,7 @@ const Header = () => {
                   className="text-white hover:text-primary transition-colors"
                   onClick={(e) => {
                     // Track desktop navigation
-                    MixpanelService.trackEvent('Navigation Click', {
+                    Analytics.trackEvent('Navigation Click', {
                       link: '#references',
                       text: 'References',
                       mobile: false
@@ -209,7 +209,7 @@ const Header = () => {
                   onClick={() => {
                     setFunkyToolsMenuOpen(!funkyToolsMenuOpen);
                     try {
-                      MixpanelService.trackEvent('Menu Toggle', {
+                      Analytics.trackEvent('Menu Toggle', {
                         menu: 'funky_tools',
                         action: !funkyToolsMenuOpen ? 'open' : 'close',
                         mobile: false
@@ -236,7 +236,7 @@ const Header = () => {
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
                       onClick={() => {
-                        MixpanelService.trackEvent('External Link Click', {
+                        Analytics.trackEvent('External Link Click', {
                           link: 'https://lunchvote.matyasi.me',
                           text: 'Lunchvote',
                           category: 'funky_tools',
@@ -260,7 +260,7 @@ const Header = () => {
                   onClick={() => {
                     setContactMenuOpen(!contactMenuOpen);
                     try {
-                      MixpanelService.trackEvent('Menu Toggle', {
+                      Analytics.trackEvent('Menu Toggle', {
                         menu: 'contact',
                         action: !contactMenuOpen ? 'open' : 'close',
                         mobile: false
@@ -285,7 +285,7 @@ const Header = () => {
                       href="mailto:andras@matyasi.me" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
                       onClick={() => {
-                        MixpanelService.trackEvent('Contact Click', {
+                        Analytics.trackEvent('Contact Click', {
                           method: 'email',
                           text: 'Email',
                           mobile: false
@@ -301,7 +301,7 @@ const Header = () => {
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
                       onClick={() => {
-                        MixpanelService.trackEvent('Contact Click', {
+                        Analytics.trackEvent('Contact Click', {
                           method: 'linkedin',
                           text: 'LinkedIn',
                           mobile: false
@@ -317,7 +317,7 @@ const Header = () => {
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
                       onClick={() => {
-                        MixpanelService.trackEvent('Contact Click', {
+                        Analytics.trackEvent('Contact Click', {
                           method: 'calendly',
                           text: 'Book a meeting',
                           mobile: false
@@ -341,7 +341,7 @@ const Header = () => {
             onClick={() => {
               toggleMobileMenu();
               try {
-                MixpanelService.trackEvent('Menu Toggle', {
+                Analytics.trackEvent('Menu Toggle', {
                   menu: 'mobile_main',
                   action: !mobileMenuOpen ? 'open' : 'close',
                   mobile: true
@@ -407,7 +407,7 @@ const Header = () => {
                   onClick={() => {
                     setFunkyToolsMenuOpen(!funkyToolsMenuOpen);
                     try {
-                      MixpanelService.trackEvent('Menu Toggle', {
+                      Analytics.trackEvent('Menu Toggle', {
                         menu: 'funky_tools',
                         action: !funkyToolsMenuOpen ? 'open' : 'close',
                         mobile: true
@@ -428,7 +428,7 @@ const Header = () => {
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
                       onClick={(e) => {
-                        MixpanelService.trackEvent('External Link Click', {
+                        Analytics.trackEvent('External Link Click', {
                           link: 'https://lunchvote.matyasi.me',
                           text: 'Lunchvote',
                           category: 'funky_tools',
@@ -451,7 +451,7 @@ const Header = () => {
                   onClick={() => {
                     setContactMenuOpen(!contactMenuOpen);
                     try {
-                      MixpanelService.trackEvent('Menu Toggle', {
+                      Analytics.trackEvent('Menu Toggle', {
                         menu: 'contact',
                         action: !contactMenuOpen ? 'open' : 'close',
                         mobile: true
@@ -470,7 +470,7 @@ const Header = () => {
                       href="mailto:andras@matyasi.me" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
                       onClick={(e) => {
-                        MixpanelService.trackEvent('Contact Click', {
+                        Analytics.trackEvent('Contact Click', {
                           method: 'email',
                           text: 'Email',
                           mobile: true
@@ -487,7 +487,7 @@ const Header = () => {
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
                       onClick={(e) => {
-                        MixpanelService.trackEvent('Contact Click', {
+                        Analytics.trackEvent('Contact Click', {
                           method: 'linkedin',
                           text: 'LinkedIn',
                           mobile: true
@@ -504,7 +504,7 @@ const Header = () => {
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
                       onClick={(e) => {
-                        MixpanelService.trackEvent('Contact Click', {
+                        Analytics.trackEvent('Contact Click', {
                           method: 'calendly',
                           text: 'Book a meeting',
                           mobile: true

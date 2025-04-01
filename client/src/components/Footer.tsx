@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Linkedin, Mail, Calendar } from "lucide-react";
-import MixpanelService from "@/lib/mixpanel";
+import Analytics from "@/lib/analytics";
 
 const Footer = () => {
   return (
@@ -23,7 +23,7 @@ const Footer = () => {
               aria-label="Email"
               onClick={() => {
                 try {
-                  MixpanelService.trackEvent('Contact Click', {
+                  Analytics.trackEvent('Contact Click', {
                     method: 'email',
                     section: 'footer',
                     value: 'andras@matyasi.me'
@@ -43,7 +43,7 @@ const Footer = () => {
               aria-label="LinkedIn"
               onClick={() => {
                 try {
-                  MixpanelService.trackEvent('Contact Click', {
+                  Analytics.trackEvent('Contact Click', {
                     method: 'linkedin',
                     section: 'footer',
                     value: 'amatyasi'
@@ -63,7 +63,7 @@ const Footer = () => {
               aria-label="Book a Meeting"
               onClick={() => {
                 try {
-                  MixpanelService.trackEvent('Contact Click', {
+                  Analytics.trackEvent('Contact Click', {
                     method: 'calendly',
                     section: 'footer',
                     value: 'Book a meeting'

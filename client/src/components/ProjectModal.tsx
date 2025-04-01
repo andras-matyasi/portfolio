@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowLeft } from "lucide-react";
 import { projects } from "@/data/projectsData";
-import MixpanelService from "@/lib/mixpanel";
+import Analytics from "@/lib/analytics";
 
 interface ProjectModalProps {
   projectId: string;
@@ -35,7 +35,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
           // Only track if scrolled more than 10% in either direction
           if (Math.abs(currentScrollPosition - lastScrollPosition) > (modalRef.current.clientHeight * 0.1)) {
             try {
-              MixpanelService.trackEvent('Case Study Modal Scroll', {
+              Analytics.trackEvent('Case Study Modal Scroll', {
                 projectId,
                 projectTitle: project.title,
                 scrollDirection,
@@ -67,7 +67,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         try {
-          MixpanelService.trackEvent('Close Case Study', {
+          Analytics.trackEvent('Close Case Study', {
             projectId,
             projectTitle: project.title,
             method: 'escape_key'
@@ -85,7 +85,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
         !modalRef.current.contains(event.target as Node)
       ) {
         try {
-          MixpanelService.trackEvent('Close Case Study', {
+          Analytics.trackEvent('Close Case Study', {
             projectId,
             projectTitle: project.title,
             method: 'click_outside'
@@ -129,7 +129,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
             className="absolute top-4 right-4 text-[#f8f8f0] hover:text-white transition-colors"
             onClick={() => {
               try {
-                MixpanelService.trackEvent('Close Case Study', {
+                Analytics.trackEvent('Close Case Study', {
                   projectId,
                   projectTitle: project.title,
                   method: 'close_button'
@@ -193,7 +193,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
               className="inline-flex items-center px-5 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors font-medium"
               onClick={() => {
                 try {
-                  MixpanelService.trackEvent('Close Case Study', {
+                  Analytics.trackEvent('Close Case Study', {
                     projectId,
                     projectTitle: project.title,
                     method: 'back_button'

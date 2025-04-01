@@ -12,7 +12,7 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import MixpanelService from "@/lib/mixpanel";
+import Analytics from "@/lib/analytics";
 
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
@@ -32,7 +32,7 @@ const ProjectsSection = () => {
       if (newSlideIndex !== activeSlide) {
         const newProject = activeProjects[newSlideIndex];
         if (newProject) {
-          MixpanelService.trackEvent('Carousel Slide Change', {
+          Analytics.trackEvent('Carousel Slide Change', {
             project_id: newProject.id,
             project_title: newProject.title,
             project_type: newProject.type,
@@ -56,7 +56,7 @@ const ProjectsSection = () => {
     
     // Track case study view
     if (project) {
-      MixpanelService.trackEvent('View Case Study', {
+      Analytics.trackEvent('View Case Study', {
         project_id: projectId,
         project_title: project.title,
         project_type: project.type
@@ -72,7 +72,7 @@ const ProjectsSection = () => {
     if (selectedProject) {
       const project = projects.find(p => p.id === selectedProject);
       if (project) {
-        MixpanelService.trackEvent('Close Case Study', {
+        Analytics.trackEvent('Close Case Study', {
           project_id: selectedProject,
           project_title: project.title,
           project_type: project.type
@@ -144,7 +144,7 @@ const ProjectsSection = () => {
             <button 
               onClick={() => {
                 api?.scrollPrev();
-                MixpanelService.trackEvent('Carousel Navigation', {
+                Analytics.trackEvent('Carousel Navigation', {
                   direction: 'previous',
                   current_slide: activeSlide
                 });
@@ -201,7 +201,7 @@ const ProjectsSection = () => {
             <button 
               onClick={() => {
                 api?.scrollNext();
-                MixpanelService.trackEvent('Carousel Navigation', {
+                Analytics.trackEvent('Carousel Navigation', {
                   direction: 'next',
                   current_slide: activeSlide
                 });
@@ -235,7 +235,7 @@ const ProjectsSection = () => {
                   // Only track if actually changing slides
                   if (activeSlide !== index) {
                     const targetProject = activeProjects[index];
-                    MixpanelService.trackEvent('Carousel Dot Navigation', {
+                    Analytics.trackEvent('Carousel Dot Navigation', {
                       from_slide: activeSlide,
                       to_slide: index,
                       target_project: targetProject?.title
@@ -256,7 +256,7 @@ const ProjectsSection = () => {
             href="#contact"
             className="inline-flex items-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
             onClick={() => {
-              MixpanelService.trackEvent('CTA Click', {
+              Analytics.trackEvent('CTA Click', {
                 cta_text: 'Interested in working together?',
                 cta_location: 'case_studies_section',
                 destination: 'contact_section'

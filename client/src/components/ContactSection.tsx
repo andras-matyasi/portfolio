@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import MixpanelService from "@/lib/mixpanel";
+import Analytics from "@/lib/analytics";
 
 const contactMethods = [
   {
@@ -85,7 +85,7 @@ const ContactSection = () => {
                   className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
                   onClick={() => {
                     try {
-                      MixpanelService.trackEvent('Contact Click', {
+                      Analytics.trackEvent('Contact Click', {
                         method: method.title.toLowerCase(),
                         section: 'contact_section',
                         value: method.value
