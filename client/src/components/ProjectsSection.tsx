@@ -54,7 +54,7 @@ const ProjectsSection = () => {
   const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
     <motion.div
       variants={item}
-      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
+      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full max-h-[40vh] md:max-h-none"
       onClick={() => openModal(project.id)}
     >
       <div className="relative" style={{ aspectRatio: '3/2' }}>
@@ -76,7 +76,7 @@ const ProjectsSection = () => {
         <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
-        <p className="text-[#f8f8f0] text-sm">{project.shortText}</p>
+        <p className="text-[#f8f8f0] text-sm line-clamp-2">{project.shortText}</p>
       </div>
     </motion.div>
   );
@@ -130,7 +130,7 @@ const ProjectsSection = () => {
                 setApi={setApi}
                 className="w-full"
                 opts={{
-                  align: "start",
+                  align: "center", // Changed to center for better alignment
                   loop: true
                 }}
               >
@@ -138,9 +138,9 @@ const ProjectsSection = () => {
                   {activeProjects.map((project) => (
                     <CarouselItem 
                       key={project.id} 
-                      className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
+                      className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 flex justify-center"
                     >
-                      <div className="h-full">
+                      <div className="h-full w-full max-w-[280px] mx-auto md:max-w-none md:mx-0">
                         <ProjectCard project={project} />
                       </div>
                     </CarouselItem>
