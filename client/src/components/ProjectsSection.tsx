@@ -102,10 +102,10 @@ const ProjectsSection = () => {
           className="relative"
         >
           <div className="flex">
-            {/* Left Arrow - Full height */}
+            {/* Left Arrow - Hidden on mobile, visible on larger screens */}
             <button 
               onClick={() => api?.scrollPrev()}
-              className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
+              className="hidden md:flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Previous slide"
             >
               <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
@@ -153,10 +153,10 @@ const ProjectsSection = () => {
               </Carousel>
             </div>
 
-            {/* Right Arrow - Full height */}
+            {/* Right Arrow - Hidden on mobile, visible on larger screens */}
             <button 
               onClick={() => api?.scrollNext()}
-              className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
+              className="hidden md:flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
               aria-label="Next slide"
             >
               <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
