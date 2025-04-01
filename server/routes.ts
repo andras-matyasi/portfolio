@@ -1,6 +1,7 @@
-import type { Express } from "express";
+import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import axios from "axios";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // put application routes here
@@ -38,6 +39,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
     setTimeout(() => {
       res.status(403).json({ error: 'Invalid credentials' });
     }, 2000);
+  });
+  
+  // Proxy for Mixpanel to avoid ad blockers
+  app.post('/api/analytics/track', async (req: Request, res: Response) => {
+    try {
+      const { event, properties } = req.body;
+      const mixpanelToken = process.env.MIXPANEL_TOKEN;
+      
+      // Ensure we have the required parameters
+      if (!event || !mixpanelToken) {
+        return res.status(400).json({ error: 'Missing required parameters' });
+      }
+      
+      // Make a request to Mixpanel
+      const encodedData = Buffer.from(JSON.stringify({
+        event,
+        properties: {
+          ...properties,
+          token: mixpanelToken,
+          time: properties?.time || Math.floor(Date.now() / 1000),
+          ip: req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress
+        }
+      })).toString('base64');
+      
+      const response = await axios.get(`https://api.mixpanel.com/track/?data=${encodedData}&ip=1`);
+      
+      res.status(200).json({ success: true });
+    } catch (error) {
+      console.error('Mixpanel proxy error:', error);
+      res.status(500).json({ error: 'Failed to track event' });
+    }
   });
   
   const httpServer = createServer(app);
