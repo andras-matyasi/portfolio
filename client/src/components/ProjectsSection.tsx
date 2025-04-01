@@ -54,7 +54,7 @@ const ProjectsSection = () => {
   const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
     <motion.div
       variants={item}
-      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full max-h-[40vh] md:max-h-none"
+      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full max-h-[200px] md:max-h-none"
       onClick={() => openModal(project.id)}
     >
       <div className="relative" style={{ aspectRatio: '3/2' }}>
@@ -69,14 +69,14 @@ const ProjectsSection = () => {
           </span>
         </div>
       </div>
-      <div className="p-5">
+      <div className="p-4">
         <span className="text-xs font-medium text-primary uppercase tracking-wider">
           {project.type}
         </span>
-        <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
+        <h3 className="text-base md:text-xl font-semibold mt-1 mb-1 group-hover:text-primary transition-colors line-clamp-1">
           {project.title}
         </h3>
-        <p className="text-[#f8f8f0] text-sm line-clamp-2">{project.shortText}</p>
+        <p className="text-[#f8f8f0] text-xs md:text-sm line-clamp-1">{project.shortText}</p>
       </div>
     </motion.div>
   );
@@ -140,7 +140,7 @@ const ProjectsSection = () => {
                   {activeProjects.map((project) => (
                     <CarouselItem 
                       key={project.id} 
-                      className="pl-1 md:pl-4 basis-[85%] md:basis-1/2 lg:basis-1/3 flex justify-center"
+                      className="pl-1 md:pl-4 basis-[70%] md:basis-1/2 lg:basis-1/3 flex justify-center"
                     >
                       <div className="h-full w-full mx-auto">
                         <ProjectCard project={project} />
