@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useEffect, useState, useMemo } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Fisher-Yates (Knuth) shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -109,23 +110,27 @@ const ReferencesSection = () => {
     };
   }, [api]);
 
+  const isMobile = useIsMobile();
+
   const ReferenceCard = ({ reference }: { reference: typeof referencesData[0] }) => (
-    <div className="bg-dark p-6 rounded-xl shadow-md flex flex-col h-full">
-      <div className="mb-4">
-        <Quote className="h-8 w-8 text-primary/40" />
+    <div className={`bg-dark ${isMobile ? 'p-4' : 'p-6'} rounded-xl shadow-md flex flex-col h-full`}>
+      <div className="mb-3">
+        <Quote className={`${isMobile ? 'h-6 w-6' : 'h-8 w-8'} text-primary/40`} />
       </div>
-      <p className="text-[#f8f8f0] italic mb-6 flex-grow">"{reference.quote}"</p>
+      <p className={`text-[#f8f8f0] italic ${isMobile ? 'mb-4 text-xs line-clamp-6' : 'mb-6 text-sm'} flex-grow`}>
+        "{reference.quote}"
+      </p>
       <div className="flex items-center mt-auto">
-        <div className="mr-4">
+        <div className="mr-3">
           <img 
             src={reference.imageUrl} 
             alt={reference.name} 
-            className="h-12 w-12 rounded-full object-cover"
+            className={`${isMobile ? 'h-10 w-10' : 'h-12 w-12'} rounded-full object-cover`}
           />
         </div>
         <div>
-          <h4 className="font-medium text-white">{reference.name}</h4>
-          <p className="text-sm text-[#f8f8f0]">{reference.position}</p>
+          <h4 className={`font-medium text-white ${isMobile ? 'text-sm' : ''}`}>{reference.name}</h4>
+          <p className={`${isMobile ? 'text-xs' : 'text-sm'} text-[#f8f8f0]`}>{reference.position}</p>
         </div>
       </div>
     </div>
@@ -153,27 +158,29 @@ const ReferencesSection = () => {
           className="relative"
         >
           <div className="flex">
-            {/* Left Arrow - Full height */}
-            <button 
-              onClick={() => api?.scrollPrev()}
-              className="flex items-center justify-center w-14 md:w-20 bg-dark-secondary hover:bg-dark transition-all duration-300 cursor-pointer"
-              aria-label="Previous slide"
-            >
-              <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="w-full h-full text-primary/80 hover:text-primary transition-colors"
-                >
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </div>
-            </button>
+            {/* Left Arrow - Hidden on mobile, visible on desktop */}
+            {!isMobile && (
+              <button 
+                onClick={() => api?.scrollPrev()}
+                className="flex items-center justify-center w-14 md:w-20 bg-dark-secondary hover:bg-dark transition-all duration-300 cursor-pointer hidden md:flex"
+                aria-label="Previous slide"
+              >
+                <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    className="w-full h-full text-primary/80 hover:text-primary transition-colors"
+                  >
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </div>
+              </button>
+            )}
 
             {/* Carousel content */}
             <div className="flex-1">
@@ -182,14 +189,15 @@ const ReferencesSection = () => {
                 className="w-full"
                 opts={{
                   align: "start",
-                  loop: true
+                  loop: true,
+                  dragFree: false, // Ensures snap behavior when swiping
                 }}
               >
                 <CarouselContent className="-ml-4">
                   {references.map((reference) => (
                     <CarouselItem 
                       key={reference.id} 
-                      className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
+                      className={`pl-4 ${isMobile ? 'basis-[95%]' : 'basis-full md:basis-1/2 lg:basis-1/3'}`}
                     >
                       <div className="h-full">
                         <ReferenceCard reference={reference} />
@@ -204,27 +212,29 @@ const ReferencesSection = () => {
               </Carousel>
             </div>
 
-            {/* Right Arrow - Full height */}
-            <button 
-              onClick={() => api?.scrollNext()}
-              className="flex items-center justify-center w-14 md:w-20 bg-dark-secondary hover:bg-dark transition-all duration-300 cursor-pointer"
-              aria-label="Next slide"
-            >
-              <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="w-full h-full text-primary/80 hover:text-primary transition-colors"
-                >
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </div>
-            </button>
+            {/* Right Arrow - Hidden on mobile, visible on desktop */}
+            {!isMobile && (
+              <button 
+                onClick={() => api?.scrollNext()}
+                className="flex items-center justify-center w-14 md:w-20 bg-dark-secondary hover:bg-dark transition-all duration-300 cursor-pointer hidden md:flex"
+                aria-label="Next slide"
+              >
+                <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    className="w-full h-full text-primary/80 hover:text-primary transition-colors"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </button>
+            )}
           </div>
           
           <div className="flex items-center justify-center mt-8 gap-2">

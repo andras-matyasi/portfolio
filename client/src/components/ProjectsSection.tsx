@@ -89,35 +89,41 @@ const ProjectsSection = () => {
     show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
-  const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
-    <motion.div
-      variants={item}
-      className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
-      onClick={() => openModal(project.id)}
-    >
-      <div className="relative" style={{ aspectRatio: '3/2' }}>
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="project-overlay absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <span className="px-4 py-2 border border-white/30 text-white text-sm font-medium rounded-lg">
-            View Case Study
-          </span>
+  const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
+    const isMobile = useIsMobile();
+    
+    return (
+      <motion.div
+        variants={item}
+        className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
+        onClick={() => openModal(project.id)}
+      >
+        <div className="relative" style={{ aspectRatio: '3/2' }}>
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="project-overlay absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span className="px-4 py-2 border border-white/30 text-white text-sm font-medium rounded-lg">
+              View Case Study
+            </span>
+          </div>
         </div>
-      </div>
-      <div className="p-5">
-        <span className="text-xs font-medium text-primary uppercase tracking-wider">
-          {project.type}
-        </span>
-        <h3 className="text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-[#f8f8f0] text-sm">{project.shortText}</p>
-      </div>
-    </motion.div>
-  );
+        <div className={`p-4 ${isMobile ? 'p-3' : 'p-5'}`}>
+          <span className="text-xs font-medium text-primary uppercase tracking-wider">
+            {project.type}
+          </span>
+          <h3 className={`font-semibold mt-2 mb-2 group-hover:text-primary transition-colors ${isMobile ? 'text-lg' : 'text-xl'}`}>
+            {project.title}
+          </h3>
+          <p className={`text-[#f8f8f0] ${isMobile ? 'text-xs line-clamp-3' : 'text-sm'}`}>
+            {project.shortText}
+          </p>
+        </div>
+      </motion.div>
+    );
+  };
 
   return (
     <section id="case-studies" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
@@ -140,33 +146,35 @@ const ProjectsSection = () => {
           className="relative"
         >
           <div className="flex">
-            {/* Left Arrow - Full height */}
-            <button 
-              onClick={() => {
-                api?.scrollPrev();
-                Analytics.trackEvent('Carousel Navigation', {
-                  direction: 'previous',
-                  current_slide: activeSlide
-                });
-              }}
-              className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
-              aria-label="Previous slide"
-            >
-              <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="w-full h-full text-primary/80 hover:text-primary transition-colors"
-                >
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </div>
-            </button>
+            {/* Left Arrow - Hidden on mobile, visible on desktop */}
+            {!isMobile && (
+              <button 
+                onClick={() => {
+                  api?.scrollPrev();
+                  Analytics.trackEvent('Carousel Navigation', {
+                    direction: 'previous',
+                    current_slide: activeSlide
+                  });
+                }}
+                className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer hidden md:flex"
+                aria-label="Previous slide"
+              >
+                <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    className="w-full h-full text-primary/80 hover:text-primary transition-colors"
+                  >
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </div>
+              </button>
+            )}
 
             {/* Carousel content */}
             <div className="flex-1">
@@ -175,14 +183,15 @@ const ProjectsSection = () => {
                 className="w-full"
                 opts={{
                   align: "start",
-                  loop: true
+                  loop: true,
+                  dragFree: false, // Ensures snap behavior when swiping
                 }}
               >
                 <CarouselContent className="-ml-4">
                   {activeProjects.map((project) => (
                     <CarouselItem 
                       key={project.id} 
-                      className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
+                      className={`pl-4 ${isMobile ? 'basis-[95%]' : 'basis-full md:basis-1/2 lg:basis-1/3'}`}
                     >
                       <div className="h-full">
                         <ProjectCard project={project} />
@@ -197,33 +206,35 @@ const ProjectsSection = () => {
               </Carousel>
             </div>
 
-            {/* Right Arrow - Full height */}
-            <button 
-              onClick={() => {
-                api?.scrollNext();
-                Analytics.trackEvent('Carousel Navigation', {
-                  direction: 'next',
-                  current_slide: activeSlide
-                });
-              }}
-              className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer"
-              aria-label="Next slide"
-            >
-              <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="w-full h-full text-primary/80 hover:text-primary transition-colors"
-                >
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </div>
-            </button>
+            {/* Right Arrow - Hidden on mobile, visible on desktop */}
+            {!isMobile && (
+              <button 
+                onClick={() => {
+                  api?.scrollNext();
+                  Analytics.trackEvent('Carousel Navigation', {
+                    direction: 'next',
+                    current_slide: activeSlide
+                  });
+                }}
+                className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer hidden md:flex"
+                aria-label="Next slide"
+              >
+                <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    className="w-full h-full text-primary/80 hover:text-primary transition-colors"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </button>
+            )}
           </div>
           
           <div className="flex items-center justify-center mt-8 gap-2">
