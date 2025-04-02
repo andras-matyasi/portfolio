@@ -196,7 +196,7 @@ const ProjectsSection = () => {
               <div className="embla__container">
                 {activeProjects.map((project) => (
                   <div className="embla__slide" key={project.id}>
-                    <div className="embla__slide__inner h-full px-4 pb-10">
+                    <div className="embla__slide__inner h-full px-1 pb-10">
                       <ProjectCard project={project} />
                     </div>
                   </div>

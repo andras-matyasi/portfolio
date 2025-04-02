@@ -193,7 +193,7 @@ const ReferencesSection = () => {
               <div className="embla__container">
                 {references.map((reference) => (
                   <div className="embla__slide" key={reference.id}>
-                    <div className="embla__slide__inner h-full px-4 pb-10">
+                    <div className="embla__slide__inner h-full px-1 pb-10">
                       <ReferenceCard reference={reference} />
                     </div>
                   </div>

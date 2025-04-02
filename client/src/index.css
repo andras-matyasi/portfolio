@@ -71,6 +71,11 @@
     height: 100%;
   }
   
+  .embla {
+    position: relative;
+    padding: 0 40px; /* Make space for the arrows outside */
+  }
+  
   .embla__button {
     z-index: 1;
     position: absolute;
@@ -80,10 +85,10 @@
     top: 0;
     bottom: 0;
     height: 100%;
-    width: 80px;
+    width: 40px;
     cursor: pointer;
     background: transparent;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(118, 74, 188, 0.6); /* Purple tint, same as font */
     border: none;
     transition: all 0.3s ease;
     padding: 0;
@@ -96,14 +101,14 @@
     bottom: 0;
     width: 100%;
     background: linear-gradient(90deg, 
-      rgba(0, 0, 0, 0.3) 0%, 
+      rgba(0, 0, 0, 0.15) 0%, 
       rgba(0, 0, 0, 0) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
   
   .embla__button:hover {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(118, 74, 188, 0.9); /* Brighter on hover */
   }
   
   .embla__button:hover::before {
@@ -131,7 +136,7 @@
   .embla__prev::before {
     left: 0;
     background: linear-gradient(90deg, 
-      rgba(0, 0, 0, 0.3) 0%, 
+      rgba(0, 0, 0, 0.15) 0%, 
       rgba(0, 0, 0, 0) 100%);
   }
   
@@ -142,7 +147,7 @@
   .embla__next::before {
     right: 0;
     background: linear-gradient(-90deg, 
-      rgba(0, 0, 0, 0.3) 0%, 
+      rgba(0, 0, 0, 0.15) 0%, 
       rgba(0, 0, 0, 0) 100%);
   }
   
@@ -244,8 +249,12 @@
     }
     
     /* Adjust arrow positions and size on mobile */
+    .embla {
+      padding: 0 30px; /* Smaller padding on mobile */
+    }
+    
     .embla__button {
-      width: 50px;
+      width: 30px;
     }
     
     .embla__button svg {
