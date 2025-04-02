@@ -127,7 +127,7 @@ const ProjectsSection = () => {
             loop={true}
             pagination={{
               clickable: true,
-              dynamicBullets: true,
+              dynamicBullets: false,
             }}
             navigation={!isMobile}
             onSlideChange={(swiper) => {

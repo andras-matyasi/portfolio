@@ -28,27 +28,37 @@
   
   /* Swiper styling */
   /* Swiper styling for all swipers */
+  .reference-swiper .swiper-pagination,
+  .projects-swiper .swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+  }
+  
   .reference-swiper .swiper-pagination-bullet,
   .projects-swiper .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
     background: #666;
-    opacity: 0.5;
+    opacity: 0.7;
+    margin: 0 4px;
   }
+  
   .reference-swiper .swiper-pagination-bullet-active,
   .projects-swiper .swiper-pagination-bullet-active {
     background: var(--primary);
     opacity: 1;
   }
-  /* Custom navigation buttons styling - full height with abstract arrows */
+  /* Custom navigation buttons styling - card height with simple arrows */
   .reference-swiper .swiper-button-next,
   .reference-swiper .swiper-button-prev,
   .projects-swiper .swiper-button-next,
   .projects-swiper .swiper-button-prev {
-    width: 80px;
-    height: 100%;
+    width: 40px;
+    height: calc(100% - 50px); /* Match card height, accounting for pagination */
     top: 0;
     margin-top: 0;
     color: var(--primary);
-    background-color: rgba(34, 34, 34, 0.3);
+    background-color: rgba(34, 34, 34, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,7 +69,7 @@
   .reference-swiper .swiper-button-prev:hover,
   .projects-swiper .swiper-button-next:hover,
   .projects-swiper .swiper-button-prev:hover {
-    background-color: rgba(34, 34, 34, 0.6);
+    background-color: rgba(34, 34, 34, 0.4);
   }
   
   /* Remove default Swiper text (NEXT, PREV) */
@@ -70,29 +80,21 @@
     display: none;
   }
   
-  /* Custom arrow SVG content - larger and more abstract */
+  /* Custom arrow content - simple < > */
   .reference-swiper .swiper-button-next::before,
   .projects-swiper .swiper-button-next::before {
-    content: '';
-    width: 40px;
-    height: 40px;
-    /* Abstract right arrow */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23764abc' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3Cpolyline points='12 5 19 12 12 19'%3E%3C/polyline%3E%3C/svg%3E");
-    background-position: center;
-    background-repeat: no-repeat;
-    display: block;
+    content: '>';
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--primary);
   }
   
   .reference-swiper .swiper-button-prev::before,
   .projects-swiper .swiper-button-prev::before {
-    content: '';
-    width: 40px;
-    height: 40px;
-    /* Abstract left arrow */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23764abc' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='19' y1='12' x2='5' y2='12'%3E%3C/line%3E%3Cpolyline points='12 19 5 12 12 5'%3E%3C/polyline%3E%3C/svg%3E");
-    background-position: center;
-    background-repeat: no-repeat;
-    display: block;
+    content: '<';
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--primary);
   }
   
   /* Swiper container styling */

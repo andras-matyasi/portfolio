@@ -153,7 +153,7 @@ const ReferencesSection = () => {
             loop={true}
             pagination={{
               clickable: true,
-              dynamicBullets: true,
+              dynamicBullets: false,
             }}
             navigation={!isMobile}
             onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
