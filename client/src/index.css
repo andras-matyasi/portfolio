@@ -25,4 +25,31 @@
   .project-card:hover .project-overlay {
     @apply opacity-100;
   }
+  
+  /* Swiper styling */
+  /* Swiper styling for all swipers */
+  .reference-swiper .swiper-pagination-bullet,
+  .projects-swiper .swiper-pagination-bullet {
+    background: #666;
+    opacity: 0.5;
+  }
+  .reference-swiper .swiper-pagination-bullet-active,
+  .projects-swiper .swiper-pagination-bullet-active {
+    background: var(--primary);
+    opacity: 1;
+  }
+  .reference-swiper .swiper-button-next,
+  .reference-swiper .swiper-button-prev,
+  .projects-swiper .swiper-button-next,
+  .projects-swiper .swiper-button-prev {
+    color: var(--primary);
+  }
+  @media (max-width: 768px) {
+    .reference-swiper .swiper-button-next,
+    .reference-swiper .swiper-button-prev,
+    .projects-swiper .swiper-button-next,
+    .projects-swiper .swiper-button-prev {
+      display: none;
+    }
+  }
 }

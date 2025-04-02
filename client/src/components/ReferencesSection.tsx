@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+// Import required modules
+import { Pagination, Navigation } from 'swiper/modules';
 
 // Fisher-Yates (Knuth) shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -91,33 +92,19 @@ const referencesData = [
 const ReferencesSection = () => {
   const { ref, controls } = useScrollAnimation();
   const [activeSlide, setActiveSlide] = useState(0);
-  const [api, setApi] = useState<any>(null);
+  const swiperRef = useRef<any>(null);
   
   // Shuffle references once on component mount
   const references = useMemo(() => shuffleArray(referencesData), []);
 
-  useEffect(() => {
-    if (!api) return;
-    
-    const onSelect = () => {
-      setActiveSlide(api.selectedScrollSnap());
-    };
-    
-    api.on("select", onSelect);
-    
-    return () => {
-      api.off("select", onSelect);
-    };
-  }, [api]);
-
   const isMobile = useIsMobile();
 
   const ReferenceCard = ({ reference }: { reference: typeof referencesData[0] }) => (
-    <div className={`bg-dark ${isMobile ? 'p-4' : 'p-6'} rounded-xl shadow-md flex flex-col h-full`}>
+    <div className="bg-dark p-6 rounded-xl shadow-md flex flex-col h-full">
       <div className="mb-3">
-        <Quote className={`${isMobile ? 'h-6 w-6' : 'h-8 w-8'} text-primary/40`} />
+        <Quote className="h-8 w-8 text-primary/40" />
       </div>
-      <p className={`text-[#f8f8f0] italic ${isMobile ? 'mb-4 text-xs line-clamp-6' : 'mb-6 text-sm'} flex-grow`}>
+      <p className="text-[#f8f8f0] italic mb-6 text-sm flex-grow line-clamp-6">
         "{reference.quote}"
       </p>
       <div className="flex items-center mt-auto">
@@ -125,12 +112,12 @@ const ReferencesSection = () => {
           <img 
             src={reference.imageUrl} 
             alt={reference.name} 
-            className={`${isMobile ? 'h-10 w-10' : 'h-12 w-12'} rounded-full object-cover`}
+            className="h-12 w-12 rounded-full object-cover"
           />
         </div>
         <div>
-          <h4 className={`font-medium text-white ${isMobile ? 'text-sm' : ''}`}>{reference.name}</h4>
-          <p className={`${isMobile ? 'text-xs' : 'text-sm'} text-[#f8f8f0]`}>{reference.position}</p>
+          <h4 className="font-medium text-white">{reference.name}</h4>
+          <p className="text-sm text-[#f8f8f0]">{reference.position}</p>
         </div>
       </div>
     </div>
@@ -157,98 +144,48 @@ const ReferencesSection = () => {
           transition={{ duration: 0.8 }}
           className="relative max-w-full overflow-hidden"
         >
-          <div className="flex">
-            {/* Left Arrow - Hidden on mobile, visible on desktop */}
-            {!isMobile && (
-              <button 
-                onClick={() => api?.scrollPrev()}
-                className="flex items-center justify-center w-14 md:w-20 bg-dark-secondary hover:bg-dark transition-all duration-300 cursor-pointer hidden md:flex"
-                aria-label="Previous slide"
-              >
-                <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    className="w-full h-full text-primary/80 hover:text-primary transition-colors"
-                  >
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
+          {/* Swiper component */}
+          <Swiper
+            modules={[Pagination, Navigation]}
+            spaceBetween={15}
+            slidesPerView={isMobile ? 1.05 : 3}
+            centeredSlides={isMobile}
+            loop={true}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
+            }}
+            navigation={!isMobile}
+            onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
+            breakpoints={{
+              320: {
+                slidesPerView: 1.05,
+                spaceBetween: 15,
+                centeredSlides: true,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+                centeredSlides: false,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 25,
+                centeredSlides: false,
+              }
+            }}
+            className="reference-swiper"
+          >
+            {references.map((reference) => (
+              <SwiperSlide key={reference.id}>
+                <div className="h-full px-1 pb-10">
+                  <ReferenceCard reference={reference} />
                 </div>
-              </button>
-            )}
-
-            {/* Carousel content */}
-            <div className="flex-1">
-              <Carousel
-                setApi={setApi}
-                className="w-full"
-                opts={{
-                  align: "start",
-                  loop: true,
-                  dragFree: false, // Ensures snap behavior when swiping
-                }}
-              >
-                <CarouselContent className="-ml-4">
-                  {references.map((reference) => (
-                    <CarouselItem 
-                      key={reference.id} 
-                      className={`pl-4 ${isMobile ? 'basis-[95%]' : 'basis-full md:basis-1/2 lg:basis-1/3'}`}
-                    >
-                      <div className="h-full">
-                        <ReferenceCard reference={reference} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                
-                {/* These are hidden but still needed for API functionality */}
-                <CarouselPrevious className="hidden" />
-                <CarouselNext className="hidden" />
-              </Carousel>
-            </div>
-
-            {/* Right Arrow - Hidden on mobile, visible on desktop */}
-            {!isMobile && (
-              <button 
-                onClick={() => api?.scrollNext()}
-                className="flex items-center justify-center w-14 md:w-20 bg-dark-secondary hover:bg-dark transition-all duration-300 cursor-pointer hidden md:flex"
-                aria-label="Next slide"
-              >
-                <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    className="w-full h-full text-primary/80 hover:text-primary transition-colors"
-                  >
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </div>
-              </button>
-            )}
-          </div>
-          
-          <div className="flex items-center justify-center mt-8 gap-2">
-            {references.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => api?.scrollTo(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  activeSlide === index ? "bg-primary" : "bg-gray-600"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
+          
+
         </motion.div>
       </div>
     </section>

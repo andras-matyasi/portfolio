@@ -1,54 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { projects } from "@/data/projectsData";
 import ProjectModal from "./ProjectModal";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Analytics from "@/lib/analytics";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import required modules
+import { Pagination, Navigation } from 'swiper/modules';
 
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [api, setApi] = useState<any>(null);
   const { ref, controls } = useScrollAnimation();
   const isMobile = useIsMobile();
+  const swiperRef = useRef<any>(null);
 
   const activeProjects = projects.filter(project => project.active);
-
-  useEffect(() => {
-    if (!api) return;
-    
-    const onSelect = () => {
-      const newSlideIndex = api.selectedScrollSnap();
-      // Only track if slide actually changed
-      if (newSlideIndex !== activeSlide) {
-        const newProject = activeProjects[newSlideIndex];
-        if (newProject) {
-          Analytics.trackEvent('Carousel Slide Change', {
-            project_id: newProject.id,
-            project_title: newProject.title,
-            project_type: newProject.type,
-            slide_index: newSlideIndex
-          });
-        }
-      }
-      setActiveSlide(newSlideIndex);
-    };
-    
-    api.on("select", onSelect);
-    
-    return () => {
-      api.off("select", onSelect);
-    };
-  }, [api, activeSlide, activeProjects]);
 
   const openModal = (projectId: string) => {
     // Find the project to get its details for tracking
@@ -145,121 +115,64 @@ const ProjectsSection = () => {
           transition={{ duration: 0.8 }}
           className="relative max-w-full overflow-hidden"
         >
-          <div className="flex">
-            {/* Left Arrow - Hidden on mobile, visible on desktop */}
-            {!isMobile && (
-              <button 
-                onClick={() => {
-                  api?.scrollPrev();
-                  Analytics.trackEvent('Carousel Navigation', {
-                    direction: 'previous',
-                    current_slide: activeSlide
+          {/* Swiper component */}
+          <Swiper
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            modules={[Pagination, Navigation]}
+            spaceBetween={15}
+            slidesPerView={isMobile ? 1.05 : 3}
+            centeredSlides={isMobile}
+            loop={true}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
+            }}
+            navigation={!isMobile}
+            onSlideChange={(swiper) => {
+              const newSlideIndex = swiper.realIndex;
+              // Only track if slide actually changed
+              if (newSlideIndex !== activeSlide) {
+                const newProject = activeProjects[newSlideIndex];
+                if (newProject) {
+                  Analytics.trackEvent('Carousel Slide Change', {
+                    project_id: newProject.id,
+                    project_title: newProject.title,
+                    project_type: newProject.type,
+                    slide_index: newSlideIndex
                   });
-                }}
-                className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer hidden md:flex"
-                aria-label="Previous slide"
-              >
-                <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    className="w-full h-full text-primary/80 hover:text-primary transition-colors"
-                  >
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
+                }
+              }
+              setActiveSlide(newSlideIndex);
+            }}
+            breakpoints={{
+              320: {
+                slidesPerView: 1.05,
+                spaceBetween: 15,
+                centeredSlides: true,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+                centeredSlides: false,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 25,
+                centeredSlides: false,
+              }
+            }}
+            className="projects-swiper"
+          >
+            {activeProjects.map((project) => (
+              <SwiperSlide key={project.id}>
+                <div className="h-full px-1 pb-10">
+                  <ProjectCard project={project} />
                 </div>
-              </button>
-            )}
-
-            {/* Carousel content */}
-            <div className="flex-1">
-              <Carousel
-                setApi={setApi}
-                className="w-full"
-                opts={{
-                  align: "start",
-                  loop: true,
-                  dragFree: false, // Ensures snap behavior when swiping
-                }}
-              >
-                <CarouselContent className="-ml-4">
-                  {activeProjects.map((project) => (
-                    <CarouselItem 
-                      key={project.id} 
-                      className={`pl-4 ${isMobile ? 'basis-[95%]' : 'basis-full md:basis-1/2 lg:basis-1/3'}`}
-                    >
-                      <div className="h-full">
-                        <ProjectCard project={project} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                
-                {/* These are hidden but still needed for API functionality */}
-                <CarouselPrevious className="hidden" />
-                <CarouselNext className="hidden" />
-              </Carousel>
-            </div>
-
-            {/* Right Arrow - Hidden on mobile, visible on desktop */}
-            {!isMobile && (
-              <button 
-                onClick={() => {
-                  api?.scrollNext();
-                  Analytics.trackEvent('Carousel Navigation', {
-                    direction: 'next',
-                    current_slide: activeSlide
-                  });
-                }}
-                className="flex items-center justify-center w-14 md:w-20 bg-dark hover:bg-dark-secondary transition-all duration-300 cursor-pointer hidden md:flex"
-                aria-label="Next slide"
-              >
-                <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    className="w-full h-full text-primary/80 hover:text-primary transition-colors"
-                  >
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </div>
-              </button>
-            )}
-          </div>
-          
-          <div className="flex items-center justify-center mt-8 gap-2">
-            {activeProjects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  api?.scrollTo(index);
-                  // Only track if actually changing slides
-                  if (activeSlide !== index) {
-                    const targetProject = activeProjects[index];
-                    Analytics.trackEvent('Carousel Dot Navigation', {
-                      from_slide: activeSlide,
-                      to_slide: index,
-                      target_project: targetProject?.title
-                    });
-                  }
-                }}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  activeSlide === index ? "bg-primary" : "bg-gray-600"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </motion.div>
 
         <div className="text-center my-10">
