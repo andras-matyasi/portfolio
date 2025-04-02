@@ -28,9 +28,31 @@
   
   /* Swiper styling */
   /* Swiper styling for all swipers */
+  /* iOS/Safari optimizations for Swiper */
+  .reference-swiper,
+  .projects-swiper {
+    /* Hardware acceleration for smoother swiping */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-touch-callout: none; /* Prevent callout to copy image, etc when tap to hold */
+  }
+  
   .reference-swiper .swiper-pagination,
   .projects-swiper .swiper-pagination {
     margin-top: 10px;
+  }
+  
+  /* Improve slider performance on iOS */
+  .reference-swiper .swiper-slide,
+  .projects-swiper .swiper-slide {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
   }
   
   .reference-swiper .swiper-pagination-bullet,

@@ -9,7 +9,13 @@ import Analytics from "@/lib/analytics";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import required modules
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation, FreeMode } from 'swiper/modules';
+// Import additional styles for FreeMode
+import 'swiper/css/free-mode';
+// Import base Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
@@ -120,7 +126,7 @@ const ProjectsSection = () => {
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
-            modules={[Pagination, Navigation]}
+            modules={[Pagination, Navigation, FreeMode]}
             spaceBetween={15}
             slidesPerView={isMobile ? 1.05 : 3}
             centeredSlides={isMobile}
@@ -130,6 +136,20 @@ const ProjectsSection = () => {
               dynamicBullets: true,
             }}
             navigation={!isMobile}
+            speed={300} // Faster transition for more responsiveness
+            watchSlidesProgress={true} // Better tracking of slide positions
+            simulateTouch={true} // Force enabling touch
+            touchRatio={1.5} // More sensitive touch (default: 1)
+            touchAngle={30} // Less strict angle for swiping (default: 45)
+            threshold={5} // Smaller swipe distance needed (default: 10)
+            resistance={false} // Disable resistance at edges
+            allowTouchMove={true} // Ensure touch is enabled
+            touchStartPreventDefault={false} // Don't prevent default touch behavior
+            touchMoveStopPropagation={false} // Don't stop propagation
+            cssMode={isMobile} // Use CSS mode for smoother swiping on mobile devices
+            observer={true} // Better reactivity to DOM changes
+            observeParents={true} // Observe parent elements too
+            resizeObserver={true} // React to resize events
             onSlideChange={(swiper) => {
               const newSlideIndex = swiper.realIndex;
               // Only track if slide actually changed
@@ -151,16 +171,27 @@ const ProjectsSection = () => {
                 slidesPerView: 1.05,
                 spaceBetween: 15,
                 centeredSlides: true,
+                cssMode: false, // Disable cssMode for iOS
+                touchRatio: 1.5,
+                freeMode: {
+                  enabled: true,
+                  sticky: true,
+                  momentumBounce: true,
+                  momentumRatio: 0.5,
+                  minimumVelocity: 0.1
+                }
               },
               768: {
                 slidesPerView: 2,
                 spaceBetween: 20,
                 centeredSlides: false,
+                cssMode: false,
               },
               1024: {
                 slidesPerView: 3,
                 spaceBetween: 25,
                 centeredSlides: false,
+                cssMode: false,
               }
             }}
             className="projects-swiper"
