@@ -21,7 +21,7 @@ export const projects: Project[] = [
     image: "/images/case-studies/pricing-case-study.png",
     problem: "Seat-based pricing provided bad scaling for teams and heavy API users.",
     solution: "Redesigned packages so team members and API usage became more scalable add-ons.",
-    success: "4x team members in 2 months, extra API usage is the top grossing add-on, total revenue increased by 8%",
+    success: "4x team members in 2 months, extra API usage is the top grossing add-on.",
     keyLearnings: [
       "Do your research, but don't be afraid to change the pricing.",
       "Designing pricing should be a cross-company effort, each team have invaluable input.", 
@@ -81,9 +81,9 @@ export const projects: Project[] = [
     active: true,
     title: "Swapp",
     type: "Marketplace",
-    shortText: "Finding traction with a new car subscription platform.",
+    shortText: "0 to 1 with new car subscription platform in EU and Middle East.",
     image: "/images/case-studies/swapp-case-study.png",
-    problem: "Launch a new company and survive.",
+    problem: "Launch a new company, find PMF and traction than scale.",
     solution: "Experimentation and growing through partnerships until traction: shipped 2 MVPs (car subscription and daily car rental for extra monetization). Launched in 3 cities, 1 sticked. Partnered up with Careem to source new customers through their superapp.",
     success: "Achieved PMF in Dubai.",
     keyLearnings: [
