@@ -22,7 +22,8 @@ const ProjectsSection = () => {
     align: isMobile ? 'center' : 'start',
     skipSnaps: false,
     dragFree: false,
-    containScroll: 'trimSnaps'
+    containScroll: 'trimSnaps',
+    inViewThreshold: 0.7
   });
   
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
@@ -195,7 +196,7 @@ const ProjectsSection = () => {
               <div className="embla__container">
                 {activeProjects.map((project) => (
                   <div className="embla__slide" key={project.id}>
-                    <div className="embla__slide__inner h-full px-3 pb-10">
+                    <div className="embla__slide__inner h-full px-4 pb-10">
                       <ProjectCard project={project} />
                     </div>
                   </div>
@@ -203,27 +204,23 @@ const ProjectsSection = () => {
               </div>
             </div>
             
-            {/* Navigation buttons */}
-            {!isMobile && (
-              <>
-                <button 
-                  className="embla__prev embla__button" 
-                  onClick={scrollPrev}
-                  disabled={!prevBtnEnabled}
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
-                </button>
-                <button 
-                  className="embla__next embla__button" 
-                  onClick={scrollNext}
-                  disabled={!nextBtnEnabled}
-                  aria-label="Next slide"
-                >
-                  <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
-                </button>
-              </>
-            )}
+            {/* Navigation buttons - now showing on all devices */}
+            <button 
+              className="embla__prev embla__button" 
+              onClick={scrollPrev}
+              disabled={!prevBtnEnabled}
+              aria-label="Previous slide"
+            >
+              <ChevronLeft strokeWidth={1.5} />
+            </button>
+            <button 
+              className="embla__next embla__button" 
+              onClick={scrollNext}
+              disabled={!nextBtnEnabled}
+              aria-label="Next slide"
+            >
+              <ChevronRight strokeWidth={1.5} />
+            </button>
             
             {/* Dots navigation */}
             <div className="embla__dots">

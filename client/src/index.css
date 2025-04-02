@@ -77,49 +77,73 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 80px;
     cursor: pointer;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+    border: none;
+    transition: all 0.3s ease;
     padding: 0;
   }
   
-  .embla__button:hover {
-    background: rgba(118, 74, 188, 0.8);
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-50%) scale(1.05);
+  .embla__button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(90deg, 
+      rgba(0, 0, 0, 0.3) 0%, 
+      rgba(0, 0, 0, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
   
-  .embla__button:active {
-    transform: translateY(-50%) scale(0.95);
+  .embla__button:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .embla__button:hover::before {
+    opacity: 1;
   }
   
   .embla__button:disabled {
-    opacity: 0.3;
+    opacity: 0;
     cursor: default;
     pointer-events: none;
   }
   
   .embla__button svg {
-    width: 24px;
-    height: 24px;
-    stroke-width: 3px;
+    position: relative;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    stroke-width: 1.5px;
   }
   
   .embla__prev {
-    left: 15px;
+    left: 0;
+  }
+  
+  .embla__prev::before {
+    left: 0;
+    background: linear-gradient(90deg, 
+      rgba(0, 0, 0, 0.3) 0%, 
+      rgba(0, 0, 0, 0) 100%);
   }
   
   .embla__next {
-    right: 15px;
+    right: 0;
+  }
+  
+  .embla__next::before {
+    right: 0;
+    background: linear-gradient(-90deg, 
+      rgba(0, 0, 0, 0.3) 0%, 
+      rgba(0, 0, 0, 0) 100%);
   }
   
   /* Dots styling */
@@ -219,18 +243,14 @@
       -webkit-line-clamp: 4; /* Shorter on mobile */
     }
     
-    /* Adjust arrow positions on mobile */
+    /* Adjust arrow positions and size on mobile */
     .embla__button {
-      width: 40px;
-      height: 40px;
+      width: 50px;
     }
     
-    .embla__prev {
-      left: 5px;
-    }
-    
-    .embla__next {
-      right: 5px;
+    .embla__button svg {
+      width: 24px;
+      height: 24px;
     }
   }
 }
