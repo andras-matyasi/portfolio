@@ -28,15 +28,25 @@
   
   /* Swiper styling */
   /* Swiper styling for all swipers */
+  .reference-swiper .swiper-pagination,
+  .projects-swiper .swiper-pagination {
+    margin-top: 10px;
+  }
+  
   .reference-swiper .swiper-pagination-bullet,
   .projects-swiper .swiper-pagination-bullet {
-    background: #666;
-    opacity: 0.5;
+    background: #a8a8a8;
+    opacity: 0.8;
+    width: 10px;
+    height: 10px;
+    margin: 0 6px !important;
   }
+  
   .reference-swiper .swiper-pagination-bullet-active,
   .projects-swiper .swiper-pagination-bullet-active {
-    background: var(--primary);
+    background: #764abc; /* Purple from the gradient text */
     opacity: 1;
+    transform: scale(1.2);
   }
   /* Custom navigation buttons styling */
   .reference-swiper .swiper-button-next,
