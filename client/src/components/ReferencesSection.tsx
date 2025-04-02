@@ -142,14 +142,14 @@ const ReferencesSection = () => {
   }, [emblaApi, onSelect]);
 
   const ReferenceCard = ({ reference }: { reference: typeof referencesData[0] }) => (
-    <div className="bg-dark p-6 rounded-xl shadow-md flex flex-col h-full" style={{ minHeight: '300px' }}>
+    <div className="reference-card bg-dark p-6 rounded-xl shadow-md">
       <div className="mb-3">
         <Quote className="h-8 w-8 text-primary/40" />
       </div>
-      <p className="text-[#f8f8f0] italic mb-6 text-sm flex-grow line-clamp-6 md:line-clamp-none">
+      <p className="reference-quote text-[#f8f8f0] italic text-sm">
         "{reference.quote}"
       </p>
-      <div className="flex items-center mt-auto">
+      <div className="reference-info flex items-center mt-6">
         <div className="mr-3">
           <img 
             src={reference.imageUrl} 
@@ -207,15 +207,17 @@ const ReferencesSection = () => {
                   className="embla__prev embla__button" 
                   onClick={scrollPrev}
                   disabled={!prevBtnEnabled}
+                  aria-label="Previous slide"
                 >
-                  <ChevronLeft className="h-6 w-6" />
+                  <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
                 </button>
                 <button 
                   className="embla__next embla__button" 
                   onClick={scrollNext}
                   disabled={!nextBtnEnabled}
+                  aria-label="Next slide"
                 >
-                  <ChevronRight className="h-6 w-6" />
+                  <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
                 </button>
               </>
             )}

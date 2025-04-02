@@ -125,7 +125,7 @@ const ProjectsSection = () => {
     return (
       <motion.div
         variants={item}
-        className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
+        className="group project-card bg-dark rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full"
         onClick={() => openModal(project.id)}
       >
         <div className="relative" style={{ aspectRatio: '3/2' }}>
@@ -135,8 +135,8 @@ const ProjectsSection = () => {
             className="w-full h-full object-cover"
           />
           {!isMobile && (
-            <div className="project-overlay absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <span className="px-4 py-2 border border-white/30 text-white text-sm font-medium rounded-lg">
+            <div className="project-overlay absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/50 to-dark/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span className="px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-medium rounded-full shadow-lg hover:bg-white/20 transition-all duration-200">
                 View Case Study
               </span>
             </div>
@@ -149,18 +149,19 @@ const ProjectsSection = () => {
           <h3 className={`font-semibold mt-2 mb-2 group-hover:text-primary transition-colors ${isMobile ? 'text-lg' : 'text-xl'}`}>
             {project.title}
           </h3>
-          <p className={`text-[#f8f8f0] ${isMobile ? 'text-xs line-clamp-3 mb-3' : 'text-sm'}`}>
+          <p className={`text-[#f8f8f0] ${isMobile ? 'text-xs line-clamp-3 mb-4' : 'text-sm'}`}>
             {project.shortText}
           </p>
           {isMobile && (
             <button 
-              className="mt-2 px-4 py-2 border border-white/30 text-white text-xs font-medium rounded-lg hover:bg-white/10 transition-colors w-full"
+              className="mt-1 px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-xs font-medium rounded-full shadow-md hover:bg-white/20 transition-all duration-200 w-full flex items-center justify-center"
               onClick={(e) => {
                 e.stopPropagation(); // Stop event bubbling to prevent duplicate modal opening
                 openModal(project.id);
               }}
             >
-              View Case Study
+              <span>View Case Study</span>
+              <ArrowRight className="h-3 w-3 ml-2" />
             </button>
           )}
         </div>
@@ -209,15 +210,17 @@ const ProjectsSection = () => {
                   className="embla__prev embla__button" 
                   onClick={scrollPrev}
                   disabled={!prevBtnEnabled}
+                  aria-label="Previous slide"
                 >
-                  <ChevronLeft className="h-6 w-6" />
+                  <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
                 </button>
                 <button 
                   className="embla__next embla__button" 
                   onClick={scrollNext}
                   disabled={!nextBtnEnabled}
+                  aria-label="Next slide"
                 >
-                  <ChevronRight className="h-6 w-6" />
+                  <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
                 </button>
               </>
             )}

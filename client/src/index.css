@@ -80,31 +80,46 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    width: 50px;
-    height: 50px;
-    background-color: #222;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    color: #764abc;
-    border: none;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
     padding: 0;
+  }
+  
+  .embla__button:hover {
+    background: rgba(118, 74, 188, 0.8);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-50%) scale(1.05);
+  }
+  
+  .embla__button:active {
+    transform: translateY(-50%) scale(0.95);
   }
   
   .embla__button:disabled {
     opacity: 0.3;
     cursor: default;
+    pointer-events: none;
   }
   
-  .embla__button__svg {
-    width: 40%;
-    height: 40%;
+  .embla__button svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 3px;
   }
   
   .embla__prev {
-    left: 10px;
+    left: 15px;
   }
   
   .embla__next {
-    right: 10px;
+    right: 15px;
   }
   
   /* Dots styling */
@@ -112,29 +127,60 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     padding: 10px 0;
   }
   
   .embla__dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     display: flex;
     align-items: center;
-    margin: 0 6px;
+    margin: 0 5px;
     padding: 0;
     border-radius: 50%;
-    background-color: #a8a8a8;
-    opacity: 0.8;
-    transition: all 0.2s ease;
+    background-color: rgba(160, 160, 160, 0.5);
+    opacity: 0.7;
+    transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    position: relative;
+  }
+  
+  .embla__dot:hover {
+    opacity: 0.9;
+    background-color: rgba(160, 160, 160, 0.8);
   }
   
   .embla__dot--selected {
     background-color: #764abc; /* Purple from the gradient text */
     opacity: 1;
-    transform: scale(1.2);
+    transform: scale(1.3);
+    box-shadow: 0 0 6px rgba(118, 74, 188, 0.4);
+  }
+  
+  .embla__dot--selected:hover {
+    background-color: #764abc;
+  }
+  
+  /* Reference cards specific styling */
+  .reference-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .reference-quote {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .reference-info {
+    margin-top: auto;
   }
   
   @media (max-width: 768px) {
@@ -167,6 +213,24 @@
     /* Reference cards style for mobile */
     .embla__slide {
       height: auto;
+    }
+    
+    .reference-quote {
+      -webkit-line-clamp: 4; /* Shorter on mobile */
+    }
+    
+    /* Adjust arrow positions on mobile */
+    .embla__button {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .embla__prev {
+      left: 5px;
+    }
+    
+    .embla__next {
+      right: 5px;
     }
   }
 }
