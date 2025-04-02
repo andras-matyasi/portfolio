@@ -10,9 +10,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 // Import required modules
-import { Pagination, Navigation, FreeMode } from 'swiper/modules';
-// Import additional styles for FreeMode
-import 'swiper/css/free-mode';
+import { Pagination, Navigation } from 'swiper/modules';
 
 // Fisher-Yates (Knuth) shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -106,7 +104,7 @@ const ReferencesSection = () => {
       <div className="mb-3">
         <Quote className="h-8 w-8 text-primary/40" />
       </div>
-      <p className="text-[#f8f8f0] italic mb-6 text-sm flex-grow line-clamp-6">
+      <p className="text-[#f8f8f0] italic mb-6 text-sm flex-grow line-clamp-6 md:line-clamp-none">
         "{reference.quote}"
       </p>
       <div className="flex items-center mt-auto">
@@ -148,9 +146,9 @@ const ReferencesSection = () => {
         >
           {/* Swiper component */}
           <Swiper
-            modules={[Pagination, Navigation, FreeMode]}
+            modules={[Pagination, Navigation]}
             spaceBetween={15}
-            slidesPerView={isMobile ? 1.05 : 3}
+            slidesPerView={isMobile ? 1 : 3}
             centeredSlides={isMobile}
             loop={true}
             pagination={{
@@ -159,34 +157,30 @@ const ReferencesSection = () => {
             }}
             navigation={!isMobile}
             onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
-            speed={300} // Faster transition for more responsiveness
+            speed={500} // Moderate transition speed
             watchSlidesProgress={true} // Better tracking of slide positions
             simulateTouch={true} // Force enabling touch
-            touchRatio={1.5} // More sensitive touch (default: 1)
-            touchAngle={30} // Less strict angle for swiping (default: 45)
-            threshold={5} // Smaller swipe distance needed (default: 10)
-            resistance={false} // Disable resistance at edges
+            touchRatio={1.0} // Standard touch ratio
+            threshold={10} // Standard swipe distance needed
+            resistance={true} // Normal resistance at edges
             allowTouchMove={true} // Ensure touch is enabled
-            touchStartPreventDefault={false} // Don't prevent default touch behavior
-            touchMoveStopPropagation={false} // Don't stop propagation
-            cssMode={isMobile} // Use CSS mode for smoother swiping on mobile devices
+            preventClicks={false} // Allow clicks during swipe
+            preventClicksPropagation={false} // Allow click propagation
+            grabCursor={true} // Show grab cursor
+            shortSwipes={true} // Enable short swipes
+            longSwipesMs={300} // Time threshold for long swipes
+            longSwipesRatio={0.5} // Ratio threshold for long swipes
+            cssMode={false} // Turn off CSS mode as it can cause flickering
             observer={true} // Better reactivity to DOM changes
             observeParents={true} // Observe parent elements too
             resizeObserver={true} // React to resize events
             breakpoints={{
               320: {
-                slidesPerView: 1.05,
+                slidesPerView: 1,
                 spaceBetween: 15,
                 centeredSlides: true,
-                cssMode: false, // Disable cssMode for iOS
-                touchRatio: 1.5,
-                freeMode: {
-                  enabled: true,
-                  sticky: true,
-                  momentumBounce: true,
-                  momentumRatio: 0.5,
-                  minimumVelocity: 0.1
-                }
+                cssMode: false,
+                touchRatio: 1.0
               },
               768: {
                 slidesPerView: 2,
