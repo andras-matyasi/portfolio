@@ -97,7 +97,7 @@ const ProjectsSection = () => {
 
   return (
     <section id="case-studies" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
-      <div className={`${isMobile ? 'px-0' : 'container mx-auto px-4 md:px-0 lg:px-6'}`}>
+      <div className={`${isMobile ? 'px-0' : 'container mx-auto px-4 md:px-6'}`}>
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-10 px-4"
           initial={{ opacity: 0, y: 20 }}
@@ -127,7 +127,7 @@ const ProjectsSection = () => {
             loop={true}
             pagination={{
               clickable: true,
-              dynamicBullets: false,
+              dynamicBullets: true,
             }}
             navigation={!isMobile}
             onSlideChange={(swiper) => {
