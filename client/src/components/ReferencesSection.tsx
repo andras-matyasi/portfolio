@@ -1,16 +1,11 @@
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-// Import required modules
-import { Pagination, Navigation } from 'swiper/modules';
+// Import Embla Carousel
+import useEmblaCarousel from 'embla-carousel-react';
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel';
 
 // Fisher-Yates (Knuth) shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -92,12 +87,59 @@ const referencesData = [
 const ReferencesSection = () => {
   const { ref, controls } = useScrollAnimation();
   const [activeSlide, setActiveSlide] = useState(0);
-  const swiperRef = useRef<any>(null);
+  const isMobile = useIsMobile();
   
   // Shuffle references once on component mount
   const references = useMemo(() => shuffleArray(referencesData), []);
-
-  const isMobile = useIsMobile();
+  
+  // Setup Embla Carousel
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: isMobile ? 'center' : 'start',
+    skipSnaps: false,
+    dragFree: false,
+    containScroll: 'trimSnaps'
+  });
+  
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  
+  // Navigation callbacks for Embla
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    
+    const newIndex = emblaApi.selectedScrollSnap();
+    setSelectedIndex(newIndex);
+    setActiveSlide(newIndex);
+    
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+  }, [emblaApi]);
+  
+  // Set up carousel when it's ready
+  useEffect(() => {
+    if (!emblaApi) return;
+    
+    // Save all snap positions
+    setScrollSnaps(emblaApi.scrollSnapList());
+    
+    // Initial button state
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+    
+    // Add event listeners
+    emblaApi.on('select', onSelect);
+    
+    // Cleanup on unmount
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   const ReferenceCard = ({ reference }: { reference: typeof referencesData[0] }) => (
     <div className="bg-dark p-6 rounded-xl shadow-md flex flex-col h-full" style={{ minHeight: '300px' }}>
@@ -144,67 +186,51 @@ const ReferencesSection = () => {
           transition={{ duration: 0.8 }}
           className="relative max-w-full overflow-hidden"
         >
-          {/* Swiper component */}
-          <Swiper
-            modules={[Pagination, Navigation]}
-            spaceBetween={15}
-            slidesPerView={isMobile ? 1 : 3}
-            centeredSlides={isMobile}
-            loop={true}
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            navigation={!isMobile}
-            onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
-            speed={500} // Moderate transition speed
-            watchSlidesProgress={true} // Better tracking of slide positions
-            simulateTouch={true} // Force enabling touch
-            touchRatio={1.0} // Standard touch ratio
-            threshold={10} // Standard swipe distance needed
-            resistance={true} // Normal resistance at edges
-            allowTouchMove={true} // Ensure touch is enabled
-            preventClicks={false} // Allow clicks during swipe
-            preventClicksPropagation={false} // Allow click propagation
-            grabCursor={true} // Show grab cursor
-            shortSwipes={true} // Enable short swipes
-            longSwipesMs={300} // Time threshold for long swipes
-            longSwipesRatio={0.5} // Ratio threshold for long swipes
-            cssMode={false} // Turn off CSS mode as it can cause flickering
-            observer={true} // Better reactivity to DOM changes
-            observeParents={true} // Observe parent elements too
-            resizeObserver={true} // React to resize events
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 15,
-                centeredSlides: true,
-                cssMode: false,
-                touchRatio: 1.0
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-                centeredSlides: false,
-                cssMode: false,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 25,
-                centeredSlides: false,
-                cssMode: false,
-              }
-            }}
-            className="reference-swiper"
-          >
-            {references.map((reference) => (
-              <SwiperSlide key={reference.id}>
-                <div className="h-full px-1 pb-10">
-                  <ReferenceCard reference={reference} />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {/* Embla Carousel */}
+          <div className="embla references-embla">
+            <div className="embla__viewport" ref={emblaRef}>
+              <div className="embla__container">
+                {references.map((reference) => (
+                  <div className="embla__slide" key={reference.id}>
+                    <div className="embla__slide__inner h-full px-3 pb-10">
+                      <ReferenceCard reference={reference} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Navigation buttons */}
+            {!isMobile && (
+              <>
+                <button 
+                  className="embla__prev embla__button" 
+                  onClick={scrollPrev}
+                  disabled={!prevBtnEnabled}
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button 
+                  className="embla__next embla__button" 
+                  onClick={scrollNext}
+                  disabled={!nextBtnEnabled}
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            )}
+            
+            {/* Dots navigation */}
+            <div className="embla__dots">
+              {scrollSnaps.map((_, index) => (
+                <button
+                  key={index}
+                  className={`embla__dot ${index === selectedIndex ? 'embla__dot--selected' : ''}`}
+                  onClick={() => emblaApi?.scrollTo(index)}
+                />
+              ))}
+            </div>
+          </div>
           
 
         </motion.div>

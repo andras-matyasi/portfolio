@@ -1,28 +1,84 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { projects } from "@/data/projectsData";
 import ProjectModal from "./ProjectModal";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Analytics from "@/lib/analytics";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-// Import required modules
-import { Pagination, Navigation, EffectFade } from 'swiper/modules';
-// Import base Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+// Import Embla Carousel
+import useEmblaCarousel from 'embla-carousel-react';
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel';
 
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const { ref, controls } = useScrollAnimation();
   const isMobile = useIsMobile();
-  const swiperRef = useRef<any>(null);
+  
+  // Setup Embla Carousel
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: isMobile ? 'center' : 'start',
+    skipSnaps: false,
+    dragFree: false,
+    containScroll: 'trimSnaps'
+  });
+  
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
   const activeProjects = projects.filter(project => project.active);
+
+  // Navigation and initialization callbacks for Embla
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    
+    const newIndex = emblaApi.selectedScrollSnap();
+    setSelectedIndex(newIndex);
+    
+    // Only track if slide actually changed
+    if (newIndex !== activeSlide) {
+      const newProject = activeProjects[newIndex];
+      if (newProject) {
+        Analytics.trackEvent('Carousel Slide Change', {
+          project_id: newProject.id,
+          project_title: newProject.title,
+          project_type: newProject.type,
+          slide_index: newIndex
+        });
+      }
+    }
+    setActiveSlide(newIndex);
+    
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+  }, [emblaApi, activeProjects, activeSlide]);
+  
+  // Set up carousel when it's ready
+  useEffect(() => {
+    if (!emblaApi) return;
+    
+    // Save all snap positions
+    setScrollSnaps(emblaApi.scrollSnapList());
+    
+    // Initial button state
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+    
+    // Add event listeners
+    emblaApi.on('select', onSelect);
+    
+    // Cleanup on unmount
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   const openModal = (projectId: string) => {
     // Find the project to get its details for tracking
@@ -132,85 +188,51 @@ const ProjectsSection = () => {
           transition={{ duration: 0.8 }}
           className="relative max-w-full overflow-hidden"
         >
-          {/* Swiper component */}
-          <Swiper
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
-            modules={[Pagination, Navigation]}
-            spaceBetween={15}
-            slidesPerView={isMobile ? 1 : 3}
-            centeredSlides={isMobile}
-            loop={true}
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            navigation={!isMobile}
-            speed={500} // Moderate transition speed
-            watchSlidesProgress={true} // Better tracking of slide positions
-            simulateTouch={true} // Force enabling touch
-            touchRatio={1.0} // Standard touch ratio
-            threshold={10} // Standard swipe distance needed
-            resistance={true} // Normal resistance at edges
-            allowTouchMove={true} // Ensure touch is enabled
-            preventClicks={false} // Allow clicks during swipe
-            preventClicksPropagation={false} // Allow click propagation
-            grabCursor={true} // Show grab cursor
-            shortSwipes={true} // Enable short swipes
-            longSwipesMs={300} // Time threshold for long swipes
-            longSwipesRatio={0.5} // Ratio threshold for long swipes
-            cssMode={false} // Turn off CSS mode as it can cause flickering
-            observer={true} // Better reactivity to DOM changes
-            observeParents={true} // Observe parent elements too
-            resizeObserver={true} // React to resize events
-            onSlideChange={(swiper) => {
-              const newSlideIndex = swiper.realIndex;
-              // Only track if slide actually changed
-              if (newSlideIndex !== activeSlide) {
-                const newProject = activeProjects[newSlideIndex];
-                if (newProject) {
-                  Analytics.trackEvent('Carousel Slide Change', {
-                    project_id: newProject.id,
-                    project_title: newProject.title,
-                    project_type: newProject.type,
-                    slide_index: newSlideIndex
-                  });
-                }
-              }
-              setActiveSlide(newSlideIndex);
-            }}
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 15,
-                centeredSlides: true,
-                cssMode: false, // Disable cssMode for iOS
-                touchRatio: 1.0
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-                centeredSlides: false,
-                cssMode: false,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 25,
-                centeredSlides: false,
-                cssMode: false,
-              }
-            }}
-            className="projects-swiper"
-          >
-            {activeProjects.map((project) => (
-              <SwiperSlide key={project.id}>
-                <div className="h-full px-1 pb-10">
-                  <ProjectCard project={project} />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {/* Embla Carousel */}
+          <div className="embla projects-embla">
+            <div className="embla__viewport" ref={emblaRef}>
+              <div className="embla__container">
+                {activeProjects.map((project) => (
+                  <div className="embla__slide" key={project.id}>
+                    <div className="embla__slide__inner h-full px-3 pb-10">
+                      <ProjectCard project={project} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Navigation buttons */}
+            {!isMobile && (
+              <>
+                <button 
+                  className="embla__prev embla__button" 
+                  onClick={scrollPrev}
+                  disabled={!prevBtnEnabled}
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button 
+                  className="embla__next embla__button" 
+                  onClick={scrollNext}
+                  disabled={!nextBtnEnabled}
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            )}
+            
+            {/* Dots navigation */}
+            <div className="embla__dots">
+              {scrollSnaps.map((_, index) => (
+                <button
+                  key={index}
+                  className={`embla__dot ${index === selectedIndex ? 'embla__dot--selected' : ''}`}
+                  onClick={() => emblaApi?.scrollTo(index)}
+                />
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         <div className="text-center my-10">
