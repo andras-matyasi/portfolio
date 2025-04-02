@@ -123,5 +123,30 @@
     .projects-swiper .swiper-button-prev {
       display: none;
     }
+    
+    /* Ensure mobile cards have a minimum height */
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 420px;
+    }
+    
+    .project-card > div:first-child {
+      flex-shrink: 0;
+    }
+    
+    .project-card > div:last-child {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    
+    .project-card p {
+      margin-bottom: 10px;
+    }
+    
+    .project-card button {
+      margin-top: auto;
+    }
   }
 }

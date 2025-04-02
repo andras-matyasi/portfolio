@@ -80,11 +80,13 @@ const ProjectsSection = () => {
             alt={project.title}
             className="w-full h-full object-cover"
           />
-          <div className="project-overlay absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span className="px-4 py-2 border border-white/30 text-white text-sm font-medium rounded-lg">
-              View Case Study
-            </span>
-          </div>
+          {!isMobile && (
+            <div className="project-overlay absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span className="px-4 py-2 border border-white/30 text-white text-sm font-medium rounded-lg">
+                View Case Study
+              </span>
+            </div>
+          )}
         </div>
         <div className={`p-4 ${isMobile ? 'p-3' : 'p-5'}`}>
           <span className="text-xs font-medium text-primary uppercase tracking-wider">
@@ -93,9 +95,20 @@ const ProjectsSection = () => {
           <h3 className={`font-semibold mt-2 mb-2 group-hover:text-primary transition-colors ${isMobile ? 'text-lg' : 'text-xl'}`}>
             {project.title}
           </h3>
-          <p className={`text-[#f8f8f0] ${isMobile ? 'text-xs line-clamp-3' : 'text-sm'}`}>
+          <p className={`text-[#f8f8f0] ${isMobile ? 'text-xs line-clamp-3 mb-3' : 'text-sm'}`}>
             {project.shortText}
           </p>
+          {isMobile && (
+            <button 
+              className="mt-2 px-4 py-2 border border-white/30 text-white text-xs font-medium rounded-lg hover:bg-white/10 transition-colors w-full"
+              onClick={(e) => {
+                e.stopPropagation(); // Stop event bubbling to prevent duplicate modal opening
+                openModal(project.id);
+              }}
+            >
+              View Case Study
+            </button>
+          )}
         </div>
       </motion.div>
     );
