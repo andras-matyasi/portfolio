@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Calendar, Utensils, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import Analytics from "@/lib/analytics";
 
 const Header = () => {
   const isMobile = useIsMobile();
@@ -83,14 +82,6 @@ const Header = () => {
     
     // Check if this is an anchor link
     const href = e.currentTarget.getAttribute('href');
-    const linkText = e.currentTarget.textContent?.trim() || '';
-    
-    // Track click in Mixpanel
-    Analytics.trackEvent('Navigation Click', {
-      link: href,
-      text: linkText,
-      mobile: true
-    });
     
     if (href && href.startsWith('#')) {
       e.preventDefault();
@@ -155,14 +146,6 @@ const Header = () => {
                 <a 
                   href="#case-studies" 
                   className="text-white hover:text-primary transition-colors"
-                  onClick={(e) => {
-                    // Track desktop navigation
-                    Analytics.trackEvent('Navigation Click', {
-                      link: '#case-studies',
-                      text: 'Case Studies',
-                      mobile: false
-                    });
-                  }}
                 >
                   Case Studies
                 </a>
@@ -171,14 +154,6 @@ const Header = () => {
                 <a 
                   href="#about" 
                   className="text-white hover:text-primary transition-colors"
-                  onClick={(e) => {
-                    // Track desktop navigation
-                    Analytics.trackEvent('Navigation Click', {
-                      link: '#about',
-                      text: 'About Me',
-                      mobile: false
-                    });
-                  }}
                 >
                   About Me
                 </a>
@@ -187,14 +162,6 @@ const Header = () => {
                 <a 
                   href="#references" 
                   className="text-white hover:text-primary transition-colors"
-                  onClick={(e) => {
-                    // Track desktop navigation
-                    Analytics.trackEvent('Navigation Click', {
-                      link: '#references',
-                      text: 'References',
-                      mobile: false
-                    });
-                  }}
                 >
                   References
                 </a>
@@ -206,18 +173,7 @@ const Header = () => {
               >
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center"
-                  onClick={() => {
-                    setPetProjectsMenuOpen(!petProjectsMenuOpen);
-                    try {
-                      Analytics.trackEvent('Menu Toggle', {
-                        menu: 'pet_projects',
-                        action: !petProjectsMenuOpen ? 'open' : 'close',
-                        mobile: false
-                      });
-                    } catch (err) {
-                      console.error('Failed to track pet projects menu toggle:', err);
-                    }
-                  }}
+                  onClick={() => setPetProjectsMenuOpen(!petProjectsMenuOpen)}
                 >
                   Pet projects
                   <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" 
@@ -235,14 +191,6 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
-                      onClick={() => {
-                        Analytics.trackEvent('External Link Click', {
-                          link: 'https://lunchvote.matyasi.me',
-                          text: 'Lunchvote',
-                          category: 'pet_projects',
-                          mobile: false
-                        });
-                      }}
                     >
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
@@ -257,18 +205,7 @@ const Header = () => {
               >
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center"
-                  onClick={() => {
-                    setContactMenuOpen(!contactMenuOpen);
-                    try {
-                      Analytics.trackEvent('Menu Toggle', {
-                        menu: 'contact',
-                        action: !contactMenuOpen ? 'open' : 'close',
-                        mobile: false
-                      });
-                    } catch (err) {
-                      console.error('Failed to track contact menu toggle:', err);
-                    }
-                  }}
+                  onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 >
                   Contact
                   <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200"
@@ -284,13 +221,6 @@ const Header = () => {
                     <a 
                       href="mailto:andras@matyasi.me" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
-                      onClick={() => {
-                        Analytics.trackEvent('Contact Click', {
-                          method: 'email',
-                          text: 'Email',
-                          mobile: false
-                        });
-                      }}
                     >
                       <Mail className="h-4 w-4 mr-2" />
                       Email
@@ -300,13 +230,6 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
-                      onClick={() => {
-                        Analytics.trackEvent('Contact Click', {
-                          method: 'linkedin',
-                          text: 'LinkedIn',
-                          mobile: false
-                        });
-                      }}
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
                       LinkedIn
@@ -316,13 +239,6 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
-                      onClick={() => {
-                        Analytics.trackEvent('Contact Click', {
-                          method: 'calendly',
-                          text: 'Book a meeting',
-                          mobile: false
-                        });
-                      }}
                     >
                       <Calendar className="h-4 w-4 mr-2" />
                       Book a meeting
@@ -338,18 +254,7 @@ const Header = () => {
         {isMobile && (
           <button 
             className="text-white hover:text-primary transition-colors p-1"
-            onClick={() => {
-              toggleMobileMenu();
-              try {
-                Analytics.trackEvent('Menu Toggle', {
-                  menu: 'mobile_main',
-                  action: !mobileMenuOpen ? 'open' : 'close',
-                  mobile: true
-                });
-              } catch (err) {
-                console.error('Failed to track mobile menu toggle:', err);
-              }
-            }}
+            onClick={toggleMobileMenu}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
@@ -404,18 +309,7 @@ const Header = () => {
               <div className="py-2">
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
-                  onClick={() => {
-                    setPetProjectsMenuOpen(!petProjectsMenuOpen);
-                    try {
-                      Analytics.trackEvent('Menu Toggle', {
-                        menu: 'pet_projects',
-                        action: !petProjectsMenuOpen ? 'open' : 'close',
-                        mobile: true
-                      });
-                    } catch (err) {
-                      console.error('Failed to track mobile pet projects menu toggle:', err);
-                    }
-                  }}
+                  onClick={() => setPetProjectsMenuOpen(!petProjectsMenuOpen)}
                 >
                   <span>Pet projects</span>
                   {petProjectsMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -427,15 +321,7 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={(e) => {
-                        Analytics.trackEvent('External Link Click', {
-                          link: 'https://lunchvote.matyasi.me',
-                          text: 'Lunchvote',
-                          category: 'pet_projects',
-                          mobile: true
-                        });
-                        handleMobileLinkClick(e);
-                      }}
+                      onClick={handleMobileLinkClick}
                     >
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
@@ -448,18 +334,7 @@ const Header = () => {
               <div className="py-2">
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
-                  onClick={() => {
-                    setContactMenuOpen(!contactMenuOpen);
-                    try {
-                      Analytics.trackEvent('Menu Toggle', {
-                        menu: 'contact',
-                        action: !contactMenuOpen ? 'open' : 'close',
-                        mobile: true
-                      });
-                    } catch (err) {
-                      console.error('Failed to track mobile contact menu toggle:', err);
-                    }
-                  }}
+                  onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 >
                   <span>Contact</span>
                   {contactMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -469,14 +344,7 @@ const Header = () => {
                     <a 
                       href="mailto:andras@matyasi.me" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={(e) => {
-                        Analytics.trackEvent('Contact Click', {
-                          method: 'email',
-                          text: 'Email',
-                          mobile: true
-                        });
-                        handleMobileLinkClick(e);
-                      }}
+                      onClick={handleMobileLinkClick}
                     >
                       <Mail className="h-4 w-4 mr-2" />
                       Email
@@ -486,14 +354,7 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={(e) => {
-                        Analytics.trackEvent('Contact Click', {
-                          method: 'linkedin',
-                          text: 'LinkedIn',
-                          mobile: true
-                        });
-                        handleMobileLinkClick(e);
-                      }}
+                      onClick={handleMobileLinkClick}
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
                       LinkedIn
@@ -503,14 +364,7 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={(e) => {
-                        Analytics.trackEvent('Contact Click', {
-                          method: 'calendly',
-                          text: 'Book a meeting',
-                          mobile: true
-                        });
-                        handleMobileLinkClick(e);
-                      }}
+                      onClick={handleMobileLinkClick}
                     >
                       <Calendar className="h-4 w-4 mr-2" />
                       Book a meeting

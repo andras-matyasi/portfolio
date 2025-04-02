@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowLeft } from "lucide-react";
 import { projects } from "@/data/projectsData";
-import Analytics from "@/lib/analytics";
 
 interface ProjectModalProps {
   projectId: string;
@@ -13,68 +12,11 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
   const project = projects.find((p) => p.id === projectId);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Track modal scroll interaction
-  useEffect(() => {
-    if (!modalRef.current || !project) return;
-    
-    let lastScrollPosition = 0;
-    let scrollDebounce: ReturnType<typeof setTimeout>;
-    
-    const handleScroll = () => {
-      if (!modalRef.current || !project) return;
-      
-      // Clear previous timeout
-      clearTimeout(scrollDebounce);
-      
-      scrollDebounce = setTimeout(() => {
-        if (modalRef.current && project) {
-          const currentScrollPosition = modalRef.current.scrollTop;
-          const scrollDirection = currentScrollPosition > lastScrollPosition ? 'down' : 'up';
-          const scrollPercentage = Math.round((currentScrollPosition / (modalRef.current.scrollHeight - modalRef.current.clientHeight)) * 100);
-          
-          // Only track if scrolled more than 10% in either direction
-          if (Math.abs(currentScrollPosition - lastScrollPosition) > (modalRef.current.clientHeight * 0.1)) {
-            try {
-              Analytics.trackEvent('Case Study Modal Scroll', {
-                projectId,
-                projectTitle: project.title,
-                scrollDirection,
-                scrollPercentage: scrollPercentage > 100 ? 100 : scrollPercentage
-              });
-            } catch (err) {
-              console.error('Failed to track scroll event:', err);
-            }
-            
-            lastScrollPosition = currentScrollPosition;
-          }
-        }
-      }, 500); // Debounce for 500ms
-    };
-    
-    modalRef.current.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      if (modalRef.current) {
-        modalRef.current.removeEventListener('scroll', handleScroll);
-      }
-      clearTimeout(scrollDebounce);
-    };
-  }, [projectId, project]);
-
   useEffect(() => {
     if (!project) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        try {
-          Analytics.trackEvent('Close Case Study', {
-            projectId,
-            projectTitle: project.title,
-            method: 'escape_key'
-          });
-        } catch (err) {
-          console.error('Failed to track escape key event:', err);
-        }
         onClose();
       }
     };
@@ -84,15 +26,6 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
         modalRef.current &&
         !modalRef.current.contains(event.target as Node)
       ) {
-        try {
-          Analytics.trackEvent('Close Case Study', {
-            projectId,
-            projectTitle: project.title,
-            method: 'click_outside'
-          });
-        } catch (err) {
-          console.error('Failed to track click outside event:', err);
-        }
         onClose();
       }
     };
@@ -127,18 +60,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
         >
           <button
             className="absolute top-4 right-4 text-[#f8f8f0] hover:text-white transition-colors"
-            onClick={() => {
-              try {
-                Analytics.trackEvent('Close Case Study', {
-                  projectId,
-                  projectTitle: project.title,
-                  method: 'close_button'
-                });
-              } catch (err) {
-                console.error('Failed to track close button event:', err);
-              }
-              onClose();
-            }}
+            onClick={onClose}
             aria-label="Close modal"
           >
             <X className="h-6 w-6" />
@@ -191,18 +113,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
           <div className="text-center">
             <button
               className="inline-flex items-center px-5 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors font-medium"
-              onClick={() => {
-                try {
-                  Analytics.trackEvent('Close Case Study', {
-                    projectId,
-                    projectTitle: project.title,
-                    method: 'back_button'
-                  });
-                } catch (err) {
-                  console.error('Failed to track back button event:', err);
-                }
-                onClose();
-              }}
+              onClick={onClose}
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Projects

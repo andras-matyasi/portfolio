@@ -43,19 +43,10 @@ const ProjectsSection = () => {
     const newIndex = emblaApi.selectedScrollSnap();
     setSelectedIndex(newIndex);
     
-    // Only track if slide actually changed
+    // Only update the active slide if it changed
     if (newIndex !== activeSlide) {
-      const newProject = activeProjects[newIndex];
-      if (newProject) {
-        Analytics.trackEvent('Carousel Slide Change', {
-          project_id: newProject.id,
-          project_title: newProject.title,
-          project_type: newProject.type,
-          slide_index: newIndex
-        });
-      }
+      setActiveSlide(newIndex);
     }
-    setActiveSlide(newIndex);
     
     setPrevBtnEnabled(emblaApi.canScrollPrev());
     setNextBtnEnabled(emblaApi.canScrollNext());
@@ -82,35 +73,13 @@ const ProjectsSection = () => {
   }, [emblaApi, onSelect]);
 
   const openModal = (projectId: string) => {
-    // Find the project to get its details for tracking
-    const project = projects.find(p => p.id === projectId);
-    
-    // Track case study view
-    if (project) {
-      Analytics.trackEvent('View Case Study', {
-        project_id: projectId,
-        project_title: project.title,
-        project_type: project.type
-      });
-    }
-    
+    // Open the project modal
     setSelectedProject(projectId);
     document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
-    // Track case study close
-    if (selectedProject) {
-      const project = projects.find(p => p.id === selectedProject);
-      if (project) {
-        Analytics.trackEvent('Close Case Study', {
-          project_id: selectedProject,
-          project_title: project.title,
-          project_type: project.type
-        });
-      }
-    }
-    
+    // Close the project modal
     setSelectedProject(null);
     document.body.style.overflow = "auto";
   };
@@ -239,13 +208,6 @@ const ProjectsSection = () => {
           <a
             href="#contact"
             className="inline-flex items-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
-            onClick={() => {
-              Analytics.trackEvent('CTA Click', {
-                cta_text: 'Interested in working together?',
-                cta_location: 'case_studies_section',
-                destination: 'contact_section'
-              });
-            }}
           >
             Interested in working together?
             <ArrowRight className="h-4 w-4 ml-2" />

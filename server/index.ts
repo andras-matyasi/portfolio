@@ -4,9 +4,6 @@ import { setupVite, serveStatic, log } from "./vite";
 import helmet from "helmet";
 import { detectSuspiciousBots, validateHumanForm } from "./security";
 
-// Forward the MIXPANEL_TOKEN from client to server environment
-process.env.MIXPANEL_TOKEN = process.env.VITE_MIXPANEL_TOKEN;
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -16,10 +13,10 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com", "https://*.mixpanel.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       imgSrc: ["'self'", "data:", "https:", "http:"],
-      connectSrc: ["'self'", "https:", "http:", "https://*.mixpanel.com", "https://api.mixpanel.com"],
+      connectSrc: ["'self'", "https:", "http:"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       objectSrc: ["'none'"],
       mediaSrc: ["'self'"],
