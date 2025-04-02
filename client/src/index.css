@@ -38,19 +38,28 @@
     background: var(--primary);
     opacity: 1;
   }
-  /* Custom navigation buttons styling */
+  /* Custom navigation buttons styling - full height with abstract arrows */
   .reference-swiper .swiper-button-next,
   .reference-swiper .swiper-button-prev,
   .projects-swiper .swiper-button-next,
   .projects-swiper .swiper-button-prev {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 100%;
+    top: 0;
+    margin-top: 0;
     color: var(--primary);
-    background-color: #222;
-    border-radius: 50%;
+    background-color: rgba(34, 34, 34, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reference-swiper .swiper-button-next:hover,
+  .reference-swiper .swiper-button-prev:hover,
+  .projects-swiper .swiper-button-next:hover,
+  .projects-swiper .swiper-button-prev:hover {
+    background-color: rgba(34, 34, 34, 0.6);
   }
   
   /* Remove default Swiper text (NEXT, PREV) */
@@ -61,13 +70,14 @@
     display: none;
   }
   
-  /* Custom arrow SVG content */
+  /* Custom arrow SVG content - larger and more abstract */
   .reference-swiper .swiper-button-next::before,
   .projects-swiper .swiper-button-next::before {
     content: '';
-    width: 24px;
-    height: 24px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23764abc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+    width: 40px;
+    height: 40px;
+    /* Abstract right arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23764abc' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3Cpolyline points='12 5 19 12 12 19'%3E%3C/polyline%3E%3C/svg%3E");
     background-position: center;
     background-repeat: no-repeat;
     display: block;
@@ -76,12 +86,21 @@
   .reference-swiper .swiper-button-prev::before,
   .projects-swiper .swiper-button-prev::before {
     content: '';
-    width: 24px;
-    height: 24px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23764abc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
+    width: 40px;
+    height: 40px;
+    /* Abstract left arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23764abc' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='19' y1='12' x2='5' y2='12'%3E%3C/line%3E%3Cpolyline points='12 19 5 12 12 5'%3E%3C/polyline%3E%3C/svg%3E");
     background-position: center;
     background-repeat: no-repeat;
     display: block;
+  }
+  
+  /* Swiper container styling */
+  .reference-swiper,
+  .projects-swiper {
+    padding-bottom: 40px;
+    position: relative;
+    overflow: visible !important;
   }
   
   @media (max-width: 768px) {
