@@ -138,9 +138,9 @@ const ReferencesSection = () => {
 
   return (
     <section id="references" className="py-16 md:py-24 bg-dark-secondary">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className={`${isMobile ? 'px-0' : 'container mx-auto px-4 md:px-6'}`}>
         <motion.div 
-          className="max-w-3xl mx-auto text-center mb-12"
+          className="max-w-3xl mx-auto text-center mb-12 px-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -155,7 +155,7 @@ const ReferencesSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="relative"
+          className="relative max-w-full overflow-hidden"
         >
           <div className="flex">
             {/* Left Arrow - Hidden on mobile, visible on desktop */}
