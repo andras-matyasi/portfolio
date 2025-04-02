@@ -100,7 +100,7 @@ const ReferencesSection = () => {
   const isMobile = useIsMobile();
 
   const ReferenceCard = ({ reference }: { reference: typeof referencesData[0] }) => (
-    <div className="bg-dark p-6 rounded-xl shadow-md flex flex-col h-full">
+    <div className="bg-dark p-6 rounded-xl shadow-md flex flex-col h-full" style={{ minHeight: '300px' }}>
       <div className="mb-3">
         <Quote className="h-8 w-8 text-primary/40" />
       </div>
