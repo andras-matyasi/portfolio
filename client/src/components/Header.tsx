@@ -9,12 +9,12 @@ const Header = () => {
   const isMobile = useIsMobile();
   const [isScrolled, setIsScrolled] = useState(false);
   const [contactMenuOpen, setContactMenuOpen] = useState(false);
-  const [funkyToolsMenuOpen, setFunkyToolsMenuOpen] = useState(false);
+  const [petProjectsMenuOpen, setPetProjectsMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const contactMenuRef = useRef<HTMLLIElement>(null);
   const contactDropdownRef = useRef<HTMLDivElement>(null);
-  const funkyToolsMenuRef = useRef<HTMLLIElement>(null);
-  const funkyToolsDropdownRef = useRef<HTMLDivElement>(null);
+  const petProjectsMenuRef = useRef<HTMLLIElement>(null);
+  const petProjectsDropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,12 +38,12 @@ const Header = () => {
       }
       
       if (
-        funkyToolsMenuRef.current && 
-        !funkyToolsMenuRef.current.contains(event.target as Node) && 
-        funkyToolsDropdownRef.current && 
-        !funkyToolsDropdownRef.current.contains(event.target as Node)
+        petProjectsMenuRef.current && 
+        !petProjectsMenuRef.current.contains(event.target as Node) && 
+        petProjectsDropdownRef.current && 
+        !petProjectsDropdownRef.current.contains(event.target as Node)
       ) {
-        setFunkyToolsMenuOpen(false);
+        setPetProjectsMenuOpen(false);
       }
       
       // Close mobile menu when clicking outside
@@ -58,17 +58,17 @@ const Header = () => {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [contactMenuRef, funkyToolsMenuRef, mobileMenuRef]);
+  }, [contactMenuRef, petProjectsMenuRef, mobileMenuRef]);
 
   // Handlers for menu interactions
-  const handleFunkyToolsMouseEnter = () => {
-    setFunkyToolsMenuOpen(true);
+  const handlePetProjectsMouseEnter = () => {
+    setPetProjectsMenuOpen(true);
     setContactMenuOpen(false);
   };
 
   const handleContactMouseEnter = () => {
     setContactMenuOpen(true);
-    setFunkyToolsMenuOpen(false);
+    setPetProjectsMenuOpen(false);
   };
 
   // Toggle mobile menu
@@ -137,8 +137,8 @@ const Header = () => {
         if (contactMenuOpen) {
           handleMouseMove(e, contactMenuRef, setContactMenuOpen);
         }
-        if (funkyToolsMenuOpen) {
-          handleMouseMove(e, funkyToolsMenuRef, setFunkyToolsMenuOpen);
+        if (petProjectsMenuOpen) {
+          handleMouseMove(e, petProjectsMenuRef, setPetProjectsMenuOpen);
         }
       }}
     >
@@ -200,35 +200,35 @@ const Header = () => {
                 </a>
               </li>
               <li 
-                ref={funkyToolsMenuRef} 
+                ref={petProjectsMenuRef} 
                 className="relative"
-                onMouseEnter={handleFunkyToolsMouseEnter}
+                onMouseEnter={handlePetProjectsMouseEnter}
               >
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center"
                   onClick={() => {
-                    setFunkyToolsMenuOpen(!funkyToolsMenuOpen);
+                    setPetProjectsMenuOpen(!petProjectsMenuOpen);
                     try {
                       Analytics.trackEvent('Menu Toggle', {
-                        menu: 'funky_tools',
-                        action: !funkyToolsMenuOpen ? 'open' : 'close',
+                        menu: 'pet_projects',
+                        action: !petProjectsMenuOpen ? 'open' : 'close',
                         mobile: false
                       });
                     } catch (err) {
-                      console.error('Failed to track funky tools menu toggle:', err);
+                      console.error('Failed to track pet projects menu toggle:', err);
                     }
                   }}
                 >
-                  Funky tools
+                  Pet projects
                   <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" 
-                    style={{ transform: funkyToolsMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                    style={{ transform: petProjectsMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
                   />
                 </button>
-                {funkyToolsMenuOpen && (
+                {petProjectsMenuOpen && (
                   <div 
-                    ref={funkyToolsDropdownRef}
+                    ref={petProjectsDropdownRef}
                     className="absolute right-0 mt-2 py-2 w-48 bg-dark-secondary border border-dark rounded-md shadow-lg z-50"
-                    onMouseEnter={handleFunkyToolsMouseEnter}
+                    onMouseEnter={handlePetProjectsMouseEnter}
                   >
                     <a 
                       href="https://lunchvote.matyasi.me" 
@@ -239,7 +239,7 @@ const Header = () => {
                         Analytics.trackEvent('External Link Click', {
                           link: 'https://lunchvote.matyasi.me',
                           text: 'Lunchvote',
-                          category: 'funky_tools',
+                          category: 'pet_projects',
                           mobile: false
                         });
                       }}
@@ -400,27 +400,27 @@ const Header = () => {
                 References
               </a>
               
-              {/* Funky Tools Accordion */}
+              {/* Pet Projects Accordion */}
               <div className="py-2">
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
                   onClick={() => {
-                    setFunkyToolsMenuOpen(!funkyToolsMenuOpen);
+                    setPetProjectsMenuOpen(!petProjectsMenuOpen);
                     try {
                       Analytics.trackEvent('Menu Toggle', {
-                        menu: 'funky_tools',
-                        action: !funkyToolsMenuOpen ? 'open' : 'close',
+                        menu: 'pet_projects',
+                        action: !petProjectsMenuOpen ? 'open' : 'close',
                         mobile: true
                       });
                     } catch (err) {
-                      console.error('Failed to track mobile funky tools menu toggle:', err);
+                      console.error('Failed to track mobile pet projects menu toggle:', err);
                     }
                   }}
                 >
-                  <span>Funky tools</span>
-                  {funkyToolsMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                  <span>Pet projects</span>
+                  {petProjectsMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </button>
-                {funkyToolsMenuOpen && (
+                {petProjectsMenuOpen && (
                   <div className="mt-2 pl-4 border-l border-dark-secondary">
                     <a 
                       href="https://lunchvote.matyasi.me" 
@@ -431,7 +431,7 @@ const Header = () => {
                         Analytics.trackEvent('External Link Click', {
                           link: 'https://lunchvote.matyasi.me',
                           text: 'Lunchvote',
-                          category: 'funky_tools',
+                          category: 'pet_projects',
                           mobile: true
                         });
                         handleMobileLinkClick(e);
