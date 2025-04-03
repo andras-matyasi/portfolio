@@ -20,6 +20,22 @@ function generateSessionId(): string {
  */
 export async function logAction(action: string, data: Record<string, any> = {}): Promise<boolean> {
   try {
+    // Get screen dimensions
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // Get browser and OS info from user agent
+    const userAgent = navigator.userAgent;
+    
+    // Get page load time if available
+    let pageLoadTime = null;
+    if (window.performance && window.performance.timing) {
+      const timing = window.performance.timing;
+      pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+    }
+    
     // Add session ID for anonymized user tracking
     const payload = {
       action,
@@ -28,8 +44,14 @@ export async function logAction(action: string, data: Record<string, any> = {}):
         session_id: sessionId,
         page: window.location.pathname,
         referrer: document.referrer || null,
-        screen_size: `${window.innerWidth}x${window.innerHeight}`,
-        timestamp: new Date().toISOString(),
+        screen_size: `${screenWidth}x${screenHeight}`,
+        viewport_size: `${viewportWidth}x${viewportHeight}`,
+        user_agent: userAgent,
+        page_load_time: pageLoadTime,
+        url: window.location.href,
+        host: window.location.host,
+        language: navigator.language,
+        timestamp: Math.floor(Date.now() / 1000), // Unix timestamp in seconds for Mixpanel compatibility
       }
     };
 
