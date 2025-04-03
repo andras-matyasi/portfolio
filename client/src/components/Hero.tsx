@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import Analytics from "@/lib/analytics";
+import ActivityService from "@/lib/activity";
 
 const Hero = () => {
   return (
@@ -32,15 +32,11 @@ const Hero = () => {
               href="#case-studies" 
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 hover:from-blue-600 hover:via-indigo-700 hover:to-purple-800 text-white rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
               onClick={() => {
-                try {
-                  Analytics.trackEvent('CTA Click', {
-                    cta_text: 'Check out my work',
-                    cta_location: 'hero_section',
-                    destination: 'case_studies_section'
-                  });
-                } catch (err) {
-                  console.error('Failed to track CTA click:', err);
-                }
+                ActivityService.logClick('cta-work-button', 'navigation', {
+                  cta_text: 'Check out my work',
+                  section: 'hero',
+                  destination: 'case_studies'
+                });
               }}
             >
               Check out my work

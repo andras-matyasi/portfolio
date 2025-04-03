@@ -1,6 +1,7 @@
-import type { Express, Request, Response } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { trackActivity, identifyUser } from "./activity";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // put application routes here
@@ -40,10 +41,91 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }, 2000);
   });
   
-  // Add a dummy analytics endpoint to avoid 404 errors for any existing client requests
-  app.post('/api/analytics/track', async (req: Request, res: Response) => {
-    // Simply return success to keep the client happy, but don't do any actual tracking
-    res.status(200).json({ success: true });
+  // Activity logging endpoint - intentionally using a generic name to avoid ad blockers
+  app.post('/api/log', async (req: Request, res: Response, next: NextFunction) => {
+    // Set content type to JSON explicitly to prevent Vite middleware from intercepting
+    res.setHeader('Content-Type', 'application/json');
+    
+    try {
+      const { action, data = {} } = req.body;
+      
+      if (!action) {
+        return res.status(400).json({ success: false, message: 'Missing required fields' });
+      }
+      
+      // Log the incoming event for debugging
+      console.log(`[Activity] Tracking: ${action}`, JSON.stringify(data).substring(0, 100) + (JSON.stringify(data).length > 100 ? '...' : ''));
+      
+      // Add user agent and referrer info from headers
+      const properties = {
+        ...data,
+        $user_agent: req.headers['user-agent'] || 'Unknown',
+        $referrer: req.headers.referer || null,
+      };
+      
+      // Use distinct_id from data if available
+      if (data.session_id) {
+        properties.distinct_id = data.session_id;
+      }
+      
+      // Track the activity using Mixpanel
+      await trackActivity(action, properties, req.ip);
+      
+      // Return success to the client
+      return res.status(200).send(JSON.stringify({ success: true }));
+    } catch (error) {
+      console.error('Error processing activity:', error);
+      return res.status(500).send(JSON.stringify({ success: false, error: 'Internal server error' }));
+    }
+  });
+  
+  // User identification endpoint
+  app.post('/api/identify', async (req: Request, res: Response, next: NextFunction) => {
+    // Set content type to JSON explicitly to prevent Vite middleware from intercepting
+    res.setHeader('Content-Type', 'application/json');
+    
+    try {
+      const { distinct_id, traits = {} } = req.body;
+      
+      if (!distinct_id) {
+        return res.status(400).send(JSON.stringify({ success: false, message: 'Missing required fields' }));
+      }
+      
+      // Log the identification event
+      console.log(`[Activity] Identifying user: ${distinct_id}`);
+      
+      // Identify the user in Mixpanel
+      await identifyUser(distinct_id, traits);
+      
+      // Return success to the client
+      return res.status(200).send(JSON.stringify({ success: true }));
+    } catch (error) {
+      console.error('Error identifying user:', error);
+      return res.status(500).send(JSON.stringify({ success: false, error: 'Internal server error' }));
+    }
+  });
+  
+  // Keep the old endpoint for backward compatibility
+  app.post('/api/analytics/track', async (req: Request, res: Response, next: NextFunction) => {
+    // Set content type to JSON explicitly to prevent Vite middleware from intercepting
+    res.setHeader('Content-Type', 'application/json');
+    
+    try {
+      const { event, properties = {} } = req.body;
+      
+      if (event) {
+        // Log the event
+        console.log(`[Analytics Legacy] Tracking: ${event}`);
+        
+        // Forward to our new tracking system
+        await trackActivity(event, properties, req.ip);
+      }
+      
+      return res.status(200).send(JSON.stringify({ success: true }));
+    } catch (error) {
+      console.error('Error in legacy analytics endpoint:', error);
+      return res.status(200).send(JSON.stringify({ success: true })); // Still return success to avoid breaking clients
+    }
   });
   
   const httpServer = createServer(app);
