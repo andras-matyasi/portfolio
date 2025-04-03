@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Calendar, Utensils, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import ActivityService from "@/lib/activity";
 
 const Header = () => {
   const isMobile = useIsMobile();
@@ -83,15 +82,6 @@ const Header = () => {
     
     // Check if this is an anchor link
     const href = e.currentTarget.getAttribute('href');
-    const linkText = e.currentTarget.textContent?.trim() || '';
-    
-    // Log the click event
-    ActivityService.logClick(`mobile-${linkText.toLowerCase().replace(/\s+/g, '-')}-link`, 'navigation', {
-      section: 'header-mobile',
-      value: linkText,
-      href: href || '',
-      device: 'mobile'
-    });
     
     if (href && href.startsWith('#')) {
       e.preventDefault();
@@ -144,16 +134,7 @@ const Header = () => {
       }}
     >
       <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-        <a 
-          href="#top" 
-          className="text-xl font-semibold tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-all duration-300"
-          onClick={() => {
-            ActivityService.logClick('logo', 'navigation', {
-              section: 'header',
-              value: 'Andras Matyasi'
-            });
-          }}
-        >
+        <a href="#top" className="text-xl font-semibold tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-all duration-300">
           Andras Matyasi
         </a>
 
@@ -165,13 +146,6 @@ const Header = () => {
                 <a 
                   href="#case-studies" 
                   className="text-white hover:text-primary transition-colors"
-                  onClick={() => {
-                    ActivityService.logClick('case-studies-link', 'navigation', {
-                      section: 'header',
-                      value: 'Case Studies',
-                      device: 'desktop'
-                    });
-                  }}
                 >
                   Case Studies
                 </a>
@@ -180,13 +154,6 @@ const Header = () => {
                 <a 
                   href="#about" 
                   className="text-white hover:text-primary transition-colors"
-                  onClick={() => {
-                    ActivityService.logClick('about-link', 'navigation', {
-                      section: 'header',
-                      value: 'About Me',
-                      device: 'desktop'
-                    });
-                  }}
                 >
                   About Me
                 </a>
@@ -195,13 +162,6 @@ const Header = () => {
                 <a 
                   href="#references" 
                   className="text-white hover:text-primary transition-colors"
-                  onClick={() => {
-                    ActivityService.logClick('references-link', 'navigation', {
-                      section: 'header',
-                      value: 'References',
-                      device: 'desktop'
-                    });
-                  }}
                 >
                   References
                 </a>
@@ -213,15 +173,7 @@ const Header = () => {
               >
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center"
-                  onClick={() => {
-                    setPetProjectsMenuOpen(!petProjectsMenuOpen);
-                    ActivityService.logClick('pet-projects-menu', 'menu', {
-                      section: 'header',
-                      action: petProjectsMenuOpen ? 'close' : 'open',
-                      value: 'Pet projects',
-                      device: 'desktop'
-                    });
-                  }}
+                  onClick={() => setPetProjectsMenuOpen(!petProjectsMenuOpen)}
                 >
                   Pet projects
                   <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" 
@@ -239,15 +191,6 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
-                      onClick={() => {
-                        ActivityService.logClick('lunchvote-link', 'external-link', {
-                          section: 'header',
-                          menu: 'pet-projects',
-                          value: 'Lunchvote',
-                          url: 'https://lunchvote.matyasi.me',
-                          device: 'desktop'
-                        });
-                      }}
                     >
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
@@ -262,15 +205,7 @@ const Header = () => {
               >
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center"
-                  onClick={() => {
-                    setContactMenuOpen(!contactMenuOpen);
-                    ActivityService.logClick('contact-menu', 'menu', {
-                      section: 'header',
-                      action: contactMenuOpen ? 'close' : 'open',
-                      value: 'Contact',
-                      device: 'desktop'
-                    });
-                  }}
+                  onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 >
                   Contact
                   <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200"
@@ -286,15 +221,6 @@ const Header = () => {
                     <a 
                       href="mailto:andras@matyasi.me" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
-                      onClick={() => {
-                        ActivityService.logClick('email-header-link', 'contact', {
-                          section: 'header',
-                          menu: 'contact',
-                          value: 'Email',
-                          email: 'andras@matyasi.me',
-                          device: 'desktop'
-                        });
-                      }}
                     >
                       <Mail className="h-4 w-4 mr-2" />
                       Email
@@ -304,15 +230,6 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
-                      onClick={() => {
-                        ActivityService.logClick('linkedin-header-link', 'contact', {
-                          section: 'header',
-                          menu: 'contact',
-                          value: 'LinkedIn',
-                          url: 'https://www.linkedin.com/in/amatyasi/',
-                          device: 'desktop'
-                        });
-                      }}
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
                       LinkedIn
@@ -322,15 +239,6 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
-                      onClick={() => {
-                        ActivityService.logClick('calendly-header-link', 'contact', {
-                          section: 'header',
-                          menu: 'contact',
-                          value: 'Book a meeting',
-                          url: 'https://calendly.com/andras-matyasi/30min',
-                          device: 'desktop'
-                        });
-                      }}
                     >
                       <Calendar className="h-4 w-4 mr-2" />
                       Book a meeting
@@ -346,15 +254,7 @@ const Header = () => {
         {isMobile && (
           <button 
             className="text-white hover:text-primary transition-colors p-1"
-            onClick={() => {
-              toggleMobileMenu();
-              ActivityService.logClick('mobile-menu-button', 'navigation', {
-                section: 'header',
-                action: mobileMenuOpen ? 'close' : 'open',
-                value: 'Mobile Menu',
-                device: 'mobile'
-              });
-            }}
+            onClick={toggleMobileMenu}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
@@ -409,15 +309,7 @@ const Header = () => {
               <div className="py-2">
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
-                  onClick={() => {
-                    setPetProjectsMenuOpen(!petProjectsMenuOpen);
-                    ActivityService.logClick('mobile-pet-projects-menu', 'menu', {
-                      section: 'header-mobile',
-                      action: petProjectsMenuOpen ? 'close' : 'open',
-                      value: 'Pet projects',
-                      device: 'mobile'
-                    });
-                  }}
+                  onClick={() => setPetProjectsMenuOpen(!petProjectsMenuOpen)}
                 >
                   <span>Pet projects</span>
                   {petProjectsMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -429,15 +321,7 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={(e) => {
-                        handleMobileLinkClick(e);
-                        ActivityService.logClick('mobile-lunchvote-link', 'link', {
-                          section: 'header-mobile',
-                          value: 'Lunchvote',
-                          device: 'mobile',
-                          destination: 'https://lunchvote.matyasi.me'
-                        });
-                      }}
+                      onClick={handleMobileLinkClick}
                     >
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
@@ -450,15 +334,7 @@ const Header = () => {
               <div className="py-2">
                 <button 
                   className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
-                  onClick={() => {
-                    setContactMenuOpen(!contactMenuOpen);
-                    ActivityService.logClick('mobile-contact-menu', 'menu', {
-                      section: 'header-mobile',
-                      action: contactMenuOpen ? 'close' : 'open',
-                      value: 'Contact',
-                      device: 'mobile'
-                    });
-                  }}
+                  onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 >
                   <span>Contact</span>
                   {contactMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -468,15 +344,7 @@ const Header = () => {
                     <a 
                       href="mailto:andras@matyasi.me" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={(e) => {
-                        handleMobileLinkClick(e);
-                        ActivityService.logClick('mobile-email-link', 'link', {
-                          section: 'header-mobile',
-                          value: 'Email',
-                          device: 'mobile',
-                          destination: 'mailto:andras@matyasi.me'
-                        });
-                      }}
+                      onClick={handleMobileLinkClick}
                     >
                       <Mail className="h-4 w-4 mr-2" />
                       Email
@@ -486,15 +354,7 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={(e) => {
-                        handleMobileLinkClick(e);
-                        ActivityService.logClick('mobile-linkedin-link', 'link', {
-                          section: 'header-mobile',
-                          value: 'LinkedIn',
-                          device: 'mobile',
-                          destination: 'https://www.linkedin.com/in/amatyasi/'
-                        });
-                      }}
+                      onClick={handleMobileLinkClick}
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
                       LinkedIn
@@ -504,15 +364,7 @@ const Header = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block py-2 text-white hover:text-primary transition-colors flex items-center"
-                      onClick={(e) => {
-                        handleMobileLinkClick(e);
-                        ActivityService.logClick('mobile-calendly-link', 'link', {
-                          section: 'header-mobile',
-                          value: 'Book a meeting',
-                          device: 'mobile',
-                          destination: 'https://calendly.com/andras-matyasi/30min'
-                        });
-                      }}
+                      onClick={handleMobileLinkClick}
                     >
                       <Calendar className="h-4 w-4 mr-2" />
                       Book a meeting

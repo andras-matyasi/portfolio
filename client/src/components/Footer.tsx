@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Linkedin, Mail, Calendar } from "lucide-react";
-import ActivityService from "@/lib/activity";
+import Analytics from "@/lib/analytics";
 
 const Footer = () => {
   return (
@@ -22,10 +22,15 @@ const Footer = () => {
               className="text-white hover:text-primary transition-colors"
               aria-label="Email"
               onClick={() => {
-                ActivityService.logClick('email-link', 'contact', {
-                  section: 'footer',
-                  value: 'andras@matyasi.me'
-                });
+                try {
+                  Analytics.trackEvent('Contact Click', {
+                    method: 'email',
+                    section: 'footer',
+                    value: 'andras@matyasi.me'
+                  });
+                } catch (err) {
+                  console.error('Failed to track email click:', err);
+                }
               }}
             >
               <Mail className="h-5 w-5" />
@@ -37,10 +42,15 @@ const Footer = () => {
               className="text-white hover:text-primary transition-colors"
               aria-label="LinkedIn"
               onClick={() => {
-                ActivityService.logClick('linkedin-link', 'contact', {
-                  section: 'footer',
-                  value: 'amatyasi'
-                });
+                try {
+                  Analytics.trackEvent('Contact Click', {
+                    method: 'linkedin',
+                    section: 'footer',
+                    value: 'amatyasi'
+                  });
+                } catch (err) {
+                  console.error('Failed to track LinkedIn click:', err);
+                }
               }}
             >
               <Linkedin className="h-5 w-5" />
@@ -52,10 +62,15 @@ const Footer = () => {
               className="text-white hover:text-primary transition-colors"
               aria-label="Book a Meeting"
               onClick={() => {
-                ActivityService.logClick('calendly-link', 'contact', {
-                  section: 'footer',
-                  value: 'Book a meeting'
-                });
+                try {
+                  Analytics.trackEvent('Contact Click', {
+                    method: 'calendly',
+                    section: 'footer',
+                    value: 'Book a meeting'
+                  });
+                } catch (err) {
+                  console.error('Failed to track Calendly click:', err);
+                }
               }}
             >
               <Calendar className="h-5 w-5" />
