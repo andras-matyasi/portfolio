@@ -68,8 +68,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         properties.distinct_id = data.session_id;
       }
       
-      // Track the activity using Mixpanel
-      await trackActivity(action, properties, req.ip);
+      // Get the real IP address, considering forwarded headers for proper geolocation
+      const clientIp = req.headers['x-forwarded-for'] || 
+                      req.headers['x-real-ip'] || 
+                      req.connection.remoteAddress || 
+                      req.ip || 
+                      '127.0.0.1';
+                      
+      // Track the activity using Mixpanel with the client's real IP
+      const ipAddress = Array.isArray(clientIp) ? clientIp[0] : String(clientIp);
+      
+      // Log the IP being used (only in debug mode)
+      if (process.env.DEBUG_TRACKING === 'true') {
+        console.log(`[Activity Debug] Using IP for geolocation: ${ipAddress}`);
+      }
+      
+      await trackActivity(action, properties, ipAddress);
       
       // Return success to the client
       return res.status(200).send(JSON.stringify({ success: true }));
@@ -117,8 +131,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // Log the event
         console.log(`[Analytics Legacy] Tracking: ${event}`);
         
-        // Forward to our new tracking system
-        await trackActivity(event, properties, req.ip);
+        // Get the real IP address (same as main endpoint)
+        const clientIp = req.headers['x-forwarded-for'] || 
+                        req.headers['x-real-ip'] || 
+                        req.connection.remoteAddress || 
+                        req.ip || 
+                        '127.0.0.1';
+        
+        const ipAddress = Array.isArray(clientIp) ? clientIp[0] : String(clientIp);
+        
+        // Forward to our new tracking system with proper IP
+        await trackActivity(event, properties, ipAddress);
       }
       
       return res.status(200).send(JSON.stringify({ success: true }));

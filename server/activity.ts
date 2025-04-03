@@ -37,14 +37,14 @@ export async function trackActivity(
     // Mixpanel expects "time" property as a unix timestamp in seconds
     properties.time = Math.floor(Date.now() / 1000);
     
-    // Anonymize IP if provided and use it for geolocation
+    // Pass the IP to Mixpanel for geolocation
     if (ip) {
-      // Only keep first 2 parts of IP for privacy (e.g., 192.168.x.x)
-      const anonymizedIp = ip.split('.').slice(0, 2).join('.') + '.0.0';
-      
-      // Use Mixpanel's standard IP property which will be automatically used for geolocation
+      // Use Mixpanel's standard IP property which will be used for geolocation
       // Mixpanel will automatically detect city, region, and country from this
-      properties.$ip = anonymizedIp;
+      properties.$ip = ip;
+      
+      // Note: Mixpanel will anonymize IPs on their end after geolocation by default
+      // This is the recommended approach for accurate geolocation while respecting privacy
     }
     
     // Let Mixpanel determine geolocation from IP instead of providing hardcoded values
