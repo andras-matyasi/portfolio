@@ -54,8 +54,8 @@ const Home = () => {
       <Header />
       <main className="flex flex-col">
         <Hero />
-        <AboutSection />
         <ProjectsSection />
+        <AboutSection />
         <ReferencesSection />
         <ContactSection />
       </main>

@@ -144,18 +144,18 @@ const Header = () => {
             <ul className="flex space-x-6 text-sm">
               <li>
                 <a 
-                  href="#about" 
-                  className="text-white hover:text-primary transition-colors"
-                >
-                  About Me
-                </a>
-              </li>
-              <li>
-                <a 
                   href="#case-studies" 
                   className="text-white hover:text-primary transition-colors"
                 >
                   Case Studies
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#about" 
+                  className="text-white hover:text-primary transition-colors"
+                >
+                  About Me
                 </a>
               </li>
               <li>
@@ -284,18 +284,18 @@ const Header = () => {
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
               <a 
-                href="#about" 
-                className="text-white hover:text-primary transition-colors py-2 text-lg"
-                onClick={handleMobileLinkClick}
-              >
-                About Me
-              </a>
-              <a 
                 href="#case-studies" 
                 className="text-white hover:text-primary transition-colors py-2 text-lg"
                 onClick={handleMobileLinkClick}
               >
                 Case Studies
+              </a>
+              <a 
+                href="#about" 
+                className="text-white hover:text-primary transition-colors py-2 text-lg"
+                onClick={handleMobileLinkClick}
+              >
+                About Me
               </a>
               <a 
                 href="#references" 
