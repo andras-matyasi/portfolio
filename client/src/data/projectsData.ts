@@ -15,9 +15,9 @@ export const projects: Project[] = [
   {
     id: "pricing-kameleo",
     active: true,
-    title: "Switch from seat-based pricing to add-on based pricing",
+    title: "SaaS Pricing Strategy",
     type: "SaaS",
-    shortText: "Enable users to capture more value and increase revenue with pricing change at Kameleo.",
+    shortText: "Switch from seat-based pricing to add-on based pricing. This enabled users to capture more value and increase revenue with pricing change at Kameleo.",
     image: "/images/case-studies/pricing-case-study.png",
     problem: "Seat-based pricing provided bad scaling for teams and heavy API users.",
     solution: "Redesigned packages so team members and API usage became more scalable add-ons.",
@@ -31,7 +31,7 @@ export const projects: Project[] = [
   {
     id: "csat-kameleo",
     active: true,
-    title: "Core feature redesign to increase activation",
+    title: "SaaS Activation Boost",
     type: "SaaS",
     shortText: "Shorter time to AHA moment to increase activation and satisfaction.",
     image: "/images/case-studies/activation-case-study.png",
@@ -39,16 +39,16 @@ export const projects: Project[] = [
     solution: "Prototypes were created and user tested to find a better performing flow. Change was implemented to the frontend and API.",
     success: "Activation increased by 7% and CSAT for new customers increased by 15%.",
     keyLearnings: [
-      "Simple interfaces work better. ",
-      "Don't expose complex filtering logic on the UI, just to stay congruent with the API."
+      "Simple interfaces work better.",
+      "Avoid complex and proprietary filtering logic on the UI."
     ]
   },
   {
     id: "retention-kameleo",
     active: true,
-    title: "Improve retention for prosumer SaaS",
+    title: "SaaS Retention Improvement",
     type: "SaaS",
-    shortText: "Focusing on the main USP instead of non-core features",
+    shortText: "Focused on improving the core value prop with a technical project, which led to better user retention.",
     image: "/images/case-studies/retention-case-study.png",
     problem: "Declining retention curve",
     solution: "Improved Kameleo's browsers to offer better fingerprinting protection.",
@@ -61,7 +61,7 @@ export const projects: Project[] = [
   {
     id: "continuous-user-research",
     active: true,
-    title: "Continuous user research framework",
+    title: "Continuous User Research Framework",
     type: "SaaS",
     shortText: "How to continuously source candidates as a single product manager at a bootstrapped company",
     image: "/images/case-studies/user-research-case-study.png",
@@ -95,24 +95,24 @@ export const projects: Project[] = [
   {
     id: "profession-onboarding",
     active: true,
-    title: "Onboarding flow for passive job search",
+    title: "Onboarding Flow for Passive Job Search",
     type: "Job board",
     shortText: "Increase high quality jobseekers by 25% on the platform",
-    image: "/images/case-studies/onboardin-case-study.png",
+    image: "/images/case-studies/onboarding-case-study.png",
     problem: "Job applicants churned when they were asked to create a data-rich profile to be discovered in Hungary's leading job platform.",
-    solution: "Created a progressive onboarding flow and asked for bite-sized data after each job application. After 5 applications, the profile was data-rich.",
+    solution: "Created a progressive onboarding flow and asked for bite-sized data after each job application. After 5 applications, the profile was data-rich. ",
     success: "Increased data rich profiles to half a million from 400k in 2 months.",
     keyLearnings: [
       "Introduce the right (low) amount of friction to get more data-rich profiles.",
-      "One applicant will likely to apply 7 times on the platform. That's plenty of occasion to ask for bite-sized information about their profile."
+      "One applicant will likely apply 7 times on the platform. That's plenty of occasion to ask for bite-sized information about their profile."
     ]
   },
   {
     id: "profession-reviews",
     active: true,
-    title: "Company reviews on a job board",
+    title: "Company Reviews for profession.hu (job board)",
     type: "Job board",
-    shortText: "The story of turning a struggling product to striving feature.",
+    shortText: "The story of turning a struggling product to a striving feature.",
     image: "/images/case-studies/reviews-case-study.png",
     problem: "Company reviews was a secondary product (to the job board) with low brand awareness. Paid was the only channel for acquisition, the product has low engagement and resource intensive to keep alive. However, user feedback was very positive, as it was a rare thing to find reviews about companies at the time (in the local market in Hungary).",
     solution: "Sunset the individual product. Launched a company reviews as a new feature for the job board, with access to the customer base. Provided a native interface to review companies 1 click away from you online CV, and created a simple email automation flow.",
