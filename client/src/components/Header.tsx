@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Calendar, Utensils, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { colors } from "@/lib/colors";
 
 const Header = () => {
   const isMobile = useIsMobile();
@@ -118,11 +117,9 @@ const Header = () => {
 
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b transition-colors duration-300"
-      style={{
-        backgroundColor: isScrolled ? `${colors.darkBlue}e6` : 'transparent', // e6 is ~90% opacity in hex
-        borderColor: isScrolled ? `${colors.darkBlueDark}` : 'transparent',
-      }}
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b transition-colors duration-300 ${
+        isScrolled ? "bg-dark/90 border-dark-secondary" : "bg-transparent border-transparent"
+      }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -137,19 +134,7 @@ const Header = () => {
       }}
     >
       <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-        <a 
-          href="#top" 
-          className="text-xl font-semibold tracking-tight bg-clip-text text-transparent transition-all duration-300"
-          style={{ 
-            backgroundImage: `linear-gradient(to right, ${colors.orange}, ${colors.teal})`,
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.backgroundImage = `linear-gradient(to right, ${colors.orangeDark}, ${colors.tealDark})`;
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.backgroundImage = `linear-gradient(to right, ${colors.orange}, ${colors.teal})`;
-          }}
-        >
+        <a href="#top" className="text-xl font-semibold tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-all duration-300">
           Andras Matyasi
         </a>
 
@@ -160,16 +145,7 @@ const Header = () => {
               <li>
                 <a 
                   href="#case-studies" 
-                  className="text-white transition-colors"
-                  style={{ 
-                    transition: 'color 0.3s ease' 
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.color = colors.orange;
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.color = 'white';
-                  }}
+                  className="text-white hover:text-primary transition-colors"
                 >
                   Case Studies
                 </a>
@@ -177,16 +153,7 @@ const Header = () => {
               <li>
                 <a 
                   href="#about" 
-                  className="text-white transition-colors"
-                  style={{ 
-                    transition: 'color 0.3s ease' 
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.color = colors.orange;
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.color = 'white';
-                  }}
+                  className="text-white hover:text-primary transition-colors"
                 >
                   About Me
                 </a>
@@ -194,16 +161,7 @@ const Header = () => {
               <li>
                 <a 
                   href="#references" 
-                  className="text-white transition-colors"
-                  style={{ 
-                    transition: 'color 0.3s ease' 
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.color = colors.orange;
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.color = 'white';
-                  }}
+                  className="text-white hover:text-primary transition-colors"
                 >
                   References
                 </a>
@@ -214,16 +172,7 @@ const Header = () => {
                 onMouseEnter={handlePetProjectsMouseEnter}
               >
                 <button 
-                  className="text-white transition-colors flex items-center"
-                  style={{ 
-                    transition: 'color 0.3s ease' 
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.color = colors.orange;
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.color = 'white';
-                  }}
+                  className="text-white hover:text-primary transition-colors flex items-center"
                   onClick={() => setPetProjectsMenuOpen(!petProjectsMenuOpen)}
                 >
                   Pet projects
@@ -234,28 +183,14 @@ const Header = () => {
                 {petProjectsMenuOpen && (
                   <div 
                     ref={petProjectsDropdownRef}
-                    className="absolute right-0 mt-2 py-2 w-48 rounded-md shadow-lg z-50"
-                    style={{
-                      backgroundColor: `${colors.darkBlue}f5`,
-                      borderColor: colors.darkBlueDark,
-                      border: `1px solid ${colors.darkBlueDark}`
-                    }}
+                    className="absolute right-0 mt-2 py-2 w-48 bg-dark-secondary border border-dark rounded-md shadow-lg z-50"
                     onMouseEnter={handlePetProjectsMouseEnter}
                   >
                     <a 
                       href="https://lunchvote.matyasi.me" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block px-4 py-2 text-sm text-white flex items-center"
-                      style={{ transition: 'background-color 0.2s ease, color 0.2s ease' }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.backgroundColor = `${colors.darkBlueDark}`;
-                        e.currentTarget.style.color = colors.orange;
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'white';
-                      }}
+                      className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
                     >
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
@@ -269,16 +204,7 @@ const Header = () => {
                 onMouseEnter={handleContactMouseEnter}
               >
                 <button 
-                  className="text-white transition-colors flex items-center"
-                  style={{ 
-                    transition: 'color 0.3s ease' 
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.color = colors.orange;
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.color = 'white';
-                  }}
+                  className="text-white hover:text-primary transition-colors flex items-center"
                   onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 >
                   Contact
@@ -289,26 +215,12 @@ const Header = () => {
                 {contactMenuOpen && (
                   <div 
                     ref={contactDropdownRef}
-                    className="absolute right-0 mt-2 py-2 w-48 rounded-md shadow-lg z-50"
-                    style={{
-                      backgroundColor: `${colors.darkBlue}f5`,
-                      borderColor: colors.darkBlueDark,
-                      border: `1px solid ${colors.darkBlueDark}`
-                    }}
+                    className="absolute right-0 mt-2 py-2 w-48 bg-dark-secondary border border-dark rounded-md shadow-lg z-50"
                     onMouseEnter={handleContactMouseEnter}
                   >
                     <a 
                       href="mailto:andras@matyasi.me" 
-                      className="block px-4 py-2 text-sm text-white flex items-center"
-                      style={{ transition: 'background-color 0.2s ease, color 0.2s ease' }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.backgroundColor = `${colors.darkBlueDark}`;
-                        e.currentTarget.style.color = colors.orange;
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'white';
-                      }}
+                      className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
                     >
                       <Mail className="h-4 w-4 mr-2" />
                       Email
@@ -317,16 +229,7 @@ const Header = () => {
                       href="https://www.linkedin.com/in/amatyasi/" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block px-4 py-2 text-sm text-white flex items-center"
-                      style={{ transition: 'background-color 0.2s ease, color 0.2s ease' }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.backgroundColor = `${colors.darkBlueDark}`;
-                        e.currentTarget.style.color = colors.orange;
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'white';
-                      }}
+                      className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
                       LinkedIn
@@ -335,16 +238,7 @@ const Header = () => {
                       href="https://calendly.com/andras-matyasi/30min" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block px-4 py-2 text-sm text-white flex items-center"
-                      style={{ transition: 'background-color 0.2s ease, color 0.2s ease' }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.backgroundColor = `${colors.darkBlueDark}`;
-                        e.currentTarget.style.color = colors.orange;
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'white';
-                      }}
+                      className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
                     >
                       <Calendar className="h-4 w-4 mr-2" />
                       Book a meeting
@@ -359,16 +253,7 @@ const Header = () => {
         {/* Mobile Hamburger Menu Button */}
         {isMobile && (
           <button 
-            className="text-white transition-colors p-1"
-            style={{ 
-              transition: 'color 0.3s ease' 
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = colors.orange;
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = 'white';
-            }}
+            className="text-white hover:text-primary transition-colors p-1"
             onClick={toggleMobileMenu}
             aria-label="Toggle menu"
           >
@@ -385,11 +270,7 @@ const Header = () => {
       {isMobile && (
         <motion.div
           ref={mobileMenuRef}
-          className="border-t overflow-hidden"
-          style={{
-            backgroundColor: `${colors.darkBlue}f2`, // f2 is ~95% opacity in hex
-            borderColor: colors.darkBlueDark,
-          }}
+          className="bg-dark/95 border-t border-dark-secondary overflow-hidden"
           initial={{ opacity: 0, height: 0 }}
           animate={{ 
             opacity: mobileMenuOpen ? 1 : 0,
@@ -404,48 +285,21 @@ const Header = () => {
             <nav className="flex flex-col space-y-4">
               <a 
                 href="#case-studies" 
-                className="text-white transition-colors py-2 text-lg"
-                style={{ 
-                  transition: 'color 0.3s ease' 
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.color = colors.orange;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.color = 'white';
-                }}
+                className="text-white hover:text-primary transition-colors py-2 text-lg"
                 onClick={handleMobileLinkClick}
               >
                 Case Studies
               </a>
               <a 
                 href="#about" 
-                className="text-white transition-colors py-2 text-lg"
-                style={{ 
-                  transition: 'color 0.3s ease' 
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.color = colors.orange;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.color = 'white';
-                }}
+                className="text-white hover:text-primary transition-colors py-2 text-lg"
                 onClick={handleMobileLinkClick}
               >
                 About Me
               </a>
               <a 
                 href="#references" 
-                className="text-white transition-colors py-2 text-lg"
-                style={{ 
-                  transition: 'color 0.3s ease' 
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.color = colors.orange;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.color = 'white';
-                }}
+                className="text-white hover:text-primary transition-colors py-2 text-lg"
                 onClick={handleMobileLinkClick}
               >
                 References
@@ -454,16 +308,7 @@ const Header = () => {
               {/* Pet Projects Accordion */}
               <div className="py-2">
                 <button 
-                  className="text-white transition-colors flex items-center justify-between w-full text-lg"
-                  style={{ 
-                    transition: 'color 0.3s ease' 
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.color = colors.orange;
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.color = 'white';
-                  }}
+                  className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
                   onClick={() => setPetProjectsMenuOpen(!petProjectsMenuOpen)}
                 >
                   <span>Pet projects</span>
@@ -475,17 +320,7 @@ const Header = () => {
                       href="https://lunchvote.matyasi.me" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block py-2 text-white flex items-center"
-                      style={{ 
-                        transition: 'color 0.3s ease',
-                        marginLeft: '1px' 
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.color = colors.orange;
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.color = 'white';
-                      }}
+                      className="block py-2 text-white hover:text-primary transition-colors flex items-center"
                       onClick={handleMobileLinkClick}
                     >
                       <Utensils className="h-4 w-4 mr-2" />
@@ -498,16 +333,7 @@ const Header = () => {
               {/* Contact Accordion */}
               <div className="py-2">
                 <button 
-                  className="text-white transition-colors flex items-center justify-between w-full text-lg"
-                  style={{ 
-                    transition: 'color 0.3s ease' 
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.color = colors.orange;
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.color = 'white';
-                  }}
+                  className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
                   onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 >
                   <span>Contact</span>
@@ -517,17 +343,7 @@ const Header = () => {
                   <div className="mt-2 pl-4 border-l border-dark-secondary">
                     <a 
                       href="mailto:andras@matyasi.me" 
-                      className="block py-2 text-white flex items-center"
-                      style={{ 
-                        transition: 'color 0.3s ease',
-                        marginLeft: '1px' 
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.color = colors.orange;
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.color = 'white';
-                      }}
+                      className="block py-2 text-white hover:text-primary transition-colors flex items-center"
                       onClick={handleMobileLinkClick}
                     >
                       <Mail className="h-4 w-4 mr-2" />
@@ -537,17 +353,7 @@ const Header = () => {
                       href="https://www.linkedin.com/in/amatyasi/" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block py-2 text-white flex items-center"
-                      style={{ 
-                        transition: 'color 0.3s ease',
-                        marginLeft: '1px' 
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.color = colors.orange;
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.color = 'white';
-                      }}
+                      className="block py-2 text-white hover:text-primary transition-colors flex items-center"
                       onClick={handleMobileLinkClick}
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
@@ -557,17 +363,7 @@ const Header = () => {
                       href="https://calendly.com/andras-matyasi/30min" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block py-2 text-white flex items-center"
-                      style={{ 
-                        transition: 'color 0.3s ease',
-                        marginLeft: '1px' 
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.color = colors.orange;
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.color = 'white';
-                      }}
+                      className="block py-2 text-white hover:text-primary transition-colors flex items-center"
                       onClick={handleMobileLinkClick}
                     >
                       <Calendar className="h-4 w-4 mr-2" />

@@ -88,7 +88,7 @@
     width: 40px;
     cursor: pointer;
     background: transparent;
-    color: rgba(248, 157, 89, 0.7); /* Orange from our color palette */
+    color: rgba(118, 74, 188, 0.6); /* Purple tint, same as font */
     border: none;
     transition: all 0.3s ease;
     padding: 0;
@@ -108,7 +108,7 @@
   }
   
   .embla__button:hover {
-    color: rgba(248, 157, 89, 1); /* Brighter orange on hover */
+    color: rgba(118, 74, 188, 0.9); /* Brighter on hover */
   }
   
   .embla__button:hover::before {
@@ -182,14 +182,14 @@
   }
   
   .embla__dot--selected {
-    background-color: #f89d59; /* Orange from our color palette */
+    background-color: #764abc; /* Purple from the gradient text */
     opacity: 1;
     transform: scale(1.3);
-    box-shadow: 0 0 6px rgba(248, 157, 89, 0.4);
+    box-shadow: 0 0 6px rgba(118, 74, 188, 0.4);
   }
   
   .embla__dot--selected:hover {
-    background-color: #f89d59;
+    background-color: #764abc;
   }
   
   /* Reference cards specific styling */

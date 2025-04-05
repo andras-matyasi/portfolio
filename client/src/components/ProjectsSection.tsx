@@ -6,7 +6,6 @@ import ProjectModal from "./ProjectModal";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Analytics from "@/lib/analytics";
-import { colors } from "@/lib/colors"; // Import colors
 // Import Embla Carousel
 import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaCarouselType, EmblaEventType } from 'embla-carousel';
@@ -141,7 +140,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="case-studies" className="pt-12 pb-0 md:pt-16 md:pb-0 overflow-hidden" style={{ backgroundColor: colors.lightBg }}>
+    <section id="case-studies" className="pt-12 pb-0 md:pt-16 md:pb-0 bg-dark overflow-hidden">
       <div className={`${isMobile ? 'px-0' : 'container mx-auto px-4 md:px-6'}`}>
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-10 px-4"
@@ -150,7 +149,7 @@ const ProjectsSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: colors.darkBlue }}>Case Studies</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Case Studies</h2>
         </motion.div>
 
         <motion.div
@@ -208,31 +207,10 @@ const ProjectsSection = () => {
         <div className="text-center my-10">
           <a
             href="#contact"
-            className="inline-flex items-center"
-            style={{
-              background: `linear-gradient(to right, ${colors.orange}, ${colors.teal})`,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              color: 'transparent',
-              fontWeight: 500,
-              transition: 'all 0.3s ease'
-            } as any}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = `linear-gradient(to right, ${colors.orangeDark}, ${colors.tealDark})`;
-              (e.currentTarget.style as any).webkitBackgroundClip = 'text';
-              (e.currentTarget.style as any).webkitTextFillColor = 'transparent';
-              e.currentTarget.style.backgroundClip = 'text';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = `linear-gradient(to right, ${colors.orange}, ${colors.teal})`;
-              (e.currentTarget.style as any).webkitBackgroundClip = 'text';
-              (e.currentTarget.style as any).webkitTextFillColor = 'transparent';
-              e.currentTarget.style.backgroundClip = 'text';
-            }}
+            className="inline-flex items-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:from-blue-500 hover:to-purple-600 transition-colors font-medium"
           >
             Interested in working together?
-            <ArrowRight className="h-4 w-4 ml-2" style={{ color: colors.teal }} />
+            <ArrowRight className="h-4 w-4 ml-2" />
           </a>
         </div>
       </div>
