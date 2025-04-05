@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Analytics from "@/lib/analytics";
+import { colors } from "@/lib/colors";
 
 const Hero = () => {
   return (
@@ -16,10 +17,13 @@ const Hero = () => {
             I translate user pain into business gain
           </motion.h1>
           <motion.p 
-            className="text-lg md:text-xl leading-relaxed mb-8 text-balance bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent font-medium"
+            className="text-lg md:text-xl leading-relaxed mb-8 text-balance bg-gradient-to-r from-teal-400 via-orange-500 to-teal-600 bg-clip-text text-transparent font-medium"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            style={{ 
+              backgroundImage: `linear-gradient(to right, ${colors.teal}, ${colors.orange}, ${colors.teal})` 
+            }}
           >
             Your Product guy, turning 'we should build this' into 'our users love this.'
           </motion.p>
@@ -30,7 +34,17 @@ const Hero = () => {
           >
             <a 
               href="#case-studies" 
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 hover:from-blue-600 hover:via-indigo-700 hover:to-purple-800 text-white rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-6 py-3 text-white rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
+              style={{ 
+                background: `linear-gradient(to right, ${colors.darkBlue}, ${colors.teal})`,
+                transition: 'all 0.3s ease',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.background = `linear-gradient(to right, ${colors.darkBlueDark}, ${colors.tealDark})`;
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.background = `linear-gradient(to right, ${colors.darkBlue}, ${colors.teal})`;
+              }}
               onClick={() => {
                 try {
                   Analytics.trackEvent('CTA Click', {
@@ -49,8 +63,18 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
-      <div className="absolute -bottom-48 -right-48 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute top-24 -left-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+      <div 
+        className="absolute -bottom-48 -right-48 w-96 h-96 rounded-full blur-3xl"
+        style={{ background: `${colors.orange}20` }} // 20 adds opacity (~12%)
+      ></div>
+      <div 
+        className="absolute top-24 -left-24 w-64 h-64 rounded-full blur-3xl"
+        style={{ background: `${colors.teal}15` }} // 15 adds opacity (~8%)
+      ></div>
+      <div 
+        className="absolute top-64 right-24 w-48 h-48 rounded-full blur-3xl"
+        style={{ background: `${colors.darkBlue}10` }} // 10 adds opacity (~6%)
+      ></div>
     </section>
   );
 };
