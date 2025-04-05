@@ -246,7 +246,16 @@ const Header = () => {
                       href="https://lunchvote.matyasi.me" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                      className="block px-4 py-2 text-sm text-white flex items-center"
+                      style={{ transition: 'background-color 0.2s ease, color 0.2s ease' }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.backgroundColor = `${colors.darkBlueDark}`;
+                        e.currentTarget.style.color = colors.orange;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'white';
+                      }}
                     >
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
@@ -290,7 +299,16 @@ const Header = () => {
                   >
                     <a 
                       href="mailto:andras@matyasi.me" 
-                      className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                      className="block px-4 py-2 text-sm text-white flex items-center"
+                      style={{ transition: 'background-color 0.2s ease, color 0.2s ease' }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.backgroundColor = `${colors.darkBlueDark}`;
+                        e.currentTarget.style.color = colors.orange;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'white';
+                      }}
                     >
                       <Mail className="h-4 w-4 mr-2" />
                       Email
@@ -299,7 +317,16 @@ const Header = () => {
                       href="https://www.linkedin.com/in/amatyasi/" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                      className="block px-4 py-2 text-sm text-white flex items-center"
+                      style={{ transition: 'background-color 0.2s ease, color 0.2s ease' }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.backgroundColor = `${colors.darkBlueDark}`;
+                        e.currentTarget.style.color = colors.orange;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'white';
+                      }}
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
                       LinkedIn
@@ -308,7 +335,16 @@ const Header = () => {
                       href="https://calendly.com/andras-matyasi/30min" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                      className="block px-4 py-2 text-sm text-white flex items-center"
+                      style={{ transition: 'background-color 0.2s ease, color 0.2s ease' }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.backgroundColor = `${colors.darkBlueDark}`;
+                        e.currentTarget.style.color = colors.orange;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'white';
+                      }}
                     >
                       <Calendar className="h-4 w-4 mr-2" />
                       Book a meeting
@@ -439,7 +475,17 @@ const Header = () => {
                       href="https://lunchvote.matyasi.me" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block py-2 text-white hover:text-primary transition-colors flex items-center"
+                      className="block py-2 text-white flex items-center"
+                      style={{ 
+                        transition: 'color 0.3s ease',
+                        marginLeft: '1px' 
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.color = colors.orange;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.color = 'white';
+                      }}
                       onClick={handleMobileLinkClick}
                     >
                       <Utensils className="h-4 w-4 mr-2" />
@@ -471,7 +517,17 @@ const Header = () => {
                   <div className="mt-2 pl-4 border-l border-dark-secondary">
                     <a 
                       href="mailto:andras@matyasi.me" 
-                      className="block py-2 text-white hover:text-primary transition-colors flex items-center"
+                      className="block py-2 text-white flex items-center"
+                      style={{ 
+                        transition: 'color 0.3s ease',
+                        marginLeft: '1px' 
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.color = colors.orange;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.color = 'white';
+                      }}
                       onClick={handleMobileLinkClick}
                     >
                       <Mail className="h-4 w-4 mr-2" />
@@ -481,7 +537,17 @@ const Header = () => {
                       href="https://www.linkedin.com/in/amatyasi/" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block py-2 text-white hover:text-primary transition-colors flex items-center"
+                      className="block py-2 text-white flex items-center"
+                      style={{ 
+                        transition: 'color 0.3s ease',
+                        marginLeft: '1px' 
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.color = colors.orange;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.color = 'white';
+                      }}
                       onClick={handleMobileLinkClick}
                     >
                       <Linkedin className="h-4 w-4 mr-2" />
@@ -491,7 +557,17 @@ const Header = () => {
                       href="https://calendly.com/andras-matyasi/30min" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="block py-2 text-white hover:text-primary transition-colors flex items-center"
+                      className="block py-2 text-white flex items-center"
+                      style={{ 
+                        transition: 'color 0.3s ease',
+                        marginLeft: '1px' 
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.color = colors.orange;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.color = 'white';
+                      }}
                       onClick={handleMobileLinkClick}
                     >
                       <Calendar className="h-4 w-4 mr-2" />
