@@ -200,12 +200,10 @@
     justify-content: space-between;
   }
   
+  /* Showing full reference text on all devices */
   .reference-quote {
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: block;
+    overflow: visible;
   }
   
   .reference-info {
@@ -242,10 +240,6 @@
     /* Reference cards style for mobile */
     .embla__slide {
       height: auto;
-    }
-    
-    .reference-quote {
-      -webkit-line-clamp: 4; /* Shorter on mobile */
     }
     
     /* Adjust arrow positions and size on mobile */
