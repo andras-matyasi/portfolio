@@ -98,7 +98,7 @@ export const projects: Project[] = [
     title: "Onboarding Flow for Passive Job Search",
     type: "Job board",
     shortText: "Increase high quality jobseekers by 25% on the platform",
-    image: "/images/case-studies/onboarding-case-study.png",
+    image: "/images/case-studies/onboardin-case-study.png",
     problem: "Job applicants churned when they were asked to create a data-rich profile to be discovered in Hungary's leading job platform.",
     solution: "Created a progressive onboarding flow and asked for bite-sized data after each job application. After 5 applications, the profile was data-rich. ",
     success: "Increased data rich profiles to half a million from 400k in 2 months.",
