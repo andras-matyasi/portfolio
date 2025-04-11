@@ -81,6 +81,13 @@ const referencesData = [
     position: "Chief Data Officer, Trendency",
     quote: "Andris is the kind of person who, if dropped into the jungle with a few tools, would not only find his way back but might also return with a new idea or concept. Working with him is a great advantage because he doesn't just want to get things done - he wants to do them well. He's a consultant-minded colleague who actively seeks to understand the underlying problems behind each task and offers solutions to address them.",
     imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQGokA7aY9zomg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1621232009879?e=1748476800&v=beta&t=3g-rDHofbOAZm3JdJbdf5Eas6S6N50I8Ro_NXWItTts"
+  },
+  {
+    id: 10,
+    name: "András Barasits",
+    position: "UX Designer, Freelance (Kameleo)",
+    quote: "As a UX designer, it was a pleasure working with András on a complex development project. As a Senior Product Manager, he always communicated clearly and effectively, supported the team in a helpful way, and consistently represented the product perspective with confidence. His forward-thinking and constructive attitude greatly contributed to successfully solving any challenges that came up.",
+    imageUrl: "https://media.licdn.com/dms/image/v2/C4D03AQEaikNbU7s89Q/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1517629352683?e=1749686400&v=beta&t=q-6VPUTRq15YB5vlyKlwtS5kJLAXRbKdiGHJAiGZyAI"
   }
 ];
 
