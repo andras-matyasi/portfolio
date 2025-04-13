@@ -88,6 +88,13 @@ const referencesData = [
     position: "UX Designer, Freelance (Kameleo)",
     quote: "As a UX designer, it was a pleasure working with András on a complex development project. As a Senior Product Manager, he always communicated clearly and effectively, supported the team in a helpful way, and consistently represented the product perspective with confidence. His forward-thinking and constructive attitude greatly contributed to successfully solving any challenges that came up.",
     imageUrl: "https://media.licdn.com/dms/image/v2/C4D03AQEaikNbU7s89Q/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1517629352683?e=1749686400&v=beta&t=q-6VPUTRq15YB5vlyKlwtS5kJLAXRbKdiGHJAiGZyAI"
+  },
+  {
+    id: 11,
+    name: "Donát Bali Papp",
+    position: "Lead Product Designer, Interactive Brokers",
+    quote: "We worked closely with András at Swapp. He had an exceptional ability to take a step back and make clear, calm decisions that benefited the product — even in the most intense times. His diligence, kindness, and trustworthy product leadership would be a great asset to any business. An extremely competent PM and an all-around great guy. Can't recommend him highly enough!",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4D03AQHF_wShLK5Dpg/profile-displayphoto-shrink_400_400/B4DZXPwmGJHAAg-/0/1742947379064?e=1750291200&v=beta&t=AQWMwZW8yk7eViTtwu8_e-rv4B6z2OuWawpke1OnNzs"
   }
 ];
 
