@@ -1,6 +1,9 @@
 // Google Analytics implementation
 // This file provides functions for Google Analytics integration
 
+// Google Analytics Measurement ID
+const GA_MEASUREMENT_ID = 'G-KCL2J8WB7Y';
+
 // Type declaration for gtag
 declare global {
   interface Window {
@@ -9,51 +12,96 @@ declare global {
   }
 }
 
+// Check if GA is loaded and available
+const isGAAvailable = (): boolean => {
+  return typeof window !== 'undefined' && !!window.gtag;
+};
+
 // Track an event
 export const trackEvent = (eventName: string, eventParams: Record<string, any> = {}) => {
   try {
-    if (window.gtag) {
+    if (isGAAvailable()) {
+      console.log('Tracking event:', eventName, eventParams);
       window.gtag('event', eventName, eventParams);
+      return true;
+    } else {
+      console.warn('Google Analytics not available for event:', eventName);
+      return false;
     }
   } catch (error) {
-    console.error('Analytics error:', error);
+    console.error('Analytics error when tracking event:', error);
+    return false;
   }
 };
 
 // Track a page view
 export const trackPageView = (path: string) => {
   try {
-    if (window.gtag) {
-      window.gtag('config', 'G-KCL2J8WB7Y', {
+    if (isGAAvailable()) {
+      console.log('Tracking page view:', path);
+      window.gtag('event', 'page_view', {
+        page_path: path,
+        page_location: window.location.href,
+        page_title: document.title
+      });
+      
+      // Also set the config for this pageview
+      window.gtag('config', GA_MEASUREMENT_ID, {
         page_path: path
       });
+      return true;
+    } else {
+      console.warn('Google Analytics not available for page view:', path);
+      return false;
     }
   } catch (error) {
-    console.error('Analytics error:', error);
+    console.error('Analytics error when tracking page view:', error);
+    return false;
   }
 };
 
 // Identify a user
 export const identifyUser = (userId: string, userProperties: Record<string, any> = {}) => {
   try {
-    if (window.gtag) {
+    if (isGAAvailable()) {
+      console.log('Setting user ID:', userId);
+      // Set user ID for the current session
+      window.gtag('set', {
+        'user_id': userId
+      });
+      
+      // Set additional user properties
       window.gtag('set', 'user_properties', {
-        user_id: userId,
         ...userProperties
       });
+      return true;
+    } else {
+      console.warn('Google Analytics not available for user identification');
+      return false;
     }
   } catch (error) {
-    console.error('Analytics error:', error);
+    console.error('Analytics error when identifying user:', error);
+    return false;
   }
 };
 
 // Reset tracking
 export const resetTracking = () => {
   try {
-    // GA4 doesn't have a direct method to reset user identification
-    // This is a placeholder for compatibility
+    if (isGAAvailable()) {
+      console.log('Resetting tracking data');
+      // Since GA4 doesn't have a direct reset method, we create a new session
+      window.gtag('config', GA_MEASUREMENT_ID, {
+        send_page_view: false
+      });
+      return true;
+    } else {
+      console.warn('Google Analytics not available for reset');
+      return false;
+    }
   } catch (error) {
-    console.error('Analytics error:', error);
+    console.error('Analytics error when resetting:', error);
+    return false;
   }
 };
 

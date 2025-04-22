@@ -54,7 +54,12 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
     
-      gtag('config', 'G-KCL2J8WB7Y');
+      gtag('config', 'G-KCL2J8WB7Y', {
+        send_page_view: false, // Disable automatic page views, we'll handle them manually
+        cookie_domain: 'none', // This helps with cross-domain tracking issues
+        debug_mode: true       // Enable debug mode temporarily to see events in console
+      });
+      console.log('Google Analytics initialized');
     </script>
     
     <!-- JSON-LD Structured Data -->
