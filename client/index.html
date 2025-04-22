@@ -47,19 +47,59 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCL2J8WB7Y"></script>
+    <!-- Google tag (gtag.js) with anti-blocking technique -->
     <script>
+      // Initialize dataLayer
       window.dataLayer = window.dataLayer || [];
+      
+      // Define the gtag function
       function gtag(){dataLayer.push(arguments);}
+      
+      // Set the current timestamp
       gtag('js', new Date());
-    
-      gtag('config', 'G-KCL2J8WB7Y', {
-        send_page_view: false, // Disable automatic page views, we'll handle them manually
-        cookie_domain: 'none', // This helps with cross-domain tracking issues
-        debug_mode: true       // Enable debug mode temporarily to see events in console
-      });
-      console.log('Google Analytics initialized');
+      
+      // Define our GA Measurement ID
+      const GA_MEASUREMENT_ID = 'G-KCL2J8WB7Y';
+      
+      // Create and load the GA script
+      (function loadGAScript() {
+        try {
+          const gaScript = document.createElement('script');
+          gaScript.async = true;
+          gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+          
+          // Add error handling
+          gaScript.onerror = function() {
+            console.warn('Google Analytics script failed to load. This might be due to an ad blocker or network issues.');
+            window.gaLoadError = true;
+          };
+          
+          // Add load confirmation
+          gaScript.onload = function() {
+            console.log('Google Analytics script loaded successfully');
+            gtag('config', GA_MEASUREMENT_ID, {
+              send_page_view: false,  // We'll handle page views manually
+              transport_type: 'beacon', // More reliable for sending final events
+              debug_mode: true        // Enable debug mode for troubleshooting
+            });
+            
+            // Send a test event
+            gtag('event', 'test_event', {
+              'event_category': 'testing',
+              'event_label': 'ga_initialization',
+              'value': 1
+            });
+            
+            window.gaLoaded = true;
+            console.log('Google Analytics initialized with ID:', GA_MEASUREMENT_ID);
+          };
+          
+          // Append the script to the DOM
+          document.head.appendChild(gaScript);
+        } catch(err) {
+          console.error('Error initializing Google Analytics:', err);
+        }
+      })();
     </script>
     
     <!-- JSON-LD Structured Data -->

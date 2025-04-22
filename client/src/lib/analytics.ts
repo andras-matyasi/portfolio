@@ -4,28 +4,155 @@
 // Google Analytics Measurement ID
 const GA_MEASUREMENT_ID = 'G-KCL2J8WB7Y';
 
-// Type declaration for gtag
+// Type declaration for gtag and custom properties
 declare global {
   interface Window {
     dataLayer: any[];
     gtag: (...args: any[]) => void;
+    gaLoaded?: boolean;
+    gaLoadError?: boolean;
   }
 }
 
+// Attempt to ensure Google Analytics is properly initialized
+// This helps recover if there were loading issues
+const ensureGA = (): void => {
+  if (typeof window === 'undefined') return;
+  
+  // If GA script loading failed, we'll try one more time
+  if (window.gaLoadError === true) {
+    console.warn('Attempting to recover Google Analytics initialization...');
+    try {
+      // Check if script is already in the DOM
+      const existingScript = document.querySelector('script[src*="googletagmanager.com/gtag/js"]');
+      if (!existingScript) {
+        console.log('Re-injecting Google Analytics script');
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+        document.head.appendChild(gaScript);
+      }
+    } catch (e) {
+      console.error('Recovery attempt failed:', e);
+    }
+  }
+};
+
+// Wait for GA to be ready with timeout
+const waitForGA = async (timeout = 2000): Promise<boolean> => {
+  if (typeof window === 'undefined') return false;
+  
+  // If GA is already loaded and ready
+  if (window.gaLoaded === true && typeof window.gtag === 'function') {
+    return true;
+  }
+  
+  // If GA failed to load, try recovery
+  if (window.gaLoadError === true) {
+    ensureGA();
+  }
+  
+  return new Promise((resolve) => {
+    let elapsed = 0;
+    const interval = 100;
+    
+    const check = () => {
+      // Check if GA has been loaded after waiting
+      if (window.gaLoaded === true && typeof window.gtag === 'function') {
+        resolve(true);
+        return;
+      }
+      
+      elapsed += interval;
+      if (elapsed >= timeout) {
+        console.warn('Timed out waiting for Google Analytics to load');
+        resolve(false);
+        return;
+      }
+      
+      setTimeout(check, interval);
+    };
+    
+    check();
+  });
+};
+
 // Check if GA is loaded and available
 const isGAAvailable = (): boolean => {
-  return typeof window !== 'undefined' && !!window.gtag;
+  if (typeof window === 'undefined') return false;
+  
+  // Check if explicitly marked as loaded
+  if (window.gaLoaded === true && typeof window.gtag === 'function') {
+    return true;
+  }
+  
+  // Fallback check - if gtag exists and appears to be valid
+  const gtagExists = typeof window.gtag === 'function';
+  const dataLayerExists = Array.isArray(window.dataLayer);
+  
+  if (gtagExists && dataLayerExists) {
+    return true;
+  }
+  
+  // If explicitly marked as errored
+  if (window.gaLoadError === true) {
+    return false;
+  }
+  
+  // Default - missing or undetermined
+  return false;
+};
+
+// Test if Google Analytics is working properly
+export const testAnalytics = async (): Promise<boolean> => {
+  // Wait for GA to be ready (with a timeout)
+  const gaReady = await waitForGA();
+  
+  if (!gaReady) {
+    console.warn('Google Analytics is not available for testing');
+    return false;
+  }
+  
+  try {
+    // Send a test event with unique identifier
+    const testId = Date.now().toString();
+    console.log('Sending GA test event with ID:', testId);
+    
+    window.gtag('event', 'analytics_test', {
+      'test_id': testId,
+      'timestamp': new Date().toISOString(),
+      'transport_type': 'beacon'
+    });
+    
+    // Check network requests could be done here in a real testing scenario
+    return true;
+  } catch (error) {
+    console.error('Analytics test failed:', error);
+    return false;
+  }
 };
 
 // Track an event
-export const trackEvent = (eventName: string, eventParams: Record<string, any> = {}) => {
+export const trackEvent = async (eventName: string, eventParams: Record<string, any> = {}): Promise<boolean> => {
+  // Try to ensure GA is loaded first
+  await waitForGA(1000); // Wait up to 1s for GA to load
+  
   try {
     if (isGAAvailable()) {
       console.log('Tracking event:', eventName, eventParams);
-      window.gtag('event', eventName, eventParams);
+      
+      // Add timestamp and common properties
+      const enhancedParams = {
+        ...eventParams,
+        event_time: new Date().toISOString(),
+        transport_type: 'beacon'
+      };
+      
+      window.gtag('event', eventName, enhancedParams);
       return true;
     } else {
       console.warn('Google Analytics not available for event:', eventName);
+      // If GA failed to load, we could queue the event here for later sending
       return false;
     }
   } catch (error) {
@@ -35,20 +162,28 @@ export const trackEvent = (eventName: string, eventParams: Record<string, any> =
 };
 
 // Track a page view
-export const trackPageView = (path: string) => {
+export const trackPageView = async (path: string): Promise<boolean> => {
+  // Try to ensure GA is loaded first
+  await waitForGA(1000); // Wait up to 1s for GA to load
+  
   try {
     if (isGAAvailable()) {
       console.log('Tracking page view:', path);
+      
+      // Send as a page_view event
       window.gtag('event', 'page_view', {
         page_path: path,
         page_location: window.location.href,
-        page_title: document.title
+        page_title: document.title,
+        transport_type: 'beacon'
       });
       
-      // Also set the config for this pageview
+      // Also update configuration
       window.gtag('config', GA_MEASUREMENT_ID, {
-        page_path: path
+        page_path: path,
+        page_location: window.location.href
       });
+      
       return true;
     } else {
       console.warn('Google Analytics not available for page view:', path);
