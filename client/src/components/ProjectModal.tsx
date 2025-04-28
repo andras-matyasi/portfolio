@@ -1,6 +1,6 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowLeft } from "lucide-react";
+import { X, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 import { projects } from "@/data/projectsData";
 
 interface ProjectModalProps {
@@ -9,8 +9,30 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
-  const project = projects.find((p) => p.id === projectId);
+  const activeProjects = projects.filter(project => project.active);
+  const currentIndex = activeProjects.findIndex(p => p.id === projectId);
+  const project = activeProjects[currentIndex];
   const modalRef = useRef<HTMLDivElement>(null);
+  
+  const navigateToPrevious = () => {
+    const newIndex = currentIndex <= 0 ? activeProjects.length - 1 : currentIndex - 1;
+    if (activeProjects[newIndex]) {
+      const prevProjectId = activeProjects[newIndex].id;
+      window.location.hash = `case-study-${prevProjectId}`;
+      return prevProjectId;
+    }
+    return projectId;
+  };
+
+  const navigateToNext = () => {
+    const newIndex = currentIndex >= activeProjects.length - 1 ? 0 : currentIndex + 1;
+    if (activeProjects[newIndex]) {
+      const nextProjectId = activeProjects[newIndex].id;
+      window.location.hash = `case-study-${nextProjectId}`;
+      return nextProjectId;
+    }
+    return projectId;
+  };
 
   useEffect(() => {
     if (!project) return;
@@ -18,6 +40,10 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
+      } else if (event.key === "ArrowLeft") {
+        navigateToPrevious();
+      } else if (event.key === "ArrowRight") {
+        navigateToNext();
       }
     };
 
@@ -37,7 +63,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [onClose, projectId, project]);
+  }, [onClose, projectId, project, currentIndex]);
 
   if (!project) return null;
 
@@ -64,6 +90,23 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
             aria-label="Close modal"
           >
             <X className="h-6 w-6" />
+          </button>
+          
+          {/* Navigation arrows */}
+          <button
+            className="absolute top-1/2 left-4 md:left-6 transform -translate-y-1/2 w-10 h-10 rounded-full bg-dark/70 hover:bg-dark/90 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm border border-white/10"
+            onClick={() => navigateToPrevious()}
+            aria-label="Previous project"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          
+          <button
+            className="absolute top-1/2 right-4 md:right-6 transform -translate-y-1/2 w-10 h-10 rounded-full bg-dark/70 hover:bg-dark/90 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm border border-white/10"
+            onClick={() => navigateToNext()}
+            aria-label="Next project"
+          >
+            <ChevronRight className="h-5 w-5" />
           </button>
 
           <div className="mb-8">

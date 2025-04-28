@@ -76,13 +76,41 @@ const ProjectsSection = () => {
     // Open the project modal
     setSelectedProject(projectId);
     document.body.style.overflow = "hidden";
+    // Update hash for direct linking
+    window.location.hash = `case-study-${projectId}`;
   };
 
   const closeModal = () => {
     // Close the project modal
     setSelectedProject(null);
     document.body.style.overflow = "auto";
+    // Clear hash when modal is closed
+    if (window.location.hash.includes('case-study-')) {
+      window.history.pushState("", document.title, window.location.pathname + window.location.search);
+    }
   };
+  
+  // Handle hash changes to open/close project modal
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#case-study-')) {
+        const projectId = hash.replace('#case-study-', '');
+        setSelectedProject(projectId);
+        document.body.style.overflow = "hidden";
+      }
+    };
+    
+    // Check hash on initial load
+    handleHashChange();
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
 
   const item = {
     hidden: { opacity: 0, y: 20 },
