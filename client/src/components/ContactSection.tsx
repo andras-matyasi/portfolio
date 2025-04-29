@@ -57,8 +57,7 @@ const ContactSection = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Get in Touch</h2>
           <p className="text-lg mb-12 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent font-medium">
-            Interested in working together? Feel free to reach out for
-            collaborations (project-based or long-term) or just a friendly hello.
+            Feel free to reach out for collaborations (project-based or long-term) or just a friendly hello.
           </p>
 
           <motion.div
