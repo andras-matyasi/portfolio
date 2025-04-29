@@ -17,15 +17,15 @@ export const projects: Project[] = [
     active: true,
     title: "SaaS Pricing Strategy",
     type: "SaaS",
-    shortText: "Switch from seat-based pricing to add-on based pricing. This enabled users to capture more value and increase revenue with pricing change at Kameleo.",
+    shortText: "Switch from seat-based pricing to scalable add-on based pricing, resulting in revenue growth and better ICP targeting at Kameleo.",
     image: "/images/case-studies/pricing-case-study.png",
-    problem: "Seat-based pricing provided bad scaling for teams and heavy API users.",
-    solution: "Redesigned packages so team members and API usage became more scalable add-ons.",
-    success: "4x team members in 2 months, extra API usage is the top grossing add-on.",
+    problem: "Seat-based pricing limited scalability for teams and API-heavy users. Poor alignment between pricing and value delivery.",
+    solution: "Redesigned packages: introduced team member add-ons and scalable API usage-based pricing. Carefully migrated existing customers to new model.",
+    success: "Revenue increased, multiplied team users 4 times, API usage add-on became the top-grossing upsell.",
     keyLearnings: [
       "Do your research, but don't be afraid to change the pricing.",
-      "Designing pricing should be a cross-company effort, each team have invaluable input.", 
-      "Creating your own pricing flavor, aligned with your product strategy beats copying competitors. Be the best option for your ICP." 
+      "Designing pricing should be a cross-company effort - all teams have invaluable input.",
+      "Align pricing directly to your ICP's real usage and value patterns instead of copying competitors."
     ]
   },
   {
@@ -33,14 +33,15 @@ export const projects: Project[] = [
     active: true,
     title: "SaaS Activation Boost",
     type: "SaaS",
-    shortText: "Shorter time to AHA moment to increase activation and satisfaction.",
+    shortText: "Shorter time to AHA moment: simplified onboarding increased activation and satisfaction rates at Kameleo.",
     image: "/images/case-studies/activation-case-study.png",
-    problem: "User research indicated the new customers, especially those who switch from competitors have lower satisfaction than older customers. After watching session replays, user interviews and competitor analysis, a pattern emerged: the core flow is hard to comprehend for new customers.",
-    solution: "Prototypes were created and user tested to find a better performing flow. Change was implemented to the frontend and API.",
-    success: "Activation increased by 7% and CSAT for new customers increased by 15%.",
+    problem: "New customers struggled with a complex environment creation flow, leading to lower activation and satisfaction.",
+    solution: "Simplified the UI to focus on the 5 most critical environment settings, moved advanced options behind tabs, validated through user testing.",
+    success: "Activation increased by 7% and new customer CSAT improved by 15%.",
     keyLearnings: [
-      "Simple interfaces work better.",
-      "Avoid complex and proprietary filtering logic on the UI."
+      "Simple interfaces drive better user outcomes.",
+      "Prioritize the critical actions - hide complexity behind advanced settings.",
+      "Session recording tools (e.g., Hotjar) combined with user interviews reveal true UX bottlenecks."
     ]
   },
   {
@@ -48,14 +49,15 @@ export const projects: Project[] = [
     active: true,
     title: "SaaS Retention Improvement",
     type: "SaaS",
-    shortText: "Focused on improving the core value prop with a technical project, which led to better user retention.",
+    shortText: "Focus on improving the core value proposition (fingerprinting masking) led to improved user retention.",
     image: "/images/case-studies/retention-case-study.png",
-    problem: "Declining retention curve",
-    solution: "Improved Kameleo's browsers to offer better fingerprinting protection.",
-    success: "3 percentage point improvement in month 2 retention, flattening retention curve.",
+    problem: "Declining retention curve due to fingerprint masking performance falling behind latest detection systems.",
+    solution: "Prioritized core technology rebuild: reassigned CTO to prototype improved spoofing engine, validated results through beta, productionized with new engineering hire.",
+    success: "Retention curve flattened significantly post-release; reversed decline among marketing users.",
     keyLearnings: [
-      "Nail it then scale it. Solve the core problem before adding on additional features and platforms.",
-      "Browser-based services change fast. Dedicate continuous effort to your core value proposition for a browser-based company."
+      "Solve the core value problem before scaling.",
+      "Investing in your USP is critical, especially in fast-evolving technical spaces like browser fingerprinting.",
+      "Roadmaps should reflect user reality, not just internal resource comfort."
     ]
   },
   {
@@ -63,33 +65,32 @@ export const projects: Project[] = [
     active: true,
     title: "Continuous User Research Framework",
     type: "SaaS",
-    shortText: "How to continuously source candidates as a single product manager at a bootstrapped company",
+    shortText: "Building continuous discovery at a bootstrapped SaaS: no budget, small pool, scrappy tactics.",
     image: "/images/case-studies/user-research-case-study.png",
-    problem: "Hard to source quality candidates if you have a small customer pool if you have non-English native customers.",
-    solution: "Discord community building, async user testing and value-based sourcing from support.",
-    success: "Quality candidates from the ICPs.",
+    problem: "Hard to consistently source quality user research candidates from a small, globally spread, niche customer base.",
+    solution: "Built a Discord community, ran async user tests, and sourced candidates through personal support interactions followed by value-based interview invites.",
+    success: "Significantly increased both quality and quantity of user research interviews with real ICP users.",
     keyLearnings: [
-      "Nail it then scale it. Solve the core problem before adding on additional features and platforms.",
-      "Increasing cash reward increases the number of interviews, but the best interviews talked to us for free or for additional product usage.",
-      "Async interviews require careful planning. It's unlikely to be the number one source, but enables users who are less likely to book a call.",
-      "Timing is crucial for success: best success rates were after signup (if the activity is high), package change or after successful support interaction.",
-      "Create a (Discord) community to help with sourcing."
+      "Timing matters: post-support wins or key user milestones are the best moments to invite for research.",
+      "Best user interviews often come from natural interactions, not incentives.",
+      "Creating a community (e.g., Discord) dramatically improves user engagement and sourcing.",
+      "Async interviews are useful but require very careful task and framing design to be effective."
     ]
   },
   {
     id: "swapp",
     active: true,
-    title: "Swapp",
+    title: "Swapp - Marketplace PMF",
     type: "Marketplace",
-    shortText: "0 to 1 with new car subscription platform in EU and Middle East.",
+    shortText: "Launched a new car subscription marketplace across Europe and the Middle East; achieved PMF in Dubai.",
     image: "/images/case-studies/swapp-case-study.png",
-    problem: "Launch a new company, find PMF and traction than scale.",
-    solution: "Experimentation and growing through partnerships until traction: shipped 2 MVPs (car subscription and daily car rental for extra monetization). Launched in 3 cities, 1 sticked. Partnered up with Careem to source new customers through their superapp.",
-    success: "Achieved PMF in Dubai.",
+    problem: "Launching a new two-sided marketplace: matching supply and demand, finding traction fast.",
+    solution: "Launched MVPs in Vienna, Budapest, and Dubai. Adapted positioning based on market signals. Partnered with Careem (Uber's Middle Eastern super app) to scale acquisition.",
+    success: "Achieved product-market fit in Dubai with expat-focused car subscription model.",
     keyLearnings: [
-      "From 0 to 1 you need to ship and experiment fast.",
-      "Done is better than perfect.",
-      "The chicken or the egg problem: a 2 sided marketplace needs constant growth on both sides."
+      "From 0 to 1, velocity and adaptability matter more than polish.",
+      "Partnerships can unlock sudden growth when distribution is otherwise hard.",
+      "Marketplace dynamics require constant tuning on both supply and demand sides."
     ]
   },
   {
@@ -97,30 +98,31 @@ export const projects: Project[] = [
     active: true,
     title: "Onboarding Flow for Passive Job Search",
     type: "Job board",
-    shortText: "Increase high quality jobseekers by 25% on the platform",
-    image: "/images/case-studies/onboardin-case-study.png",
-    problem: "Job applicants churned when they were asked to create a data-rich profile to be discovered in Hungary's leading job platform.",
-    solution: "Created a progressive onboarding flow and asked for bite-sized data after each job application. After 5 applications, the profile was data-rich. ",
-    success: "Increased data rich profiles to half a million from 400k in 2 months.",
+    shortText: "Increase in high-quality, data-rich profiles by redesigning onboarding for job seekers.",
+    image: "/images/case-studies/onboarding-case-study.png",
+    problem: "High churn during profile creation for passive job seekers; too much upfront friction.",
+    solution: "Built a progressive onboarding flow — asking for bite-sized information after each job application instead of up front.",
+    success: "Data-rich profiles grew from 400k to 500k in 2 months; applicant engagement improved.",
     keyLearnings: [
-      "Introduce the right (low) amount of friction to get more data-rich profiles.",
-      "One applicant will likely apply 7 times on the platform. That's plenty of occasion to ask for bite-sized information about their profile."
+      "Low-friction, progressive onboarding increases high-quality user engagement.",
+      "Optimize for the user journey, not just internal database needs.",
+      "Job seekers apply 7+ times — spread out data collection naturally."
     ]
   },
   {
     id: "profession-reviews",
     active: true,
-    title: "Company Reviews for profession.hu (job board)",
+    title: "Company Reviews for Profession.hu",
     type: "Job board",
-    shortText: "The story of turning a struggling product to a striving feature.",
+    shortText: "Sunset a struggling standalone product and turned it into a thriving feature for the main job board.",
     image: "/images/case-studies/reviews-case-study.png",
-    problem: "Company reviews was a secondary product (to the job board) with low brand awareness. Paid was the only channel for acquisition, the product has low engagement and resource intensive to keep alive. However, user feedback was very positive, as it was a rare thing to find reviews about companies at the time (in the local market in Hungary).",
-    solution: "Sunset the individual product. Launched a company reviews as a new feature for the job board, with access to the customer base. Provided a native interface to review companies 1 click away from you online CV, and created a simple email automation flow.",
-    success: "30% of the job board's ads had at least 5 parametric reviews (true/false statements and star ratings) within 3 months. Ads from rated companies performed better compared to non-rated companies and organic traffic increased.",
+    problem: "Standalone company reviews product was failing: costly, low engagement, and heavily dependent on paid acquisition.",
+    solution: "Sunset the standalone product, launched a company reviews feature inside the main job board — leveraging existing user base for authentic reviews.",
+    success: "30% of ads had at least 5 parametric reviews within 3 months. Ads with reviews performed better; organic traffic grew.",
     keyLearnings: [
-      "If a feature or product is struggling, sunset it, no matter how much money you spent on it. Free up company resources to something that actually delivers.",
-      "Creating reviews about the companies that pay you, and what makes a difference for the end user is hard. Stay positive and invest time in simple but effective rules and moderation.",
-      "The company needs to be aligned to be able to pull such a project. As a PM, be good friends with sales before trying to change the world."
+      "Sunset weak products decisively, even when sunk costs are high.",
+      "Building reviews where your users already are delivers network effects faster.",
+      "Cross-functional alignment with Sales is key when building features that touch sensitive advertiser relationships."
     ]
   }
 ];
