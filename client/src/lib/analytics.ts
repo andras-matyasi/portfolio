@@ -14,6 +14,58 @@ declare global {
   }
 }
 
+// Initialize analytics when the module loads
+if (typeof window !== 'undefined') {
+  // Check if Google Analytics is loaded
+  const checkGALoaded = () => {
+    try {
+      if (window.gtag && typeof window.gtag === 'function') {
+        window.gaLoaded = true;
+        console.log('Google Analytics (GA4) loaded successfully');
+      }
+    } catch (e) {
+      console.error('Error checking GA status:', e);
+    }
+  };
+  
+  // Run initial check
+  checkGALoaded();
+  
+  // Add listener for dataLayer events to ensure they're tracked in GA
+  const originalPush = Array.prototype.push;
+  if (window.dataLayer) {
+    window.dataLayer.push = function(...args) {
+      // Call original push method
+      const result = originalPush.apply(this, args);
+      
+      // Check for page_view events from dataLayer and ensure they're tracked in GA
+      try {
+        const lastEvent = args[0];
+        if (lastEvent && lastEvent.event === 'page_view') {
+          // Ensure GA is tracking this page view
+          if (window.gtag && typeof window.gtag === 'function') {
+            window.gtag('event', 'page_view', {
+              page_path: lastEvent.page_path,
+              page_location: lastEvent.page_url || window.location.href,
+              page_title: lastEvent.page_title || document.title
+            });
+            
+            // Also update configuration
+            window.gtag('config', GA_MEASUREMENT_ID, {
+              page_path: lastEvent.page_path,
+              page_location: lastEvent.page_url || window.location.href
+            });
+          }
+        }
+      } catch (e) {
+        console.error('Error processing dataLayer event:', e);
+      }
+      
+      return result;
+    };
+  }
+}
+
 // Attempt to ensure Google Analytics is properly initialized
 // This helps recover if there were loading issues
 const ensureGA = (): void => {

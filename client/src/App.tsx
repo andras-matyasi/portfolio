@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Home from "./pages/Home";
 import { useEffect } from "react";
 import { trackPageView } from "./lib/dataLayer";
+import AnalyticsService from "./lib/analytics"; // Import Analytics Service
 import DataLayerDebug from '@/components/DataLayerDebug';
 
 function Router() {
@@ -15,6 +16,15 @@ function Router() {
   useEffect(() => {
     // Push page view event to dataLayer
     trackPageView(location);
+    
+    // Also track with Google Analytics directly
+    AnalyticsService.trackPageView(location);
+    
+    // Set page title for analytics
+    document.title = location === "/" 
+      ? "Andras Matyasi | Product Manager" 
+      : `${location.substring(1)} | Andras Matyasi`;
+      
   }, [location]);
   
   return (

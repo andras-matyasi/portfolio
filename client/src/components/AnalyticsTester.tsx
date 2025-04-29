@@ -6,6 +6,7 @@ export default function AnalyticsTester() {
   const [testResult, setTestResult] = useState<string | null>(null);
   const [testLoading, setTestLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [testPageView, setTestPageView] = useState<boolean>(false);
   
   // Function to check general GA availability
   const checkAvailability = () => {
@@ -21,6 +22,21 @@ export default function AnalyticsTester() {
         setTestResult('✅ Google Analytics seems to be available (gtag function exists)');
       } else {
         setTestResult('❌ Google Analytics is not available');
+      }
+      
+      // Additional debug info
+      const gaScript = document.querySelector('script[src*="googletagmanager.com/gtag/js"]');
+      if (gaScript) {
+        setTestResult(prev => `${prev}\n✅ GA script is in the DOM`);
+      } else {
+        setTestResult(prev => `${prev}\n❌ GA script not found in the DOM`);
+      }
+      
+      // Check dataLayer
+      if (window.dataLayer && window.dataLayer.length) {
+        setTestResult(prev => `${prev}\n✅ dataLayer has ${window.dataLayer.length} items`);
+      } else {
+        setTestResult(prev => `${prev}\n❌ dataLayer is empty or not initialized`);
       }
     } catch (err) {
       setErrorMessage(`Error checking GA: ${err instanceof Error ? err.message : String(err)}`);
@@ -44,7 +60,11 @@ export default function AnalyticsTester() {
       
       if (result) {
         setTestResult(`✅ Test event "${eventName}" sent successfully`);
-      } else {
+        
+        // Check network requests
+        const hasNetwork = navigator.onLine;
+        setTestResult(prev => `${prev}\n✅ Network is ${hasNetwork ? 'online' : 'offline'}`);
+        } else {
         setTestResult(`❌ Failed to send test event`);
       }
     } catch (err) {
