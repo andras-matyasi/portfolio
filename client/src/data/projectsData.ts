@@ -53,7 +53,7 @@ export const projects: Project[] = [
     image: "/images/case-studies/retention-case-study.png",
     problem: "Declining retention curve due to fingerprint masking performance falling behind latest detection systems.",
     solution: "Prioritized core technology rebuild: reassigned CTO to prototype improved spoofing engine, validated results through beta, productionized with new engineering hire.",
-    success: "Retention curve flattened significantly post-release; reversed decline among marketing users.",
+    success: "Retention curve flattened post-release; reversed decline among marketing users.",
     keyLearnings: [
       "Solve the core value problem before scaling.",
       "Investing in your USP is critical, especially in fast-evolving technical spaces like browser fingerprinting.",
@@ -101,12 +101,12 @@ export const projects: Project[] = [
     shortText: "Increase in high-quality, data-rich profiles by redesigning onboarding for job seekers.",
     image: "/images/case-studies/onboarding-case-study.png",
     problem: "High churn during profile creation for passive job seekers; too much upfront friction.",
-    solution: "Built a progressive onboarding flow — asking for bite-sized information after each job application instead of up front.",
+    solution: "Built a progressive onboarding flow - asking for bite-sized information after each job application instead of up front.",
     success: "Data-rich profiles grew from 400k to 500k in 2 months; applicant engagement improved.",
     keyLearnings: [
       "Low-friction, progressive onboarding increases high-quality user engagement.",
       "Optimize for the user journey, not just internal database needs.",
-      "Job seekers apply 7+ times — spread out data collection naturally."
+      "Job seekers apply 7+ times - spread out data collection naturally."
     ]
   },
   {
@@ -117,7 +117,7 @@ export const projects: Project[] = [
     shortText: "Sunset a struggling standalone product and turned it into a thriving feature for the main job board.",
     image: "/images/case-studies/reviews-case-study.png",
     problem: "Standalone company reviews product was failing: costly, low engagement, and heavily dependent on paid acquisition.",
-    solution: "Sunset the standalone product, launched a company reviews feature inside the main job board — leveraging existing user base for authentic reviews.",
+    solution: "Sunset the standalone product, launched a company reviews feature inside the main job board - leveraging existing user base for authentic reviews.",
     success: "30% of ads had at least 5 parametric reviews within 3 months. Ads with reviews performed better; organic traffic grew.",
     keyLearnings: [
       "Sunset weak products decisively, even when sunk costs are high.",
