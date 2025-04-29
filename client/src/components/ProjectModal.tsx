@@ -119,7 +119,7 @@ const ProjectModal = ({ projectId, onClose }: ProjectModalProps) => {
             <p className="text-[#f8f8f0]">{project.shortText}</p>
           </div>
 
-          <div className="w-full mb-8 rounded-lg overflow-hidden" style={{ aspectRatio: '3/2' }}>
+          <div className="w-full max-w-md mx-auto mb-8 rounded-lg overflow-hidden" style={{ aspectRatio: '3/2' }}>
             <img
               src={project.image}
               alt={`${project.title} Overview`}
