@@ -48,65 +48,14 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Google tag (gtag.js) - Graceful degradation for adblockers -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCL2J8WB7Y"></script>
     <script>
-      // Initialize dataLayer immediately to prevent errors
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      
-      // Graceful Google Analytics loading
-      (function() {
-        try {
-          // Create script element
-          var script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-KCL2J8WB7Y';
-          
-          // Handle successful load
-          script.onload = function() {
-            try {
-              gtag('js', new Date());
-              gtag('config', 'G-KCL2J8WB7Y');
-              window.gaLoaded = true;
-            } catch (e) {
-              console.warn('GA config failed:', e);
-              window.gaLoadError = true;
-            }
-          };
-          
-          // Handle load errors (adblockers, network issues)
-          script.onerror = function() {
-            console.warn('Google Analytics blocked or failed to load');
-            window.gaLoadError = true;
-            // Ensure gtag function exists as no-op
-            window.gtag = window.gtag || function() {
-              window.dataLayer.push(arguments);
-            };
-          };
-          
-          // Append script to head
-          document.head.appendChild(script);
-          
-          // Fallback timeout in case script never loads or errors
-          setTimeout(function() {
-            if (!window.gaLoaded && !window.gaLoadError) {
-              console.warn('GA load timeout - likely blocked');
-              window.gaLoadError = true;
-              window.gtag = window.gtag || function() {
-                window.dataLayer.push(arguments);
-              };
-            }
-          }, 3000);
-          
-        } catch (e) {
-          console.warn('GA initialization failed:', e);
-          window.gaLoadError = true;
-          // Ensure gtag function exists as no-op
-          window.gtag = window.gtag || function() {
-            window.dataLayer.push(arguments);
-          };
-        }
-      })();
+      gtag('js', new Date());
+
+      gtag('config', 'G-KCL2J8WB7Y');
     </script>
     <!-- End Google Tag  -->
     
