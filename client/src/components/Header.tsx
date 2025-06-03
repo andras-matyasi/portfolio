@@ -175,7 +175,7 @@ const Header = () => {
                   className="text-white hover:text-primary transition-colors flex items-center"
                   onClick={() => setPetProjectsMenuOpen(!petProjectsMenuOpen)}
                 >
-                  Pet projects
+                  AI Projects
                   <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" 
                     style={{ transform: petProjectsMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
                   />
@@ -320,7 +320,7 @@ const Header = () => {
                   className="text-white hover:text-primary transition-colors flex items-center justify-between w-full text-lg"
                   onClick={() => setPetProjectsMenuOpen(!petProjectsMenuOpen)}
                 >
-                  <span>Pet projects</span>
+                  <span>AI Projects</span>
                   {petProjectsMenuOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </button>
                 {petProjectsMenuOpen && (
