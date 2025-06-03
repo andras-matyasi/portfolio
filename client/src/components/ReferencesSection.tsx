@@ -24,77 +24,77 @@ const referencesData = [
     name: "Áron Albert",
     position: "Software Engineer, Kameleo",
     quote: "András was keen on knowing the users and their needs better. He is the most user-centric PMs I ever worked with, actively seeking insights and feedback. I could feel the pain of the user when reading the PRDs.",
-    imageUrl: "/images/references/Áron Albert.jpeg"
+    imageUrl: "/images/references/aron_albert.jpg"
   },
   {
     id: 2,
     name: "Ferenc Agócs",
     position: "Software Engineer, Kameleo",
     quote: "Andris always had a clear idea for our product, and focused on what matters. His keen attention to all the different moving parts and processes in the life of our product always kept us on track. His professional skill and fun personality is something I wish I had at all my previous jobs.",
-    imageUrl: "/images/references/Ferenc Agósz.jpeg"
+    imageUrl: "/images/references/ferenc_agocs.jpg"
   },
   {
     id: 3,
     name: "Bence Gulyás",
     position: "Full-stack Product Designer, Freelance (profession.hu)",
     quote: "What set Andris apart was his balanced approach to decision-making. He skillfully filtered senior stakeholder input while facilitating unbiased trade-offs during the design process. This collaborative approach kept us focused on solving the right problems.",
-    imageUrl: "/images/references/Bence Gulyás.jpeg"
+    imageUrl: "/images/references/bence_gulyas.jpg"
   },
   {
     id: 4,
     name: "Fanni Csomós",
     position: "Marketing Manager, Kameleo",
     quote: "Andris is the kind of product guy every team needs. He knows exactly when to push, when to say no, and how to balance user insights without blindly following requests. He has a killer instinct for strategy, collaborates seamlessly with marketing, stays hands-on when needed, and ensures great ideas turn into real impact. Smart, driven, and always two steps ahead. If you get the chance to work with him, take it.",
-    imageUrl: "/images/references/Fanni Csomós.jpeg"
+    imageUrl: "/images/references/fanni_csomos.jpg"
   },
   {
     id: 5,
     name: "Ádám Kóbor",
     position: "Senior Software Engineer, Lovely Systems",
     quote: "Throughout our collaboration, Andras consistently showed exceptional resilience and leadership, steering our teams effectively even in a demanding and high-pressure environment. He maintained focus on delivering value to users and the business, while skillfully managing competing priorities and expectations from various stakeholders.",
-    imageUrl: "/images/references/Ádám Kóbor.jpeg"
+    imageUrl: "/images/references/adam_kobor.jpg"
   },
   {
     id: 6,
     name: "Eszter Somogyi-Vass",
     position: "Product Lead, profession.hu",
     quote: "I've had the pleasure of working closely with Andris, and I can confidently say he's one of the best product managers I've collaborated with. His attention to detail is great, and he always keeps the user experience at the heart of every decision. Beyond that, Andris is a fantastic communicator and works seamlessly with teams across the board—whether it's engineering, design, or stakeholders. He has a knack for bringing people together to solve problems efficiently.",
-    imageUrl: "/images/references/Eszter Somogyi-Vass.jpeg"
+    imageUrl: "/images/references/eszter_somogyi_vass.jpg"
   },
   {
     id: 7,
     name: "Balázs Wágner",
     position: "UX Designer, Bitrise",
     quote: "It's really easy to work with András, I really enjoyed it. As a senior product manager, he had a sharp vision while giving me a high degree of freedom. He was prepared and focused, keeping projects on track. The work we did together had an impact and was fun, too.",
-    imageUrl: "/images/references/Balázs Wágner.jpeg"
+    imageUrl: "/images/references/balazs_wagner.jpg"
   },
   {
     id: 8,
     name: "Ádám Krajcs",
     position: "Lead Software Engineer, profession.hu",
     quote: "I had the pleasure of working with Andris for several years at Profession.hu. He has an exceptional ability to define and communicate a clear product vision while ensuring alignment between business goals and user needs. Andris is highly data-driven, making informed decisions based on thorough analysis while also valuing user feedback and market trends.",
-    imageUrl: "/images/references/Ádám Krajcs.jpeg"
+    imageUrl: "/images/references/adam_krajcs.jpg"
   },
   {
     id: 9,
     name: "Balázs Sólyom",
     position: "Chief Data Officer, Trendency",
     quote: "Andris is the kind of person who, if dropped into the jungle with a few tools, would not only find his way back but might also return with a new idea or concept. Working with him is a great advantage because he doesn't just want to get things done - he wants to do them well. He's a consultant-minded colleague who actively seeks to understand the underlying problems behind each task and offers solutions to address them.",
-    imageUrl: "/images/references/Balázs Sólyom.jpeg"
+    imageUrl: "/images/references/balazs_solyom.jpg"
   },
   {
     id: 10,
     name: "András Barasits",
     position: "UX Designer, Freelance (Kameleo)",
     quote: "As a UX designer, it was a pleasure working with András on a complex development project. As a Senior Product Manager, he always communicated clearly and effectively, supported the team in a helpful way, and consistently represented the product perspective with confidence. His forward-thinking and constructive attitude greatly contributed to successfully solving any challenges that came up.",
-    imageUrl: "/images/references/András Barasits.jpeg"
+    imageUrl: "/images/references/andras_barasits.jpg"
   },
   {
     id: 11,
     name: "Donát Bali Papp",
     position: "Lead Product Designer, Interactive Brokers",
     quote: "We worked closely with András at Swapp. He had an exceptional ability to take a step back and make clear, calm decisions that benefited the product — even in the most intense times. His diligence, kindness, and trustworthy product leadership would be a great asset to any business. An extremely competent PM and an all-around great guy. Can't recommend him highly enough!",
-    imageUrl: "/images/references/Donát Bali-papp.jpeg"
+    imageUrl: "/images/references/donat_bali_papp.jpg"
   }
 ];
 
