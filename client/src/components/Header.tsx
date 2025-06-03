@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Calendar, Utensils, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
+import { Mail, Linkedin, Calendar, Utensils, Menu, X, ChevronDown, ChevronUp, Compass } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Header = () => {
@@ -195,6 +195,15 @@ const Header = () => {
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
                     </a>
+                    <a 
+                      href="https://confidence.matyasi.me" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="block px-4 py-2 text-sm text-white hover:bg-dark/50 flex items-center"
+                    >
+                      <Compass className="h-4 w-4 mr-2" />
+                      Confidence Meter
+                    </a>
                   </div>
                 )}
               </li>
@@ -325,6 +334,16 @@ const Header = () => {
                     >
                       <Utensils className="h-4 w-4 mr-2" />
                       Lunchvote
+                    </a>
+                    <a 
+                      href="https://confidence.matyasi.me" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="block py-2 text-white hover:text-primary transition-colors flex items-center"
+                      onClick={handleMobileLinkClick}
+                    >
+                      <Compass className="h-4 w-4 mr-2" />
+                      Confidence Meter
                     </a>
                   </div>
                 )}
