@@ -9,17 +9,18 @@
 
   body {
     @apply font-sans antialiased text-foreground;
-    /* Cosmic Nebula Background */
+    /* Aurora Borealis Background */
     background: linear-gradient(135deg, 
-      #0F0C29 0%,     /* Deep indigo */
-      #24243e 25%,    /* Purple-blue */
-      #2E1065 50%,    /* Deep purple */
-      #1a1a2e 75%,    /* Dark blue-purple */
-      #16213e 100%    /* Navy with purple hint */
+      #0c1445 0%,     /* Deep midnight blue */
+      #1e3c72 20%,    /* Deep blue */
+      #2a5298 40%,    /* Ocean blue */
+      #1a4d5c 60%,    /* Teal-blue */
+      #0f2027 80%,    /* Dark blue-green */
+      #203a43 100%    /* Deep teal */
     );
     background-attachment: fixed;
     background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+    animation: auroraShift 18s ease infinite;
     
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: none;
@@ -29,13 +30,15 @@
     touch-action: manipulation;
   }
   
-  @keyframes gradientShift {
+  @keyframes auroraShift {
     0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    25% { background-position: 100% 25%; }
+    50% { background-position: 100% 75%; }
+    75% { background-position: 0% 75%; }
     100% { background-position: 0% 50%; }
   }
   
-  /* Abstract floating elements */
+  /* Aurora Borealis floating elements */
   body::before {
     content: '';
     position: fixed;
@@ -46,20 +49,25 @@
     pointer-events: none;
     z-index: -1;
     background-image: 
-      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.08) 0%, transparent 50%);
-    animation: floatingElements 20s ease-in-out infinite;
+      radial-gradient(ellipse at 15% 20%, rgba(64, 224, 208, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 85% 80%, rgba(255, 20, 147, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse at 50% 10%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 30% 90%, rgba(0, 191, 255, 0.06) 0%, transparent 60%);
+    animation: auroraWaves 25s ease-in-out infinite;
   }
   
-  @keyframes floatingElements {
+  @keyframes auroraWaves {
     0%, 100% { 
-      transform: translateY(0px) rotate(0deg); 
-      opacity: 0.6;
+      transform: translateY(0px) scale(1) rotate(0deg); 
+      opacity: 0.7;
     }
-    50% { 
-      transform: translateY(-20px) rotate(2deg); 
-      opacity: 0.8;
+    33% { 
+      transform: translateY(-15px) scale(1.05) rotate(1deg); 
+      opacity: 0.9;
+    }
+    66% { 
+      transform: translateY(10px) scale(0.95) rotate(-1deg); 
+      opacity: 0.6;
     }
   }
   
