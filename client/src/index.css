@@ -8,13 +8,59 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased text-foreground;
+    /* Cosmic Nebula Background */
+    background: linear-gradient(135deg, 
+      #0F0C29 0%,     /* Deep indigo */
+      #24243e 25%,    /* Purple-blue */
+      #2E1065 50%,    /* Deep purple */
+      #1a1a2e 75%,    /* Dark blue-purple */
+      #16213e 100%    /* Navy with purple hint */
+    );
+    background-attachment: fixed;
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: none;
     overflow-x: hidden;
     position: relative;
     width: 100%;
     touch-action: manipulation;
+  }
+  
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Abstract floating elements */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.08) 0%, transparent 50%);
+    animation: floatingElements 20s ease-in-out infinite;
+  }
+  
+  @keyframes floatingElements {
+    0%, 100% { 
+      transform: translateY(0px) rotate(0deg); 
+      opacity: 0.6;
+    }
+    50% { 
+      transform: translateY(-20px) rotate(2deg); 
+      opacity: 0.8;
+    }
   }
   
   html {
