@@ -50,7 +50,7 @@ const Home = () => {
   }
 
   return (
-    <div className="bg-dark text-light min-h-screen overflow-x-hidden">
+    <div className="text-light min-h-screen overflow-x-hidden">
       <Header />
       <main className="flex flex-col">
         <Hero />
