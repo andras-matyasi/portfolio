@@ -48,7 +48,7 @@ Type: CNAME, Name: www, Value: yourusername.github.io
 
 ### B. GitHub Pages Domain Configuration
 1. Repository Settings → Pages
-2. Custom domain: Enter `yourdomain.com`
+2. Custom domain: Enter `andras.matyasi.me`
 3. Enable "Enforce HTTPS"
 4. Wait for DNS check to pass (can take up to 24 hours)
 
