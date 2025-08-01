@@ -6,6 +6,17 @@ This is a personal product portfolio website for András Matyasi, a Product Mana
 
 Preferred communication style: Simple, everyday language.
 
+# Recent Changes (August 2025)
+
+## Portfolio Migration to GitHub Pages
+- **Date**: August 1, 2025
+- **Migration**: Successfully moved from Replit hosting to GitHub Pages
+- **Domain**: Configured custom domain (andras.matyasi.me) with DNS A records
+- **Deployment**: Set up GitHub Actions workflow for automatic builds
+- **Cost Reduction**: Eliminated monthly Replit hosting costs, now using free GitHub Pages
+- **Development Workflow**: Maintained Replit for development with git push deployment to GitHub
+- **Status**: Live and operational at andras.matyasi.me
+
 # System Architecture
 
 ## Frontend Architecture
